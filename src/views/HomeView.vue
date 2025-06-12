@@ -57,16 +57,11 @@
 
     <!-- 右侧详细信息栏 -->
     <div
-      :class="`flex-1 lg:ml-[${pageConfig.layout.leftPanelWidth}] p-4 lg:p-8 xl:px-12 2xl:px-20 overflow-y-auto overflow-x-hidden`"
+      class="flex-1 lg:ml-[33.333333%] p-4 lg:p-8 xl:px-12 2xl:px-20 overflow-y-auto overflow-x-hidden"
     >
-      <div
-        :class="`max-w-${pageConfig.layout.maxContentWidth} mx-auto ${pageConfig.layout.spacing.section} w-full`"
-      >
+      <div class="max-w-4xl mx-auto space-y-6 lg:space-y-8 w-full">
         <!-- About Me -->
-        <section
-          class="animate-section-slide"
-          :style="{ animationDelay: pageConfig.animationDelays.aboutMe }"
-        >
+        <section class="animate-section-slide" style="animation-delay: 0.1s">
           <h2
             class="text-lg lg:text-xl font-semibold text-gray-800 mb-3 lg:mb-4 border-b border-gray-200 pb-2 hover:text-[#ed9a28] transition-colors duration-200 relative group"
           >
@@ -81,10 +76,7 @@
         </section>
 
         <!-- Skills -->
-        <section
-          class="animate-section-slide"
-          :style="{ animationDelay: pageConfig.animationDelays.skills }"
-        >
+        <section class="animate-section-slide" style="animation-delay: 0.2s">
           <h2
             class="text-lg lg:text-xl font-semibold text-gray-800 mb-3 lg:mb-4 border-b border-gray-200 pb-2 hover:text-[#ed9a28] transition-colors duration-200 relative group"
           >
@@ -93,9 +85,7 @@
               class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#ed9a28] to-[#6dd0e0] transition-all duration-200 group-hover:w-full"
             ></span>
           </h2>
-          <div
-            :class="`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ${pageConfig.layout.spacing.skillGrid}`"
-          >
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
             <div
               v-for="category in skills.categories"
               :key="category.name"
@@ -127,10 +117,7 @@
         </section>
 
         <!-- Experience -->
-        <section
-          class="animate-section-slide"
-          :style="{ animationDelay: pageConfig.animationDelays.experience }"
-        >
+        <section class="animate-section-slide" style="animation-delay: 0.3s">
           <h2
             class="text-lg lg:text-xl font-semibold text-gray-800 mb-3 lg:mb-4 border-b border-gray-200 pb-2 hover:text-[#ed9a28] transition-colors duration-200 relative group"
           >
@@ -170,10 +157,7 @@
         </section>
 
         <!-- Projects -->
-        <section
-          class="animate-section-slide"
-          :style="{ animationDelay: pageConfig.animationDelays.projects }"
-        >
+        <section class="animate-section-slide" style="animation-delay: 0.4s">
           <div class="flex justify-between items-center mb-3 lg:mb-4">
             <h2
               class="text-lg lg:text-xl font-semibold text-gray-800 border-b border-gray-200 pb-2 hover:text-[#ed9a28] transition-colors duration-200 relative group"
@@ -190,7 +174,7 @@
               {{ featuredProjects.viewAllLink.text }}
             </router-link>
           </div>
-          <div :class="`grid grid-cols-1 lg:grid-cols-2 ${pageConfig.layout.spacing.card}`">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
             <div
               v-for="project in featuredProjects.projects"
               :key="project.id"
@@ -245,7 +229,7 @@ import { profileConfig } from '@/config/profile'
 import { onMounted, nextTick } from 'vue'
 
 // 解构配置
-const { personalInfo, aboutMe, skills, experience, featuredProjects, pageConfig } = profileConfig
+const { personalInfo, aboutMe, skills, experience, featuredProjects } = profileConfig
 
 // 确保页面加载时在正确位置
 onMounted(() => {
