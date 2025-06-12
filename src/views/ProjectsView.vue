@@ -1,54 +1,63 @@
 <template>
-  <!-- 导航栏 -->
-  <Navigation />
-
-  <main class="min-h-screen bg-gray-50 py-8 px-4">
-    <div class="max-w-6xl mx-auto">
+  <main class="min-h-screen bg-gray-50 py-8 px-4 xl:px-8 2xl:px-16 overflow-x-hidden">
+    <div class="max-w-6xl mx-auto w-full">
       <!-- 页面标题 -->
-      <div class="text-center mb-12 animate-fade-in-up">
-        <h1 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">My Projects</h1>
-        <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+      <div class="text-center mb-12 animate-hero-entrance">
+        <h1 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4 animate-title-emerge">
+          My Projects
+        </h1>
+        <p class="text-gray-600 text-lg max-w-2xl mx-auto animate-subtitle-flow">
           A collection of my open-source projects and technical contributions, spanning from
           high-performance backend services to modern frontend applications.
         </p>
       </div>
 
       <!-- 项目筛选 -->
-      <div class="mb-8 animate-fade-in-up animate-delay-200">
-        <div class="flex flex-wrap justify-center gap-2 mb-6">
+      <div class="mb-8 animate-filter-slide overflow-x-hidden">
+        <div class="flex flex-wrap justify-center gap-2 mb-6 w-full">
           <button
             v-for="tag in allTags"
             :key="tag"
             @click="toggleTag(tag)"
-            :class="[
-              'px-4 py-2 rounded-full text-sm font-medium transition-all duration-300',
-              selectedTags.includes(tag)
-                ? 'bg-blue-500 text-white shadow-lg'
-                : 'bg-white text-gray-700 hover:bg-blue-50 border border-gray-200',
-            ]"
+            class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 transform hover:scale-105 hover:-translate-y-0.5 border border-gray-200 hover:shadow-md relative overflow-hidden"
+            :class="selectedTags.includes(tag) ? 'shadow-lg scale-105' : ''"
+            :style="getButtonStyle(tag)"
+            @mouseenter="handleMouseEnter($event, tag)"
+            @mouseleave="handleMouseLeave($event, tag)"
           >
-            {{ tag }}
+            <!-- 选中状态的背景叠加 -->
+            <div
+              v-if="selectedTags.includes(tag)"
+              class="absolute inset-0 rounded-full transition-all duration-200"
+              :style="{ backgroundColor: getTagColor(tag).selectedBackgroundColor }"
+            ></div>
+            <span class="relative z-10">{{ tag }}</span>
           </button>
         </div>
       </div>
 
       <!-- 项目网格 -->
       <div
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in-up animate-delay-400"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-grid-entrance w-full"
       >
         <ProjectCard
-          v-for="project in filteredProjects"
+          v-for="(project, index) in filteredProjects"
           :key="project.id"
           :project="project"
-          class="animate-fade-in-up"
+          class="animate-card-float"
+          :style="{ animationDelay: `${index * 0.05}s` }"
         />
       </div>
 
       <!-- 空状态 -->
-      <div v-if="filteredProjects.length === 0" class="text-center py-12">
-        <div class="text-gray-400 text-6xl mb-4">🔍</div>
-        <h3 class="text-xl font-semibold text-gray-600 mb-2">No projects found</h3>
-        <p class="text-gray-500">Try adjusting your filters to see more projects.</p>
+      <div v-if="filteredProjects.length === 0" class="text-center py-12 animate-empty-state">
+        <div class="text-gray-400 text-6xl mb-4 animate-search-bounce">🔍</div>
+        <h3 class="text-xl font-semibold text-gray-600 mb-2 animate-empty-title">
+          No projects found
+        </h3>
+        <p class="text-gray-500 animate-empty-text">
+          Try adjusting your filters to see more projects.
+        </p>
       </div>
     </div>
   </main>
@@ -57,8 +66,9 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import ProjectCard from '@/components/ProjectCard.vue'
-import Navigation from '@/components/Navigation.vue'
-import { projects, type Project } from '@/data/projects'
+import { projects } from '@/data/projects'
+import { getTagColor } from '@/utils/colorHash'
+import type { Project } from '@/types/project'
 
 const projectsData = ref<Project[]>(projects)
 const selectedTags = ref<string[]>([])
@@ -88,35 +98,149 @@ const toggleTag = (tag: string) => {
     selectedTags.value.push(tag)
   }
 }
+
+// 计算按钮样式
+const getButtonStyle = (tag: string) => {
+  const colors = getTagColor(tag)
+  const isSelected = selectedTags.value.includes(tag)
+
+  return {
+    backgroundColor: colors.backgroundColor,
+    color: isSelected ? colors.selectedTextColor : colors.textColor,
+    borderColor: isSelected ? colors.textColor + '40' : 'transparent',
+  }
+}
+
+// 处理鼠标悬停
+const handleMouseEnter = (event: Event, tag: string) => {
+  if (selectedTags.value.includes(tag)) return
+
+  const target = event.target as HTMLElement
+  const colors = getTagColor(tag)
+  target.style.backgroundColor = colors.hoverBackgroundColor
+  target.style.color = 'white'
+}
+
+// 处理鼠标离开
+const handleMouseLeave = (event: Event, tag: string) => {
+  if (selectedTags.value.includes(tag)) return
+
+  const target = event.target as HTMLElement
+  const colors = getTagColor(tag)
+  target.style.backgroundColor = colors.backgroundColor
+  target.style.color = colors.textColor
+}
 </script>
 
 <style scoped>
-/* 自定义样式 */
-.bg-gray-50 {
-  background-color: #f9fafb;
+/* 现代动画关键帧 */
+@keyframes heroEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
-.border-gray-300 {
-  border-color: #dee2e6;
+@keyframes titleEmerge {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.8);
+    filter: blur(10px);
+  }
+  60% {
+    opacity: 0.8;
+    transform: translateY(-5px) scale(1.02);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
 }
 
-.bg-gray-100 {
-  background-color: #f3f4f6;
-}
-
-.bg-gray-200 {
-  background-color: #e5e7eb;
-}
-
-.border-gray-200 {
-  border-color: #e5e7eb;
-}
-
-/* 动画效果 */
-@keyframes fadeInUp {
+@keyframes subtitleFlow {
   from {
     opacity: 0;
     transform: translateY(30px);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes filterSlide {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes gridEntrance {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes cardFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(60px) scale(0.8) rotateX(30deg);
+  }
+  60% {
+    opacity: 0.8;
+    transform: translateY(-10px) scale(1.02) rotateX(-5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg);
+  }
+}
+
+@keyframes emptyState {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes searchBounce {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.1) rotate(-5deg);
+  }
+  75% {
+    transform: scale(1.1) rotate(5deg);
+  }
+}
+
+@keyframes emptyTitle {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -124,111 +248,81 @@ const toggleTag = (tag: string) => {
   }
 }
 
-@keyframes slideInLeft {
+@keyframes emptyText {
   from {
     opacity: 0;
-    transform: translateX(-100%);
+    transform: translateY(15px);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 }
 
-.animate-fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
+/* 动画类 */
+.animate-hero-entrance {
+  animation: heroEntrance 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.animate-title-emerge {
+  animation: titleEmerge 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  animation-delay: 0.1s;
   opacity: 0;
 }
 
-.animate-slide-in-left {
-  animation: slideInLeft 1s ease-out forwards;
-}
-
-.animate-delay-200 {
+.animate-subtitle-flow {
+  animation: subtitleFlow 0.3s ease-out forwards;
   animation-delay: 0.2s;
+  opacity: 0;
 }
 
-.animate-delay-400 {
+.animate-filter-slide {
+  animation: filterSlide 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+
+.animate-grid-entrance {
+  animation: gridEntrance 0.2s ease-out forwards;
   animation-delay: 0.4s;
+  opacity: 0;
 }
 
-.animate-delay-600 {
+.animate-card-float {
+  animation: cardFloat 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  opacity: 0;
+}
+
+.animate-empty-state {
+  animation: emptyState 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 0.5s;
+  opacity: 0;
+}
+
+.animate-search-bounce {
+  animation: searchBounce 1.5s ease-in-out infinite;
   animation-delay: 0.6s;
 }
 
-.animate-delay-800 {
+.animate-empty-title {
+  animation: emptyTitle 0.2s ease-out forwards;
+  animation-delay: 0.7s;
+  opacity: 0;
+}
+
+.animate-empty-text {
+  animation: emptyText 0.2s ease-out forwards;
   animation-delay: 0.8s;
-}
-
-.animate-delay-1000 {
-  animation-delay: 1s;
-}
-
-.animate-delay-1200 {
-  animation-delay: 1.2s;
-}
-
-.animate-delay-1400 {
-  animation-delay: 1.4s;
-}
-
-.animate-delay-1600 {
-  animation-delay: 1.6s;
-}
-
-/* 平滑滚动 */
-html {
-  scroll-behavior: smooth;
-}
-
-/* 自定义滚动条 */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #a1a1a1;
+  opacity: 0;
 }
 
 /* 移动端优化 */
 @media (max-width: 1024px) {
-  .animate-slide-in-left {
-    animation: fadeInUp 1s ease-out forwards;
-  }
-
-  /* 禁用移动端悬停效果 */
   @media (hover: none) {
-    .hover\:scale-110:hover {
+    .hover\:scale-105:hover,
+    .hover\:-translate-y-0\.5:hover {
       transform: none;
     }
-
-    .hover\:scale-125:hover {
-      transform: none;
-    }
-
-    .hover\:-translate-y-1:hover {
-      transform: none;
-    }
-
-    .hover\:-translate-y-2:hover {
-      transform: none;
-    }
-  }
-}
-
-/* 确保移动端文本不会过小 */
-@media (max-width: 640px) {
-  .text-xs {
-    font-size: 0.75rem;
   }
 }
 </style>

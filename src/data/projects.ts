@@ -1,31 +1,4 @@
-export interface TechItem {
-  name: string
-  purpose: string
-}
-
-export interface Project {
-  id: string
-  title: string
-  description: string
-  longDescription?: string
-  tags: string[]
-  githubUrl: string
-  liveUrl?: string
-  stars?: number
-  language: string
-  status: 'active' | 'archived' | 'in-development'
-  license?: string
-  features?: string[]
-  techStack?: {
-    backend?: TechItem[]
-    frontend?: TechItem[]
-    tools?: TechItem[]
-  }
-  performance?: Array<{
-    name: string
-    value: string
-  }>
-}
+import type { Project } from '@/types/project'
 
 export const projects: Project[] = [
   {
@@ -92,7 +65,7 @@ export const projects: Project[] = [
     techStack: {
       backend: [
         { name: 'Rust', purpose: 'Core system implementation' },
-        { name: 'Axum', purpose: 'Modern async web framework' },
+        { name: 'Actix-web', purpose: 'Modern async web framework' },
         { name: 'PostgreSQL', purpose: 'Primary data storage' },
         { name: 'Redis', purpose: 'Session and cache management' },
       ],

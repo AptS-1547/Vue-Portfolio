@@ -1,7 +1,12 @@
 <template>
-  <div class="inline-flex items-center space-x-2">
-    <span class="text-sm text-gray-500">License:</span>
-    <span :class="['px-2 py-1 rounded text-xs font-medium', licenseColor]">
+  <div class="inline-flex items-center space-x-2 animate-license-entrance">
+    <span class="text-sm text-gray-500 animate-label-fade">License:</span>
+    <span
+      :class="[
+        'px-2 py-1 rounded text-xs font-medium transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 animate-badge-bounce',
+        licenseColor,
+      ]"
+    >
       {{ license }}
     </span>
   </div>
@@ -35,3 +40,56 @@ const licenseColor = computed(() => {
   }
 })
 </script>
+
+<style scoped>
+/* 微动画关键帧 */
+@keyframes licenseEntrance {
+  from {
+    opacity: 0;
+    transform: translateX(10px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes labelFade {
+  from {
+    opacity: 0;
+    transform: translateX(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes badgeBounce {
+  from {
+    opacity: 0;
+    transform: translateX(5px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* 动画类 */
+.animate-license-entrance {
+  animation: licenseEntrance 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.animate-label-fade {
+  animation: labelFade 0.6s ease-out forwards;
+  animation-delay: 0.1s;
+  opacity: 0;
+}
+
+.animate-badge-bounce {
+  animation: badgeBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+</style>
