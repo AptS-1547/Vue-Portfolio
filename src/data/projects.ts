@@ -177,7 +177,7 @@ export const projects: Project[] = [
     githubUrl: 'https://github.com/AptS-1547/VUE-About-Me',
     language: 'TypeScript',
     status: 'active',
-    license: 'GPL-3.0',
+    license: 'MIT',
     features: [
       'Fully responsive design for all device sizes',
       'Smooth scroll animations and transitions',
