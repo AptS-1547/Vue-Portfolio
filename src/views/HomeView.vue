@@ -100,7 +100,7 @@
           </h2>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
             <div
-              class="bg-white p-3 lg:p-4 rounded-lg border border-gray-200 hover:shadow-lg hover:border-[#ed9a28] hover:-translate-y-1 transition-all duration-200 cursor-pointer group"
+              class="bg-white p-3 lg:p-4 rounded-lg border border-gray-200 hover:shadow-lg hover:border-[#ed9a28] hover:-translate-y-1 touch:hover:translate-y-0 transition-all duration-200 cursor-pointer group"
             >
               <h3
                 class="font-medium text-gray-800 mb-2 text-sm lg:text-base group-hover:text-[#ed9a28] transition-colors duration-200"
@@ -123,7 +123,7 @@
               </div>
             </div>
             <div
-              class="bg-white p-3 lg:p-4 rounded-lg border border-gray-200 hover:shadow-lg hover:border-[#6dd0e0] hover:-translate-y-1 transition-all duration-200 cursor-pointer group"
+              class="bg-white p-3 lg:p-4 rounded-lg border border-gray-200 hover:shadow-lg hover:border-[#6dd0e0] hover:-translate-y-1 touch:hover:translate-y-0 transition-all duration-200 cursor-pointer group"
             >
               <h3
                 class="font-medium text-gray-800 mb-2 text-sm lg:text-base group-hover:text-[#6dd0e0] transition-colors duration-200"
@@ -146,7 +146,7 @@
               </div>
             </div>
             <div
-              class="bg-white p-3 lg:p-4 rounded-lg border border-gray-200 hover:shadow-lg hover:border-gray-400 hover:-translate-y-1 transition-all duration-200 cursor-pointer group"
+              class="bg-white p-3 lg:p-4 rounded-lg border border-gray-200 hover:shadow-lg hover:border-gray-400 hover:-translate-y-1 touch:hover:translate-y-0 transition-all duration-200 cursor-pointer group"
             >
               <h3
                 class="font-medium text-gray-800 mb-2 text-sm lg:text-base group-hover:text-gray-600 transition-colors duration-200"
@@ -183,7 +183,7 @@
           </h2>
           <div class="space-y-4 lg:space-y-6">
             <div
-              class="bg-white p-4 lg:p-6 rounded-lg border border-gray-200 hover:shadow-lg hover:border-[#ed9a28] hover:-translate-y-1 transition-all duration-200"
+              class="bg-white p-4 lg:p-6 rounded-lg border border-gray-200 hover:shadow-lg hover:border-[#ed9a28] hover:-translate-y-1 touch:hover:translate-y-0 transition-all duration-200"
             >
               <div class="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-2">
                 <h3
@@ -206,7 +206,7 @@
             </div>
 
             <div
-              class="bg-white p-4 lg:p-6 rounded-lg border border-gray-200 hover:shadow-lg hover:border-[#6dd0e0] hover:-translate-y-1 transition-all duration-200"
+              class="bg-white p-4 lg:p-6 rounded-lg border border-gray-200 hover:shadow-lg hover:border-[#6dd0e0] hover:-translate-y-1 touch:hover:translate-y-0 transition-all duration-200"
             >
               <div class="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-2">
                 <h3
@@ -246,7 +246,7 @@
           </div>
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
             <div
-              class="bg-white p-4 lg:p-6 rounded-lg border border-gray-200 hover:shadow-lg hover:border-[#ed9a28] hover:-translate-y-1 transition-all duration-200 group"
+              class="bg-white p-4 lg:p-6 rounded-lg border border-gray-200 hover:shadow-lg hover:border-[#ed9a28] hover:-translate-y-1 touch:hover:translate-y-0 transition-all duration-200 group"
             >
               <h3
                 class="font-semibold text-gray-800 mb-2 group-hover:text-[#ed9a28] transition-colors duration-200 text-sm lg:text-base"
@@ -284,7 +284,7 @@
             </div>
 
             <div
-              class="bg-white p-4 lg:p-6 rounded-lg border border-gray-200 hover:shadow-lg hover:border-[#6dd0e0] hover:-translate-y-1 transition-all duration-200 group"
+              class="bg-white p-4 lg:p-6 rounded-lg border border-gray-200 hover:shadow-lg hover:border-[#6dd0e0] hover:-translate-y-1 touch:hover:translate-y-0 transition-all duration-200 group"
             >
               <h3
                 class="font-semibold text-gray-800 mb-2 group-hover:text-[#6dd0e0] transition-colors duration-200 text-sm lg:text-base"
@@ -346,14 +346,5 @@ import { getTagColor } from '@/utils/colorHash'
 .animate-section-slide {
   animation: sectionSlide 0.3s ease-out forwards;
   opacity: 0;
-}
-
-/* 移动端优化 */
-@media (max-width: 1024px) {
-  @media (hover: none) {
-    .hover\:-translate-y-1:hover {
-      transform: none;
-    }
-  }
 }
 </style>

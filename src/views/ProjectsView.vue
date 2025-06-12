@@ -19,7 +19,7 @@
             v-for="tag in allTags"
             :key="tag"
             @click="toggleTag(tag)"
-            class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 transform hover:scale-105 hover:-translate-y-0.5 border border-gray-200 hover:shadow-md relative overflow-hidden"
+            class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 transform hover:scale-105 hover:-translate-y-0.5 touch:hover:scale-100 touch:hover:translate-y-0 border border-gray-200 hover:shadow-md relative overflow-hidden"
             :class="selectedTags.includes(tag) ? 'shadow-lg scale-105' : ''"
             :style="getButtonStyle(tag)"
             @mouseenter="handleMouseEnter($event, tag)"
@@ -317,12 +317,8 @@ const handleMouseLeave = (event: Event, tag: string) => {
 }
 
 /* 移动端优化 */
-@media (max-width: 1024px) {
-  @media (hover: none) {
-    .hover\:scale-105:hover,
-    .hover\:-translate-y-0\.5:hover {
-      transform: none;
-    }
-  }
+.touch\:scale-105:hover,
+.touch\:-translate-y-0\.5:hover {
+  transform: none;
 }
 </style>

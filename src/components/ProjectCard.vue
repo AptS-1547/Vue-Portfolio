@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg hover:border-[#ed9a28] hover:-translate-y-1 hover:scale-105 transition-all duration-200 group animate-card-entrance w-full overflow-hidden"
+    class="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg hover:border-[#ed9a28] hover:-translate-y-1 hover:scale-105 touch:hover:translate-y-0 touch:hover:scale-100 transition-all duration-200 group animate-card-entrance w-full overflow-hidden"
   >
     <!-- 项目状态标识 -->
     <div class="flex justify-between items-start mb-4 animate-status-bar">
@@ -16,7 +16,7 @@
 
     <!-- 项目标题和描述 -->
     <h3
-      class="font-bold text-gray-800 text-lg mb-3 group-hover:text-[#ed9a28] transition-colors duration-200 hover:scale-105 animate-title-slide"
+      class="font-bold text-gray-800 text-lg mb-3 group-hover:text-[#ed9a28] transition-colors duration-200 hover:scale-105 touch:hover:scale-100 animate-title-slide"
     >
       {{ project.title }}
     </h3>
@@ -30,7 +30,7 @@
       <span
         v-for="(tag, index) in project.tags.slice(0, 4)"
         :key="tag"
-        class="px-2 py-1 rounded text-xs font-medium hover:scale-105 transition-all duration-200 animate-tag-pop cursor-pointer"
+        class="px-2 py-1 rounded text-xs font-medium hover:scale-105 touch:hover:scale-100 transition-all duration-200 animate-tag-pop cursor-pointer"
         :style="{
           animationDelay: `${index * 0.05}s`,
           backgroundColor: getTagColor(tag).backgroundColor,
@@ -66,7 +66,7 @@
         <a
           :href="project.githubUrl"
           target="_blank"
-          class="inline-flex items-center text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded hover:bg-[#ed9a28] hover:text-white hover:scale-105 transition-all duration-200 group animate-button-bounce"
+          class="inline-flex items-center text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded hover:bg-[#ed9a28] hover:text-white hover:scale-105 touch:hover:scale-100 transition-all duration-200 group animate-button-bounce"
           title="View on GitHub"
           style="animation-delay: 0.05s"
         >
@@ -76,7 +76,7 @@
           v-if="project.liveUrl"
           :href="project.liveUrl"
           target="_blank"
-          class="inline-flex items-center text-xs bg-gradient-to-r from-[#ed9a28] to-[#6dd0e0] text-white px-2 py-1 rounded hover:from-[#6dd0e0] hover:to-[#ed9a28] hover:scale-105 transition-all duration-200 group animate-button-bounce"
+          class="inline-flex items-center text-xs bg-gradient-to-r from-[#ed9a28] to-[#6dd0e0] text-white px-2 py-1 rounded hover:from-[#6dd0e0] hover:to-[#ed9a28] hover:scale-105 touch:hover:scale-100 transition-all duration-200 group animate-button-bounce"
           title="Live Demo"
           style="animation-delay: 0.1s"
         >
@@ -350,21 +350,5 @@ const handleTagHover = (event: Event, tag: string, isEnter: boolean) => {
   animation: licenseFade 0.2s ease-out forwards;
   animation-delay: 0.35s;
   opacity: 0;
-}
-
-/* 移动端优化 */
-@media (max-width: 1024px) {
-  @media (hover: none) {
-    .hover\:scale-105:hover,
-    .hover\:scale-110:hover,
-    .hover\:-translate-y-3:hover,
-    .hover\:-translate-y-0\.5:hover {
-      transform: none;
-    }
-
-    .hover\:rotate-12:hover {
-      transform: none;
-    }
-  }
 }
 </style>

@@ -7,7 +7,7 @@
         <!-- Logo/Brand -->
         <router-link
           to="/"
-          class="flex items-center space-x-2 text-xl font-bold text-gray-800 hover:text-[#ed9a28] transition-all duration-200 hover:scale-105 animate-bounce-in"
+          class="flex items-center space-x-2 text-xl font-bold text-gray-800 hover:text-[#ed9a28] transition-all duration-200 hover:scale-105 touch:hover:scale-100 animate-bounce-in"
         >
           <span class="animate-rotate-in">🚀</span>
           <span class="animate-slide-in-left">AptS-1547</span>
@@ -18,7 +18,7 @@
           <router-link
             to="/"
             :class="[
-              'px-3 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 hover:-translate-y-0.5 relative group',
+              'px-3 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 hover:-translate-y-0.5 touch:hover:scale-100 touch:hover:translate-y-0 relative group',
               $route.path === '/' ? 'text-[#ed9a28]' : 'text-gray-600 hover:text-[#ed9a28]',
             ]"
           >
@@ -33,7 +33,7 @@
           <router-link
             to="/projects"
             :class="[
-              'px-3 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 hover:-translate-y-0.5 relative group',
+              'px-3 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 hover:-translate-y-0.5 touch:hover:scale-100 touch:hover:translate-y-0 relative group',
               $route.path.startsWith('/projects')
                 ? 'text-[#ed9a28]'
                 : 'text-gray-600 hover:text-[#ed9a28]',
@@ -52,7 +52,7 @@
           <a
             href="https://www.esaps.net/"
             target="_blank"
-            class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-[#ed9a28] transition-all duration-200 hover:scale-105 hover:-translate-y-0.5 relative group"
+            class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-[#ed9a28] transition-all duration-200 hover:scale-105 hover:-translate-y-0.5 touch:hover:scale-100 touch:hover:translate-y-0 relative group"
           >
             Blog
             <span
@@ -64,7 +64,7 @@
         <!-- Mobile Menu Button -->
         <button
           @click="mobileMenuOpen = !mobileMenuOpen"
-          class="md:hidden p-2 rounded-md text-gray-600 hover:text-[#ed9a28] hover:bg-gray-50 transition-all duration-200 hover:scale-110"
+          class="md:hidden p-2 rounded-md text-gray-600 hover:text-[#ed9a28] hover:bg-gray-50 transition-all duration-200 hover:scale-110 touch:hover:scale-100"
         >
           <svg
             class="w-5 h-5 transition-transform duration-200"
@@ -101,7 +101,7 @@
           to="/"
           @click="mobileMenuOpen = false"
           :class="[
-            'block px-3 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 hover:translate-x-2 animate-mobile-item',
+            'block px-3 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 hover:translate-x-2 touch:hover:scale-100 touch:hover:translate-x-0 animate-mobile-item',
             $route.path === '/'
               ? 'text-[#ed9a28] bg-gradient-to-r from-orange-50 to-cyan-50'
               : 'text-gray-600 hover:text-[#ed9a28] hover:bg-gradient-to-r hover:from-orange-50 hover:to-cyan-50',
@@ -114,7 +114,7 @@
           to="/projects"
           @click="mobileMenuOpen = false"
           :class="[
-            'block px-3 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 hover:translate-x-2 animate-mobile-item',
+            'block px-3 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 hover:translate-x-2 touch:hover:scale-100 touch:hover:translate-x-0 animate-mobile-item',
             $route.path.startsWith('/projects')
               ? 'text-[#ed9a28] bg-gradient-to-r from-orange-50 to-cyan-50'
               : 'text-gray-600 hover:text-[#ed9a28] hover:bg-gradient-to-r hover:from-orange-50 hover:to-cyan-50',
@@ -127,7 +127,7 @@
           href="https://www.esaps.net/"
           target="_blank"
           @click="mobileMenuOpen = false"
-          class="block px-3 py-2 text-sm font-medium text-gray-600 hover:text-[#ed9a28] hover:bg-gradient-to-r hover:from-orange-50 hover:to-cyan-50 transition-all duration-200 hover:scale-105 hover:translate-x-2 animate-mobile-item"
+          class="block px-3 py-2 text-sm font-medium text-gray-600 hover:text-[#ed9a28] hover:bg-gradient-to-r hover:from-orange-50 hover:to-cyan-50 transition-all duration-200 hover:scale-105 hover:translate-x-2 touch:hover:scale-100 touch:hover:translate-x-0 animate-mobile-item"
           style="animation-delay: 0.15s"
         >
           Blog

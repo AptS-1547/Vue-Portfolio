@@ -5,7 +5,7 @@
       <div class="mb-6 animate-back-button">
         <router-link
           to="/projects"
-          class="inline-flex items-center text-[#ed9a28] hover:text-[#6dd0e0] transition-all duration-500 hover:scale-105 hover:-translate-y-0.5 group"
+          class="inline-flex items-center text-[#ed9a28] hover:text-[#6dd0e0] transition-all duration-500 hover:scale-105 hover:-translate-y-0.5 touch:hover:scale-100 touch:hover:translate-y-0 group"
         >
           <span class="mr-2 transition-transform duration-500 group-hover:-translate-x-1">←</span>
           <span>Back to Projects</span>
@@ -674,15 +674,5 @@ const statusColor = computed(() => {
 
 .animate-check-bounce:hover {
   animation: checkBounce 0.6s ease-in-out;
-}
-
-/* 移动端优化 */
-@media (max-width: 1024px) {
-  @media (hover: none) {
-    .hover\:scale-105:hover,
-    .hover\:-translate-y-0\.5:hover {
-      transform: none;
-    }
-  }
 }
 </style>
