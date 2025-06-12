@@ -1,8 +1,11 @@
 <template>
+  <!-- 导航栏 -->
+  <Navigation />
+
   <main class="min-h-screen bg-gray-50 flex flex-col lg:flex-row">
     <!-- 左侧个人信息栏 - 移动端顶部，桌面端固定 -->
     <div
-      class="lg:fixed lg:left-0 lg:top-0 lg:w-1/3 lg:h-screen w-full bg-white border-b lg:border-r lg:border-b-0 border-gray-300 p-4 lg:p-8 flex flex-col items-center justify-center animate-slide-in-left"
+      class="lg:fixed lg:left-0 lg:top-16 lg:w-1/3 lg:h-[calc(100vh-4rem)] w-full bg-white border-b lg:border-r lg:border-b-0 border-gray-300 p-4 lg:p-8 flex flex-col items-center justify-center animate-slide-in-left"
     >
       <!-- 头像 -->
       <div
@@ -67,7 +70,7 @@
     </div>
 
     <!-- 右侧详细信息栏 - 移动端全宽，桌面端考虑左侧栏宽度 -->
-    <div class="flex-1 lg:ml-[33.333333%] p-4 lg:p-8 overflow-y-auto">
+    <div class="flex-1 lg:ml-[33.333333%] lg:mt-16 p-4 lg:p-8 overflow-y-auto">
       <div class="max-w-4xl mx-auto space-y-6 lg:space-y-8">
         <!-- About Me -->
         <section class="animate-fade-in-up animate-delay-1000">
@@ -201,11 +204,19 @@
 
         <!-- Projects -->
         <section class="animate-fade-in-up animate-delay-1600">
-          <h2
-            class="text-lg lg:text-xl font-semibold text-gray-800 mb-3 lg:mb-4 border-b border-gray-300 pb-2 hover:text-blue-600 transition-colors duration-300"
-          >
-            Featured Projects
-          </h2>
+          <div class="flex justify-between items-center mb-3 lg:mb-4">
+            <h2
+              class="text-lg lg:text-xl font-semibold text-gray-800 border-b border-gray-300 pb-2 hover:text-blue-600 transition-colors duration-300"
+            >
+              Featured Projects
+            </h2>
+            <router-link
+              to="/projects"
+              class="text-sm text-blue-600 hover:text-blue-800 transition-colors duration-300 hover:underline"
+            >
+              View All →
+            </router-link>
+          </div>
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
             <div
               class="bg-white p-4 lg:p-6 rounded-lg border border-gray-200 hover:shadow-xl hover:border-blue-300 hover:-translate-y-2 transition-all duration-300 group"
@@ -227,16 +238,15 @@
                 <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">SQLite</span>
                 <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">Docker</span>
               </div>
-              <a
-                href="https://github.com/AptS-1547/shortlinker"
-                target="_blank"
+              <router-link
+                :to="`/projects/shortlinker`"
                 class="inline-flex items-center text-xs lg:text-sm text-blue-600 hover:text-blue-800 transition-colors group-hover:translate-x-1"
               >
                 <span>View Project</span>
                 <span class="ml-1 transition-transform duration-300 group-hover:translate-x-1"
                   >→</span
                 >
-              </a>
+              </router-link>
             </div>
 
             <div
@@ -245,30 +255,28 @@
               <h3
                 class="font-semibold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors duration-300 text-sm lg:text-base"
               >
-                Ferrus Gate - Modern Identity Gateway
+                OneBot GitHub Webhook - QQ 通知服务
               </h3>
               <p class="text-gray-600 text-xs lg:text-sm mb-3">
-                A modern identity gateway built with Rust, supporting OAuth2, OIDC, SAML, and
-                Passkey (FIDO2) protocols. Provides unified authentication entry and account
-                management platform for distributed systems with multi-tenant support, passwordless
-                login, MFA, and pluggable architecture.
+                一个强大的服务，通过 OneBot 协议将 GitHub Webhook 推送到 QQ
+                群。支持安全验证、灵活的仓库分支匹配、自定义消息格式，以及推送、PR、Issues 和
+                Releases 等全面的事件处理。具备通配符匹配、多群支持等高级功能。
               </p>
               <div class="flex flex-wrap gap-1 mb-3">
-                <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">Rust</span>
-                <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">OAuth2</span>
-                <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">OIDC</span>
-                <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">FIDO2</span>
+                <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">Python</span>
+                <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">FastAPI</span>
+                <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">OneBot</span>
+                <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">Docker</span>
               </div>
-              <a
-                href="https://github.com/FerrusGate/FerrusGate"
-                target="_blank"
+              <router-link
+                :to="`/projects/onebot-github-webhook`"
                 class="inline-flex items-center text-xs lg:text-sm text-blue-600 hover:text-blue-800 transition-colors group-hover:translate-x-1"
               >
                 <span>View Project</span>
                 <span class="ml-1 transition-transform duration-300 group-hover:translate-x-1"
                   >→</span
                 >
-              </a>
+              </router-link>
             </div>
           </div>
         </section>
@@ -277,7 +285,9 @@
   </main>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Navigation from '@/components/Navigation.vue'
+</script>
 
 <style scoped>
 /* 自定义样式 */

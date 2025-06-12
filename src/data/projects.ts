@@ -1,0 +1,191 @@
+export interface TechItem {
+  name: string
+  purpose: string
+}
+
+export interface Project {
+  id: string
+  title: string
+  description: string
+  longDescription?: string
+  tags: string[]
+  githubUrl: string
+  liveUrl?: string
+  stars?: number
+  language: string
+  status: 'active' | 'archived' | 'in-development'
+  license?: string
+  features?: string[]
+  techStack?: {
+    backend?: TechItem[]
+    frontend?: TechItem[]
+    tools?: TechItem[]
+  }
+  performance?: Array<{
+    name: string
+    value: string
+  }>
+}
+
+export const projects: Project[] = [
+  {
+    id: 'shortlinker',
+    title: 'ShortLinker',
+    description: 'High-Performance URL Shortener built with Rust and Actix-web',
+    longDescription:
+      'ShortLinker is a minimalist yet powerful URL shortener service built from the ground up with Rust and Actix-web. Designed for maximum performance and reliability, it supports HTTP 307 redirection and achieves exceptional throughput through smart caching strategies and Bloom filters.',
+    tags: ['Rust', 'Actix-web', 'SQLite', 'Docker', 'High-Performance'],
+    githubUrl: 'https://github.com/AptS-1547/shortlinker',
+    language: 'Rust',
+    status: 'active',
+    license: 'MIT',
+    features: [
+      'HTTP 307 redirection for better SEO and user experience',
+      'Achieves 700k+ QPS with optimized caching layer',
+      'Bloom filters for efficient URL existence checking',
+      'Support for both SQLite and JSON storage backends',
+      'Built-in admin API for URL management',
+      'Configurable URL expiration support',
+      'Cross-platform deployment with Docker',
+      'Minimal memory footprint and fast startup',
+    ],
+    techStack: {
+      backend: [
+        { name: 'Rust', purpose: 'Core language for performance' },
+        { name: 'Actix-web', purpose: 'High-performance web framework' },
+        { name: 'SQLite', purpose: 'Embedded database for persistence' },
+        { name: 'Bloom Filter', purpose: 'Efficient URL existence checking' },
+      ],
+      tools: [
+        { name: 'Docker', purpose: 'Containerization and deployment' },
+        { name: 'GitHub Actions', purpose: 'CI/CD pipeline' },
+        { name: 'Cargo', purpose: 'Package management and building' },
+      ],
+    },
+    performance: [
+      { name: 'QPS', value: '700K+' },
+      { name: 'Memory Usage', value: '<50MB' },
+      { name: 'Startup Time', value: '<100ms' },
+    ],
+  },
+  {
+    id: 'ferrus-gate',
+    title: 'Ferrus Gate',
+    description: 'Modern Identity Gateway supporting OAuth2, OIDC, SAML, and FIDO2',
+    longDescription:
+      'Ferrus Gate is a comprehensive identity gateway solution built with Rust, designed to provide unified authentication entry and account management for distributed systems. It supports multiple authentication protocols including OAuth2, OpenID Connect, SAML, and modern FIDO2/WebAuthn standards.',
+    tags: ['Rust', 'OAuth2', 'OIDC', 'SAML', 'FIDO2', 'Authentication'],
+    githubUrl: 'https://github.com/FerrusGate/FerrusGate',
+    language: 'Rust',
+    status: 'in-development',
+    license: 'Apache-2.0',
+    features: [
+      'Multi-protocol support (OAuth2, OIDC, SAML, FIDO2)',
+      'Passwordless authentication with FIDO2/WebAuthn',
+      'Multi-tenant architecture for enterprise deployments',
+      'Pluggable authentication providers',
+      'Multi-factor authentication (MFA) support',
+      'Session management and SSO capabilities',
+      'Admin dashboard for user and tenant management',
+      'API-first design with comprehensive REST APIs',
+    ],
+    techStack: {
+      backend: [
+        { name: 'Rust', purpose: 'Core system implementation' },
+        { name: 'Axum', purpose: 'Modern async web framework' },
+        { name: 'PostgreSQL', purpose: 'Primary data storage' },
+        { name: 'Redis', purpose: 'Session and cache management' },
+      ],
+      frontend: [
+        { name: 'Vue.js 3', purpose: 'Admin dashboard frontend' },
+        { name: 'TypeScript', purpose: 'Type-safe development' },
+        { name: 'Tailwind CSS', purpose: 'Utility-first styling' },
+      ],
+      tools: [
+        { name: 'Docker Compose', purpose: 'Local development environment' },
+        { name: 'Kubernetes', purpose: 'Production deployment' },
+        { name: 'OpenAPI', purpose: 'API documentation' },
+      ],
+    },
+  },
+  {
+    id: 'onebot-github-webhook',
+    title: 'OneBot GitHub Webhook',
+    description: 'GitHub Webhook to QQ notification service via OneBot protocol',
+    longDescription:
+      'OneBot GitHub Webhook is a powerful service that bridges GitHub webhooks to QQ groups using the OneBot protocol. It provides seamless integration between GitHub repositories and QQ groups, enabling real-time notifications for code changes, issues, pull requests, and releases. The service features advanced pattern matching, secure webhook verification, and flexible configuration options.',
+    tags: ['Python', 'FastAPI', 'OneBot', 'GitHub API', 'WebSocket', 'Docker'],
+    githubUrl: 'https://github.com/AptS-1547/onebot-github-webhook',
+    language: 'Python',
+    status: 'active',
+    license: 'MIT',
+    features: [
+      'Secure GitHub Webhook signature verification',
+      'OneBot protocol support (WebSocket and HTTP)',
+      'Advanced repository and branch matching with wildcards',
+      'Flexible event filtering (push, PR, issues, releases)',
+      'Customizable message formatting and templates',
+      'Multi-group and multi-bot support',
+      'Docker containerization for easy deployment',
+      'Comprehensive logging and error handling',
+      'Planned: GitHub API polling for private repositories',
+      'Planned: Custom Jinja2 template system',
+    ],
+    techStack: {
+      backend: [
+        { name: 'Python 3.8+', purpose: 'Core programming language' },
+        { name: 'FastAPI', purpose: 'High-performance async web framework' },
+        { name: 'Uvicorn', purpose: 'ASGI server for production deployment' },
+        { name: 'Pydantic', purpose: 'Data validation and settings management' },
+        { name: 'aiohttp', purpose: 'Async HTTP client for OneBot communication' },
+        { name: 'PyYAML', purpose: 'Configuration file parsing' },
+      ],
+      tools: [
+        { name: 'Docker', purpose: 'Containerization and deployment' },
+        { name: 'GitHub Actions', purpose: 'CI/CD pipeline' },
+        { name: 'Poetry', purpose: 'Python dependency management' },
+        { name: 'pytest', purpose: 'Unit testing framework' },
+      ],
+    },
+    performance: [
+      { name: 'Response Time', value: '<100ms' },
+      { name: 'Memory Usage', value: '<100MB' },
+      { name: 'Event Processing', value: '1000+/min' },
+    ],
+  },
+  {
+    id: 'vue-portfolio',
+    title: 'Vue Portfolio',
+    description: 'Personal portfolio website built with Vue.js and modern design',
+    longDescription:
+      'A responsive and modern personal portfolio website showcasing projects, skills, and professional experience. Built with Vue.js 3, TypeScript, and Tailwind CSS, it features smooth animations, responsive design, and optimized performance.',
+    tags: ['Vue.js', 'TypeScript', 'Tailwind CSS', 'Responsive', 'Portfolio'],
+    githubUrl: 'https://github.com/AptS-1547/VUE-About-Me',
+    language: 'TypeScript',
+    status: 'active',
+    license: 'GPL-3.0',
+    features: [
+      'Fully responsive design for all device sizes',
+      'Smooth scroll animations and transitions',
+      'Project showcase with filtering capabilities',
+      'Skills and expertise visualization',
+      'Professional experience timeline',
+      'Contact form with validation',
+      'SEO optimized with meta tags',
+      'Fast loading with lazy loading images',
+    ],
+    techStack: {
+      frontend: [
+        { name: 'Vue.js 3', purpose: 'Progressive web framework' },
+        { name: 'TypeScript', purpose: 'Type safety and better DX' },
+        { name: 'Tailwind CSS', purpose: 'Utility-first CSS framework' },
+        { name: 'Vue Router', purpose: 'Client-side routing' },
+      ],
+      tools: [
+        { name: 'Vite', purpose: 'Fast build tool and dev server' },
+        { name: 'ESLint', purpose: 'Code linting and formatting' },
+        { name: 'Prettier', purpose: 'Code formatting' },
+      ],
+    },
+  },
+]
