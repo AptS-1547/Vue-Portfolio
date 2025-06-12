@@ -1,9 +1,9 @@
 <template>
   <div>
     <Navigation />
-    <router-view v-slot="{ Component }">
-      <transition name="page" mode="out-in">
-        <component :is="Component" />
+    <router-view v-slot="{ Component, route }">
+      <transition name="page" mode="out-in" @enter="onPageEnter" @leave="onPageLeave">
+        <component :is="Component" :key="route.path" />
       </transition>
     </router-view>
   </div>
@@ -11,6 +11,31 @@
 
 <script setup lang="ts">
 import Navigation from '@/components/Navigation.vue'
+import { generateCSSVariables } from '@/config/theme'
+import { onMounted, nextTick } from 'vue'
+
+// 在组件挂载时应用 CSS 变量
+onMounted(() => {
+  const cssVariables = generateCSSVariables()
+  const root = document.documentElement
+
+  Object.entries(cssVariables).forEach(([key, value]) => {
+    root.style.setProperty(key, value)
+  })
+})
+
+// 页面进入动画开始时
+const onPageEnter = () => {
+  // 确保页面在动画开始时就在顶部
+  nextTick(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  })
+}
+
+// 页面离开动画开始时
+const onPageLeave = () => {
+  // 可以在这里添加离开页面时的处理逻辑
+}
 </script>
 
 <style>
@@ -26,12 +51,17 @@ body {
   overflow-x: hidden;
 }
 
+/* 确保页面内容不被固定导航栏遮挡 */
+body {
+  padding-top: 0; /* 移除可能的默认padding */
+}
+
 /* 页面过渡动画 - 修复滚动条问题 */
 .page-enter-active,
 .page-leave-active {
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   overflow-x: hidden;
-  min-height: 100vh;
+  min-height: calc(100vh - 4rem); /* 减去导航栏高度 */
 }
 
 .page-enter-from {
@@ -48,6 +78,12 @@ body {
 .page-leave-from {
   opacity: 1;
   transform: translateY(0) scale(1);
+}
+
+/* 确保页面过渡期间滚动位置正确 */
+.page-enter-active {
+  /* 禁止页面进入时的滚动 */
+  overflow-y: hidden;
 }
 
 /* 确保过渡期间容器不溢出 */
@@ -68,18 +104,25 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #ed9a28, #6dd0e0);
+  background: var(--gradient-primary);
   border-radius: 4px;
   transition: all 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #6dd0e0, #ed9a28);
+  background: var(--gradient-primary-reverse);
 }
 
 /* 全局平滑滚动 */
 html {
   scroll-behavior: smooth;
+  /* 在页面切换时强制滚动到顶部 */
+  scroll-padding-top: 64px; /* 导航栏高度 */
+}
+
+/* 为主要内容区域添加滚动控制 */
+main {
+  scroll-margin-top: 64px; /* 导航栏高度 */
 }
 
 /* 防止动画期间的水平滚动 */
@@ -112,9 +155,9 @@ html {
 
 /* 焦点可见性增强 */
 *:focus-visible {
-  outline: 2px solid #ed9a28;
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: var(--border-radius-default);
 }
 
 /* 移动端特殊处理 */

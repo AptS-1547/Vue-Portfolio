@@ -1,5 +1,5 @@
 <template>
-  <main class="min-h-screen bg-gray-50 py-8 px-4 xl:px-8 2xl:px-16 overflow-x-hidden">
+  <main class="min-h-screen bg-gray-50 py-8 px-4 xl:px-8 2xl:px-16 overflow-x-hidden pt-24">
     <div class="max-w-4xl mx-auto w-full">
       <!-- 返回按钮 -->
       <div class="mb-6 animate-back-button">
@@ -220,7 +220,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
 import LicenseDisplay from '@/components/LicenseDisplay.vue'
 import { projects } from '@/data/projects'
@@ -228,6 +228,14 @@ import { getTagColor } from '@/utils/colorHash'
 import type { Project } from '@/types/project'
 
 const route = useRoute()
+
+// 确保页面加载时在正确位置
+onMounted(() => {
+  nextTick(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  })
+})
+
 const projectId = computed(() => route.params.id as string)
 
 const projectsData = ref<Project[]>(projects)

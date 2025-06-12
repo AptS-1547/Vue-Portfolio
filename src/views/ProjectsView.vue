@@ -1,5 +1,5 @@
 <template>
-  <main class="min-h-screen bg-gray-50 py-8 px-4 xl:px-8 2xl:px-16 overflow-x-hidden">
+  <main class="min-h-screen bg-gray-50 py-8 px-4 xl:px-8 2xl:px-16 overflow-x-hidden pt-24">
     <div class="max-w-6xl mx-auto w-full">
       <!-- 页面标题 -->
       <div class="text-center mb-12 animate-hero-entrance">
@@ -64,7 +64,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, nextTick } from 'vue'
 import ProjectCard from '@/components/ProjectCard.vue'
 import { projects } from '@/data/projects'
 import { getTagColor } from '@/utils/colorHash'
@@ -130,6 +130,13 @@ const handleMouseLeave = (event: Event, tag: string) => {
   target.style.backgroundColor = colors.backgroundColor
   target.style.color = colors.textColor
 }
+
+// 确保页面加载时在正确位置
+onMounted(() => {
+  nextTick(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  })
+})
 </script>
 
 <style scoped>

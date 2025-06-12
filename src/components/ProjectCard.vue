@@ -5,7 +5,7 @@
     <!-- 项目状态标识 -->
     <div class="flex justify-between items-start mb-4 animate-status-bar">
       <div class="flex items-center space-x-2">
-        <div :class="statusColor" class="w-3 h-3 rounded-full animate-status-pulse"></div>
+        <div class="w-3 h-3 rounded-full animate-status-pulse" :class="statusColorClass"></div>
         <span
           class="text-xs font-medium text-gray-500 uppercase tracking-wide animate-status-text"
           >{{ project.status.replace('-', ' ') }}</span
@@ -97,13 +97,15 @@
 import { computed } from 'vue'
 import LicenseDisplay from './LicenseDisplay.vue'
 import { getTagColor } from '@/utils/colorHash'
+import { colors } from '@/config/theme'
 import type { Project } from '@/types/project'
 
 const props = defineProps<{
   project: Project
 }>()
 
-const statusColor = computed(() => {
+// 修复状态颜色计算
+const statusColorClass = computed(() => {
   switch (props.project.status) {
     case 'active':
       return 'bg-green-400'
