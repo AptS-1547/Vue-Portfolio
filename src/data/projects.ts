@@ -51,7 +51,7 @@ export const projects: Project[] = [
     githubUrl: 'https://github.com/FerrusGate/FerrusGate',
     language: 'Rust',
     status: 'in-development',
-    license: 'Apache-2.0',
+    license: 'MIT',
     features: [
       'Multi-protocol support (OAuth2, OIDC, SAML, FIDO2)',
       'Passwordless authentication with FIDO2/WebAuthn',
@@ -82,6 +82,47 @@ export const projects: Project[] = [
     },
   },
   {
+    id: 'sled-gui',
+    title: 'Sled GUI',
+    description: 'A Simple Visual Manager for Sled KV Database built with Tauri',
+    longDescription:
+      "Sled GUI is a modern desktop application built with Tauri that provides a visual interface for managing Sled embedded key-value databases. Combining the performance and security of Rust backend with the flexibility of modern web technologies, it offers developers an intuitive way to browse, edit, and manage Sled database entries without direct file manipulation. The application leverages Tauri's unique architecture to deliver native performance with web-based UI flexibility.",
+    tags: ['Tauri', 'Rust', 'Vue.js', 'TypeScript', 'Sled', 'Desktop App'],
+    githubUrl: 'https://github.com/AptS-1547/sled-gui',
+    language: 'Rust',
+    status: 'in-development',
+    license: 'MIT',
+    features: [
+      "Native desktop performance with Tauri's Rust core",
+      'Modern web UI built with Vue 3 and TypeScript',
+      'Direct integration with Sled embedded database',
+      'Real-time database browsing and key-value management',
+      'Cross-platform support (Windows, macOS, Linux)',
+      'Secure file system access through Tauri APIs',
+      "Lightweight bundle size with Tauri's optimization",
+      'Hot-reload development experience',
+    ],
+    techStack: {
+      backend: [
+        { name: 'Rust', purpose: 'Core application logic and Tauri backend' },
+        { name: 'Tauri', purpose: 'Desktop app framework and system APIs' },
+        { name: 'Sled', purpose: 'Embedded key-value database integration' },
+        { name: 'tokio', purpose: 'Async runtime for database operations' },
+      ],
+      frontend: [
+        { name: 'Vue 3', purpose: 'Reactive UI framework with Composition API' },
+        { name: 'TypeScript', purpose: 'Type-safe frontend development' },
+        { name: 'Tailwind CSS', purpose: 'Utility-first styling system' },
+        { name: 'Vite', purpose: 'Fast build tool optimized for Tauri' },
+      ],
+      tools: [
+        { name: 'Tauri CLI', purpose: 'Build and development toolchain' },
+        { name: 'Cargo', purpose: 'Rust package management' },
+        { name: 'ESLint + Prettier', purpose: 'Code quality and formatting' },
+      ],
+    },
+  },
+  {
     id: 'onebot-github-webhook',
     title: 'OneBot GitHub Webhook',
     description: 'GitHub Webhook to QQ notification service via OneBot protocol',
@@ -91,7 +132,7 @@ export const projects: Project[] = [
     githubUrl: 'https://github.com/AptS-1547/onebot-github-webhook',
     language: 'Python',
     status: 'active',
-    license: 'MIT',
+    license: 'Apache-2.0',
     features: [
       'Secure GitHub Webhook signature verification',
       'OneBot protocol support (WebSocket and HTTP)',
