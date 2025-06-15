@@ -44,7 +44,7 @@ jobs:
 
       - name: Build documentation
         run: |
-          npm run vite build
+          npm run build-only
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
