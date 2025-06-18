@@ -82,6 +82,38 @@ export const projects: Project[] = [
     },
   },
   {
+    id: 'nebulink',
+    title: 'Nebulink',
+    description: 'Distributed acceleration management platform based on global cloud nodes',
+    longDescription:
+      'Nebulink is a distributed acceleration management platform based on global cloud nodes, dedicated to building an efficient, flexible, and scalable CDN control system. It aims to weave global nodes into a nebula and accelerate services through intelligent routing and load balancing.',
+    tags: ['Rust', 'Actix-web', 'CDN', 'Distributed System', 'Load Balancing'],
+    githubUrl: 'https://github.com/AptS-1547/Nebulink',
+    language: 'Rust',
+    status: 'in-development',
+    license: 'Apache-2.0',
+    features: [
+      'Global node registration and heartbeat monitoring',
+      'Multi-node latency detection and load balancing',
+      'Intelligent routing and acceleration logic',
+      'Configuration center with management APIs',
+      'Real-time monitoring and status reporting (planned)',
+      'Security mechanisms (planned)',
+      'Distributed system architecture',
+      'High-performance CDN control system',
+    ],
+    techStack: {
+      backend: [
+        { name: 'Rust', purpose: 'Core system implementation for performance' },
+        { name: 'Actix-web', purpose: 'High-performance async web framework' },
+      ],
+      tools: [
+        { name: 'Cargo', purpose: 'Rust package management and building' },
+        { name: 'GitHub', purpose: 'Version control and collaboration' },
+      ],
+    },
+  },
+  {
     id: 'sled-gui',
     title: 'Sled GUI',
     description: 'A Simple Visual Manager for Sled KV Database built with Tauri',
