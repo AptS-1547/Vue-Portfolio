@@ -87,18 +87,25 @@ export const experience = {
   title: 'Experience',
   positions: [
     {
-      title: 'Full-Stack Developer & Technical Writer',
+      title: 'Full-Stack Developer & DevOps Engineer',
       company: 'Aberdeen Institute Digital Infrastructure Projects',
       period: '2024 - Present',
       hoverColor: '#ed9a28',
-      description: `Leading full-stack development for digital infrastructure projects using Node.js for backend APIs, Vue.js with Vite for modern frontend applications, and handling DevOps operations including server management and deployment automation. Also maintaining a technical blog with 100+ monthly readers covering full-stack development and infrastructure topics.`,
+      description: `Leading full-stack development for digital infrastructure projects using Node.js for backend APIs, Vue.js with Vite for modern frontend applications, and handling comprehensive DevOps operations including server management, CI/CD pipeline automation, container orchestration with Docker, infrastructure monitoring, and deployment automation. Responsible for maintaining high-availability systems and ensuring scalable infrastructure solutions.`,
     },
     {
-      title: 'Backend Developer',
+      title: 'Full-Stack Developer & DevOps Engineer & Technical Writer',
       company: 'The ESAP Project',
       period: '2021 - Present',
       hoverColor: '#6dd0e0',
-      description: `Focused on backend development using Node.js and Python, building microservices architecture, and gradually expanding into full-stack development by learning Rust and modern frontend frameworks.`,
+      description: `Evolved from backend development to full-stack engineering, building microservices architecture with Node.js and Python, implementing modern frontend solutions with Vue.js and Rust. Handling DevOps operations including server management, automated deployment pipelines, and infrastructure optimization. Additionally maintaining a technical blog with 100+ monthly readers covering full-stack development, DevOps practices, and infrastructure topics.`,
+    },
+    {
+      title: 'Technical Advisor & Mini-Program Developer',
+      company: 'Guangdong Western Style Practice Team',
+      period: '2025/7/7 - 2025/7/22',
+      hoverColor: '#10b981',
+      description: `Served as technical advisor for Beijie Central Primary School, providing guidance on National Education Platform usage and training teachers on digital educational tools. Developed two comprehensive mini-programs for Jiepo Village: an external e-commerce platform for local product sales and an internal community service application to enhance village management and resident convenience.`,
     },
   ],
 }

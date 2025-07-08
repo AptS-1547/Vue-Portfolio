@@ -225,7 +225,7 @@
 
 <script setup lang="ts">
 import { getTagColor } from '@/utils/colorHash'
-import { profileConfig } from '@/config/profile'
+import { profileConfig } from '@/data/profile'
 import { onMounted, nextTick } from 'vue'
 
 // 解构配置
