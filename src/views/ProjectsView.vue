@@ -67,7 +67,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, nextTick } from 'vue'
-import ProjectCard from '@/components/ProjectCard.vue'
+import ProjectCard from '@/components/project/ProjectCard.vue'
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
 import { projects } from '@/data/projects'
 import { getTagColor } from '@/utils/colorHash'
@@ -143,192 +143,76 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* 现代动画关键帧 */
-@keyframes heroEntrance {
-  from {
-    opacity: 0;
-    transform: translateY(-50px) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
+/* ProjectsView 特有样式 - 所有通用动画已移至全局 */
 
-@keyframes titleEmerge {
-  0% {
-    opacity: 0;
-    transform: translateY(-30px) scale(0.8);
-    filter: blur(10px);
-  }
-  60% {
-    opacity: 0.8;
-    transform: translateY(-5px) scale(1.02);
-    filter: blur(2px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
-}
-
-@keyframes subtitleFlow {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-    filter: blur(5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
-
-@keyframes filterSlide {
-  from {
-    opacity: 0;
-    transform: translateY(40px) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes gridEntrance {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes cardFloat {
-  0% {
-    opacity: 0;
-    transform: translateY(60px) scale(0.8) rotateX(30deg);
-  }
-  60% {
-    opacity: 0.8;
-    transform: translateY(-10px) scale(1.02) rotateX(-5deg);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1) rotateX(0deg);
-  }
-}
-
-@keyframes emptyState {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes searchBounce {
-  0%,
-  100% {
-    transform: scale(1) rotate(0deg);
-  }
-  25% {
-    transform: scale(1.1) rotate(-5deg);
-  }
-  75% {
-    transform: scale(1.1) rotate(5deg);
-  }
-}
-
-@keyframes emptyTitle {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes emptyText {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* 动画类 */
+/* Hero 入场动画 */
 .animate-hero-entrance {
-  animation: heroEntrance 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: scaleIn var(--animation-duration-slower) var(--animation-easing-ease-in-out) forwards;
 }
 
+/* 标题动画 */
 .animate-title-emerge {
-  animation: titleEmerge 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  animation: bounceIn var(--animation-duration-slow) var(--animation-easing-bounce) forwards;
   animation-delay: 0.1s;
   opacity: 0;
 }
 
+/* 副标题动画 */
 .animate-subtitle-flow {
-  animation: subtitleFlow 0.3s ease-out forwards;
+  animation: blurUp var(--animation-duration-slow) ease-out forwards;
   animation-delay: 0.2s;
   opacity: 0;
 }
 
+/* 筛选器滑入动画 */
 .animate-filter-slide {
-  animation: filterSlide 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: scaleInUp var(--animation-duration-slow) var(--animation-easing-ease-in-out) forwards;
   animation-delay: 0.3s;
   opacity: 0;
 }
 
+/* 网格入场动画 */
 .animate-grid-entrance {
-  animation: gridEntrance 0.2s ease-out forwards;
+  animation: scaleIn var(--animation-duration-normal) ease-out forwards;
   animation-delay: 0.4s;
   opacity: 0;
 }
 
+/* 卡片浮动动画 */
 .animate-card-float {
-  animation: cardFloat 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  animation: cardFloat var(--animation-duration-slower) var(--animation-easing-bounce) forwards;
   opacity: 0;
 }
 
+/* 空状态动画 */
 .animate-empty-state {
-  animation: emptyState 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: scaleIn var(--animation-duration-slow) var(--animation-easing-ease-in-out) forwards;
   animation-delay: 0.5s;
   opacity: 0;
 }
 
 .animate-search-bounce {
-  animation: searchBounce 1.5s ease-in-out infinite;
+  animation: bounce 1.5s ease-in-out infinite;
   animation-delay: 0.6s;
 }
 
 .animate-empty-title {
-  animation: emptyTitle 0.2s ease-out forwards;
+  animation: fadeInUp var(--animation-duration-normal) ease-out forwards;
   animation-delay: 0.7s;
   opacity: 0;
 }
 
 .animate-empty-text {
-  animation: emptyText 0.2s ease-out forwards;
+  animation: fadeInUp var(--animation-duration-normal) ease-out forwards;
   animation-delay: 0.8s;
   opacity: 0;
 }
 
-/* 移动端优化 */
-.touch\:scale-105:hover,
-.touch\:-translate-y-0\.5:hover {
-  transform: none;
+/* 移动端优化 - 禁用悬停效果 */
+@media (hover: none) {
+  .touch\:hover\:scale-100:hover,
+  .touch\:hover\:translate-y-0:hover {
+    transform: none;
+  }
 }
 </style>

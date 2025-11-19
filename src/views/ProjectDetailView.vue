@@ -221,7 +221,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
-import LicenseDisplay from '@/components/LicenseDisplay.vue'
+import LicenseDisplay from '@/components/project/LicenseDisplay.vue'
 import ErrorState from '@/components/common/ErrorState.vue'
 import { CodeBracketIcon, RocketLaunchIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
 import { projects } from '@/data/projects'
@@ -258,138 +258,23 @@ const statusColor = computed(() => {
 </script>
 
 <style scoped>
-/* 简化的动画关键帧 - 从 26 个精简为 8 个核心动画 */
+/* ProjectDetailView 特有样式 - 所有通用动画已移至全局 */
 
-/* 通用淡入 + 上移动画 */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* 通用淡入 + 左移动画 */
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* 通用缩放动画 */
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* 弹性缩放动画 */
-@keyframes bounceIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  60% {
-    transform: scale(1.02);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* 搜索旋转动画 */
-@keyframes searchSpin {
-  0%, 100% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(180deg);
-  }
-}
-
-/* 状态脉冲动画 */
-@keyframes statusPulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.7;
-    transform: scale(1.2);
-  }
-}
-
-/* 悬停弹跳动画 */
-@keyframes checkBounce {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-}
-
-/* 卡片入场动画 */
-@keyframes cardEntrance {
-  from {
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* 动画类 - 使用 CSS 变量控制时长 */
+/* 返回按钮动画 */
 .animate-back-button {
-  animation: fadeInLeft var(--animation-duration-slow, 300ms) var(--animation-easing-ease-out) forwards;
+  animation: fadeInLeft var(--animation-duration-slow) ease-out forwards;
 }
 
-.animate-not-found {
-  animation: scaleIn var(--animation-duration-slow, 300ms) var(--animation-easing-ease-out) forwards;
-  animation-delay: 0.1s;
-  opacity: 0;
-}
-
-.animate-search-spin {
-  animation: searchSpin 3s ease-in-out infinite;
-}
-
-.animate-not-found-title {
-  animation: fadeInUp var(--animation-duration-slow, 300ms) ease-out forwards;
-  animation-delay: 0.2s;
-  opacity: 0;
-}
-
-.animate-not-found-text {
-  animation: fadeInUp var(--animation-duration-slow, 300ms) ease-out forwards;
-  animation-delay: 0.3s;
-  opacity: 0;
-}
-
+/* 头部卡片动画 */
 .animate-header-slide {
-  animation: cardEntrance var(--animation-duration-slow, 300ms) var(--animation-easing-ease-out) forwards;
+  animation: scaleInUp var(--animation-duration-slow) var(--animation-easing-ease-in-out) forwards;
   animation-delay: 0.05s;
   opacity: 0;
 }
 
+/* 状态信息动画 */
 .animate-status-fade {
-  animation: fadeInLeft var(--animation-duration-normal, 200ms) ease-out forwards;
+  animation: fadeInLeft var(--animation-duration-normal) ease-out forwards;
   animation-delay: 0.1s;
   opacity: 0;
 }
@@ -398,81 +283,111 @@ const statusColor = computed(() => {
   animation: statusPulse 2s ease-in-out infinite;
 }
 
+/* 标题动画 */
 .animate-title-emerge {
-  animation: bounceIn var(--animation-duration-slow, 300ms) var(--animation-easing-bounce) forwards;
+  animation: bounceIn var(--animation-duration-slow) var(--animation-easing-bounce) forwards;
   animation-delay: 0.15s;
   opacity: 0;
 }
 
+/* 描述动画 */
 .animate-description-flow {
-  animation: fadeInUp var(--animation-duration-slow, 300ms) ease-out forwards;
+  animation: fadeInUp var(--animation-duration-slow) ease-out forwards;
   animation-delay: 0.2s;
   opacity: 0;
 }
 
+/* 标签动画 */
 .animate-tags-stagger {
-  animation: fadeInUp var(--animation-duration-normal, 200ms) ease-out forwards;
+  animation: fadeInUp var(--animation-duration-normal) ease-out forwards;
   animation-delay: 0.25s;
   opacity: 0;
 }
 
 .animate-tag-bounce {
-  animation: bounceIn var(--animation-duration-normal, 200ms) var(--animation-easing-bounce) forwards;
+  animation: bounceIn var(--animation-duration-normal) var(--animation-easing-bounce) forwards;
   opacity: 0;
 }
 
+/* 按钮动画 */
 .animate-buttons-slide {
-  animation: fadeInUp var(--animation-duration-slow, 300ms) var(--animation-easing-ease-out) forwards;
+  animation: fadeInUp var(--animation-duration-slow) var(--animation-easing-ease-in-out) forwards;
   animation-delay: 0.3s;
   opacity: 0;
 }
 
+/* 区块动画 */
 .animate-section-slide {
-  animation: cardEntrance var(--animation-duration-slow, 300ms) var(--animation-easing-ease-out) forwards;
+  animation: scaleInUp var(--animation-duration-slow) var(--animation-easing-ease-in-out) forwards;
   opacity: 0;
 }
 
 .animate-section-title {
-  animation: fadeInLeft var(--animation-duration-normal, 200ms) ease-out forwards;
+  animation: fadeInLeft var(--animation-duration-normal) ease-out forwards;
   animation-delay: 0.1s;
   opacity: 0;
 }
 
+/* 文本动画 */
 .animate-text-reveal {
-  animation: fadeInUp var(--animation-duration-slow, 300ms) ease-out forwards;
+  animation: fadeInUp var(--animation-duration-slow) ease-out forwards;
   animation-delay: 0.15s;
   opacity: 0;
 }
 
+/* 特性列表动画 */
 .animate-features-slide {
-  animation: fadeInLeft var(--animation-duration-slow, 300ms) ease-out forwards;
+  animation: fadeInLeft var(--animation-duration-slow) ease-out forwards;
   animation-delay: 0.2s;
   opacity: 0;
 }
 
 .animate-features-title {
-  animation: fadeInUp var(--animation-duration-normal, 200ms) ease-out forwards;
+  animation: fadeInUp var(--animation-duration-normal) ease-out forwards;
   animation-delay: 0.25s;
   opacity: 0;
 }
 
 .animate-feature-item {
-  animation: fadeInLeft var(--animation-duration-normal, 200ms) var(--animation-easing-ease-out) forwards;
+  animation: fadeInLeft var(--animation-duration-normal) var(--animation-easing-ease-in-out) forwards;
   opacity: 0;
 }
 
 .animate-check-bounce:hover {
-  animation: checkBounce var(--animation-duration-slow, 300ms) ease-in-out;
+  animation: bounce var(--animation-duration-slow) ease-in-out;
 }
 
+/* 技术栈动画 */
 .animate-tech-section {
-  animation: cardEntrance var(--animation-duration-slow, 300ms) var(--animation-easing-ease-out) forwards;
+  animation: scaleInUp var(--animation-duration-slow) var(--animation-easing-ease-in-out) forwards;
+  opacity: 0;
+}
+
+.animate-tech-title {
+  animation: fadeInUp var(--animation-duration-normal) ease-out forwards;
+  opacity: 0;
+}
+
+.animate-tech-item {
+  animation: fadeInLeft var(--animation-duration-normal) ease-out forwards;
+  opacity: 0;
+}
+
+/* 性能指标动画 */
+.animate-metric-card {
+  animation: bounceInUp var(--animation-duration-slower) var(--animation-easing-bounce) forwards;
   opacity: 0;
 }
 
 .animate-metric-value {
-  animation: bounceIn var(--animation-duration-slow, 300ms) var(--animation-easing-bounce) forwards;
+  animation: bounceIn var(--animation-duration-slow) var(--animation-easing-bounce) forwards;
   animation-delay: 0.1s;
+  opacity: 0;
+}
+
+.animate-metric-label {
+  animation: fadeInUp var(--animation-duration-normal) ease-out forwards;
+  animation-delay: 0.15s;
   opacity: 0;
 }
 </style>

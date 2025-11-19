@@ -136,161 +136,17 @@ const handleTagHover = (event: Event, tag: string, isEnter: boolean) => {
 </script>
 
 <style scoped>
-/* 现代动画关键帧 */
-@keyframes cardEntrance {
-  from {
-    opacity: 0;
-    transform: translateY(40px) scale(0.9) rotateX(10deg);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1) rotateX(0deg);
-  }
-}
+/* ProjectCard 特有样式 - 所有通用动画已移至全局 */
 
-@keyframes statusBar {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes statusPulse {
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.7;
-    transform: scale(1.2);
-  }
-}
-
-@keyframes statusText {
-  from {
-    opacity: 0;
-    transform: translateX(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes languageBadge {
-  from {
-    opacity: 0;
-    transform: translateX(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes titleSlide {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes descriptionFade {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-    filter: blur(2px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
-
-@keyframes tagsFlow {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes tagPop {
-  from {
-    opacity: 0;
-    transform: translateY(15px) scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes actionsSlide {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes buttonsStagger {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes buttonBounce {
-  from {
-    opacity: 0;
-    transform: translateY(10px) scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes licenseFade {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* 动画类 */
+/* 卡片入场动画 */
 .animate-card-entrance {
-  animation: cardEntrance 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: cardEntrance var(--animation-duration-slow) var(--animation-easing-ease-in-out) forwards;
   opacity: 0;
 }
 
+/* 状态栏动画 */
 .animate-status-bar {
-  animation: statusBar 0.2s ease-out forwards;
+  animation: fadeInDown var(--animation-duration-normal) ease-out forwards;
   animation-delay: 0.05s;
   opacity: 0;
 }
@@ -300,58 +156,63 @@ const handleTagHover = (event: Event, tag: string, isEnter: boolean) => {
 }
 
 .animate-status-text {
-  animation: statusText 0.2s ease-out forwards;
+  animation: fadeInLeft var(--animation-duration-normal) ease-out forwards;
   animation-delay: 0.1s;
   opacity: 0;
 }
 
 .animate-language-badge {
-  animation: languageBadge 0.2s ease-out forwards;
+  animation: fadeInRight var(--animation-duration-normal) ease-out forwards;
   animation-delay: 0.1s;
   opacity: 0;
 }
 
+/* 标题动画 */
 .animate-title-slide {
-  animation: titleSlide 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: fadeInUp var(--animation-duration-slow) var(--animation-easing-ease-in-out) forwards;
   animation-delay: 0.15s;
   opacity: 0;
 }
 
+/* 描述动画 */
 .animate-description-fade {
-  animation: descriptionFade 0.3s ease-out forwards;
+  animation: blurUp var(--animation-duration-slow) ease-out forwards;
   animation-delay: 0.2s;
   opacity: 0;
 }
 
+/* 标签流动画 */
 .animate-tags-flow {
-  animation: tagsFlow 0.2s ease-out forwards;
+  animation: fadeInUp var(--animation-duration-normal) ease-out forwards;
   animation-delay: 0.25s;
   opacity: 0;
 }
 
 .animate-tag-pop {
-  animation: tagPop 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  animation: bounceIn var(--animation-duration-normal) var(--animation-easing-bounce) forwards;
   opacity: 0;
 }
 
+/* 操作按钮动画 */
 .animate-actions-slide {
-  animation: actionsSlide 0.2s ease-out forwards;
+  animation: fadeInUp var(--animation-duration-normal) ease-out forwards;
   animation-delay: 0.3s;
   opacity: 0;
 }
 
 .animate-buttons-stagger {
-  animation: buttonsStagger 0.2s ease-out forwards;
+  animation: fadeInRight var(--animation-duration-normal) ease-out forwards;
   opacity: 0;
 }
 
 .animate-button-bounce {
-  animation: buttonBounce 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  animation: bounceIn var(--animation-duration-normal) var(--animation-easing-bounce) forwards;
   opacity: 0;
 }
 
+/* 许可证信息动画 */
 .animate-license-fade {
-  animation: licenseFade 0.2s ease-out forwards;
+  animation: fadeInUp var(--animation-duration-normal) ease-out forwards;
   animation-delay: 0.35s;
   opacity: 0;
 }

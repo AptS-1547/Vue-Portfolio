@@ -1,0 +1,41 @@
+/**
+ * CSS 变量定义
+ * 统一管理动画参数、间距、颜色等
+ */
+
+:root {
+  /* 动画时长 */
+  --animation-duration-fast: 150ms;
+  --animation-duration-normal: 200ms;
+  --animation-duration-slow: 300ms;
+  --animation-duration-slower: 400ms;
+
+  /* 动画缓动函数 */
+  --animation-easing-linear: linear;
+  --animation-easing-ease-out: ease-out;
+  --animation-easing-ease-in: ease-in;
+  --animation-easing-ease-in-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --animation-easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --animation-easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* 动画延迟 */
+  --animation-delay-short: 50ms;
+  --animation-delay-medium: 100ms;
+  --animation-delay-long: 150ms;
+
+  /* 变换距离 */
+  --transform-distance-sm: 10px;
+  --transform-distance-md: 20px;
+  --transform-distance-lg: 40px;
+  --transform-distance-xl: 60px;
+}
+
+/* 减少运动偏好 */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --animation-duration-fast: 1ms;
+    --animation-duration-normal: 1ms;
+    --animation-duration-slow: 1ms;
+    --animation-duration-slower: 1ms;
+  }
+}
