@@ -21,6 +21,7 @@ export default {
   projectStatus: {
     active: 'アクティブ',
     'in-development': '開発中',
+    planned: '未着手',
     archived: 'アーカイブ済み',
   },
 
@@ -37,6 +38,8 @@ export default {
     backend: 'バックエンド',
     frontend: 'フロントエンド',
     tools: 'ツールとDevOps',
+    infrastructure: 'インフラストラクチャ',
+    automation: '自動化',
   },
 
   // エラーステート

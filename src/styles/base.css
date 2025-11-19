@@ -8,6 +8,11 @@ html,
 body {
   overflow-x: hidden;
   min-height: 100vh;
+  background-color: var(--color-background-primary);
+  color: var(--color-text-primary);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 #app {
@@ -20,7 +25,7 @@ body {
   padding-top: 0;
 }
 
-/* 全局滚动条样式 */
+/* 全局滚动条样式 - 亮色模式 */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -28,6 +33,10 @@ body {
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1f2937;
 }
 
 ::-webkit-scrollbar-thumb {

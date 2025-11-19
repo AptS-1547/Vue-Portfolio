@@ -46,7 +46,7 @@ export default {
       },
       {
         title: 'Technical Advisor & Mini-Program Developer',
-        company: 'Guangdong Western Style Practice Team',
+        company: 'Yuexi Style Practice Team',
         period: '2025/7/7 - 2025/7/22',
         description: `Served as technical advisor for Beijie Central Primary School, providing guidance on National Education Platform usage and training teachers on digital educational tools. Developed two comprehensive mini-programs for Jiepo Village: an external e-commerce platform for local product sales and an internal community service application to enhance village management and resident convenience.`,
       },
@@ -65,7 +65,8 @@ export default {
     },
     projects: {
       title: 'My Projects',
-      subtitle: 'A collection of my open-source projects and technical contributions across backend development, DevOps automation, and modern web applications.',
+      subtitle:
+        'A collection of my open-source projects and technical contributions across backend development, DevOps automation, and modern web applications.',
     },
   },
 }

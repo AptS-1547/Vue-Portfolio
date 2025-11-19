@@ -22,7 +22,7 @@ function getBrowserLocale(): Locale {
 
   // 语言代码匹配（如 zh 匹配 zh-CN）
   const languageCode = browserLocale.split('-')[0] || 'zh'
-  const matched = SUPPORT_LOCALES.find(locale => locale.startsWith(languageCode))
+  const matched = SUPPORT_LOCALES.find((locale) => locale.startsWith(languageCode))
   if (matched) {
     return matched
   }
@@ -56,11 +56,11 @@ const i18nOptions: I18nOptions = {
   messages: {
     'zh-CN': zhCN,
     en: en,
-    ja: ja
+    ja: ja,
   },
   globalInjection: true, // 全局注入 $t
   missingWarn: false,
-  fallbackWarn: false
+  fallbackWarn: false,
 }
 
 const i18n = createI18n(i18nOptions)

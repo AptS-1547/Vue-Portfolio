@@ -14,19 +14,25 @@ export default {
       'Dockerによるクロスプラットフォーム展開',
       '最小限のメモリフットプリントと高速起動',
     ],
-    techStack: {
-      backend: [
-        { name: 'Rust', purpose: 'パフォーマンス重視のコア言語' },
-        { name: 'Actix-web', purpose: '高性能Webフレームワーク' },
-        { name: 'SQLite', purpose: '永続化のための組み込みデータベース' },
-        { name: 'Bloom Filter', purpose: '効率的なURL存在チェック' },
-      ],
-      tools: [
-        { name: 'Docker', purpose: 'コンテナ化とデプロイメント' },
-        { name: 'GitHub Actions', purpose: 'CI/CDパイプライン' },
-        { name: 'Cargo', purpose: 'パッケージ管理とビルド' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'backend',
+        items: [
+          { name: 'Rust', purpose: 'パフォーマンス重視のコア言語' },
+          { name: 'Actix-web', purpose: '高性能Webフレームワーク' },
+          { name: 'SQLite', purpose: '永続化のための組み込みデータベース' },
+          { name: 'Bloom Filter', purpose: '効率的なURL存在チェック' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Docker', purpose: 'コンテナ化とデプロイメント' },
+          { name: 'GitHub Actions', purpose: 'CI/CDパイプライン' },
+          { name: 'Cargo', purpose: 'パッケージ管理とビルド' },
+        ],
+      },
+    ],
     performance: [
       { name: 'QPS', value: '70万+' },
       { name: 'メモリ使用量', value: '<50MB' },
@@ -49,24 +55,33 @@ export default {
       'ユーザーとテナント管理のための管理ダッシュボード',
       '包括的なREST APIを備えたAPIファースト設計',
     ],
-    techStack: {
-      backend: [
-        { name: 'Rust', purpose: 'コアシステム実装' },
-        { name: 'Actix-web', purpose: '最新の非同期Webフレームワーク' },
-        { name: 'PostgreSQL', purpose: 'プライマリデータストレージ' },
-        { name: 'Redis', purpose: 'セッションとキャッシュ管理' },
-      ],
-      frontend: [
-        { name: 'Vue.js 3', purpose: '管理ダッシュボードフロントエンド' },
-        { name: 'TypeScript', purpose: '型安全な開発' },
-        { name: 'Tailwind CSS', purpose: 'ユーティリティファーストスタイリング' },
-      ],
-      tools: [
-        { name: 'Docker Compose', purpose: 'ローカル開発環境' },
-        { name: 'Kubernetes', purpose: '本番環境デプロイメント' },
-        { name: 'OpenAPI', purpose: 'APIドキュメント' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'backend',
+        items: [
+          { name: 'Rust', purpose: 'コアシステム実装' },
+          { name: 'Actix-web', purpose: '最新の非同期Webフレームワーク' },
+          { name: 'PostgreSQL', purpose: 'プライマリデータストレージ' },
+          { name: 'Redis', purpose: 'セッションとキャッシュ管理' },
+        ],
+      },
+      {
+        name: 'frontend',
+        items: [
+          { name: 'Vue.js 3', purpose: '管理ダッシュボードフロントエンド' },
+          { name: 'TypeScript', purpose: '型安全な開発' },
+          { name: 'Tailwind CSS', purpose: 'ユーティリティファーストスタイリング' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Docker Compose', purpose: 'ローカル開発環境' },
+          { name: 'Kubernetes', purpose: '本番環境デプロイメント' },
+          { name: 'OpenAPI', purpose: 'APIドキュメント' },
+        ],
+      },
+    ],
   },
 
   nebulink: {
@@ -84,16 +99,22 @@ export default {
       '分散システムアーキテクチャ',
       '高性能CDN制御システム',
     ],
-    techStack: {
-      backend: [
-        { name: 'Rust', purpose: 'パフォーマンス重視のコアシステム実装' },
-        { name: 'Actix-web', purpose: '高性能非同期Webフレームワーク' },
-      ],
-      tools: [
-        { name: 'Cargo', purpose: 'Rustパッケージ管理とビルド' },
-        { name: 'GitHub', purpose: 'バージョン管理とコラボレーション' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'backend',
+        items: [
+          { name: 'Rust', purpose: 'パフォーマンス重視のコアシステム実装' },
+          { name: 'Actix-web', purpose: '高性能非同期Webフレームワーク' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Cargo', purpose: 'Rustパッケージ管理とビルド' },
+          { name: 'GitHub', purpose: 'バージョン管理とコラボレーション' },
+        ],
+      },
+    ],
   },
 
   'sled-gui': {
@@ -111,25 +132,34 @@ export default {
       'Tauriの最適化による軽量バンドルサイズ',
       'ホットリロード開発体験',
     ],
-    techStack: {
-      backend: [
-        { name: 'Rust', purpose: 'コアアプリケーションロジックとTauriバックエンド' },
-        { name: 'Tauri', purpose: 'デスクトップアプリフレームワークとシステムAPI' },
-        { name: 'Sled', purpose: '組み込みキーバリューデータベース統合' },
-        { name: 'tokio', purpose: 'データベース操作の非同期ランタイム' },
-      ],
-      frontend: [
-        { name: 'Vue 3', purpose: 'Composition APIを備えたリアクティブUIフレームワーク' },
-        { name: 'TypeScript', purpose: '型安全なフロントエンド開発' },
-        { name: 'Tailwind CSS', purpose: 'ユーティリティファーストスタイリングシステム' },
-        { name: 'Vite', purpose: 'Tauri向けに最適化された高速ビルドツール' },
-      ],
-      tools: [
-        { name: 'Tauri CLI', purpose: 'ビルドと開発ツールチェーン' },
-        { name: 'Cargo', purpose: 'Rustパッケージ管理' },
-        { name: 'ESLint + Prettier', purpose: 'コード品質とフォーマット' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'backend',
+        items: [
+          { name: 'Rust', purpose: 'コアアプリケーションロジックとTauriバックエンド' },
+          { name: 'Tauri', purpose: 'デスクトップアプリフレームワークとシステムAPI' },
+          { name: 'Sled', purpose: '組み込みキーバリューデータベース統合' },
+          { name: 'tokio', purpose: 'データベース操作の非同期ランタイム' },
+        ],
+      },
+      {
+        name: 'frontend',
+        items: [
+          { name: 'Vue 3', purpose: 'Composition APIを備えたリアクティブUIフレームワーク' },
+          { name: 'TypeScript', purpose: '型安全なフロントエンド開発' },
+          { name: 'Tailwind CSS', purpose: 'ユーティリティファーストスタイリングシステム' },
+          { name: 'Vite', purpose: 'Tauri向けに最適化された高速ビルドツール' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Tauri CLI', purpose: 'ビルドと開発ツールチェーン' },
+          { name: 'Cargo', purpose: 'Rustパッケージ管理' },
+          { name: 'ESLint + Prettier', purpose: 'コード品質とフォーマット' },
+        ],
+      },
+    ],
   },
 
   'onebot-github-webhook': {
@@ -149,22 +179,28 @@ export default {
       '予定：プライベートリポジトリ向けのGitHub APIポーリング',
       '予定：カスタムJinja2テンプレートシステム',
     ],
-    techStack: {
-      backend: [
-        { name: 'Python 3.8+', purpose: 'コアプログラミング言語' },
-        { name: 'FastAPI', purpose: '高性能非同期Webフレームワーク' },
-        { name: 'Uvicorn', purpose: '本番環境デプロイ用ASGIサーバー' },
-        { name: 'Pydantic', purpose: 'データ検証と設定管理' },
-        { name: 'aiohttp', purpose: 'OneBot通信用非同期HTTPクライアント' },
-        { name: 'PyYAML', purpose: '設定ファイル解析' },
-      ],
-      tools: [
-        { name: 'Docker', purpose: 'コンテナ化とデプロイメント' },
-        { name: 'GitHub Actions', purpose: 'CI/CDパイプライン' },
-        { name: 'Poetry', purpose: 'Python依存関係管理' },
-        { name: 'pytest', purpose: 'ユニットテストフレームワーク' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'backend',
+        items: [
+          { name: 'Python 3.8+', purpose: 'コアプログラミング言語' },
+          { name: 'FastAPI', purpose: '高性能非同期Webフレームワーク' },
+          { name: 'Uvicorn', purpose: '本番環境デプロイ用ASGIサーバー' },
+          { name: 'Pydantic', purpose: 'データ検証と設定管理' },
+          { name: 'aiohttp', purpose: 'OneBot通信用非同期HTTPクライアント' },
+          { name: 'PyYAML', purpose: '設定ファイル解析' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Docker', purpose: 'コンテナ化とデプロイメント' },
+          { name: 'GitHub Actions', purpose: 'CI/CDパイプライン' },
+          { name: 'Poetry', purpose: 'Python依存関係管理' },
+          { name: 'pytest', purpose: 'ユニットテストフレームワーク' },
+        ],
+      },
+    ],
     performance: [
       { name: '応答時間', value: '<100ms' },
       { name: 'メモリ使用量', value: '<100MB' },
@@ -187,19 +223,25 @@ export default {
       'メタタグによるSEO最適化',
       '遅延読み込み画像による高速読み込み',
     ],
-    techStack: {
-      frontend: [
-        { name: 'Vue.js 3', purpose: 'プログレッシブWebフレームワーク' },
-        { name: 'TypeScript', purpose: '型安全性と優れた開発体験' },
-        { name: 'Tailwind CSS', purpose: 'ユーティリティファーストCSSフレームワーク' },
-        { name: 'Vue Router', purpose: 'クライアントサイドルーティング' },
-      ],
-      tools: [
-        { name: 'Vite', purpose: '高速ビルドツールと開発サーバー' },
-        { name: 'ESLint', purpose: 'コードリンティングとフォーマット' },
-        { name: 'Prettier', purpose: 'コードフォーマット' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'frontend',
+        items: [
+          { name: 'Vue.js 3', purpose: 'プログレッシブWebフレームワーク' },
+          { name: 'TypeScript', purpose: '型安全性と優れた開発体験' },
+          { name: 'Tailwind CSS', purpose: 'ユーティリティファーストCSSフレームワーク' },
+          { name: 'Vue Router', purpose: 'クライアントサイドルーティング' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Vite', purpose: '高速ビルドツールと開発サーバー' },
+          { name: 'ESLint', purpose: 'コードリンティングとフォーマット' },
+          { name: 'Prettier', purpose: 'コードフォーマット' },
+        ],
+      },
+    ],
   },
 
   'wakatime-readme-updater': {
@@ -217,18 +259,24 @@ export default {
       '統計収集の設定可能な期間',
       '効率的なCI/CD統合のための小さなバイナリフットプリント',
     ],
-    techStack: {
-      backend: [
-        { name: 'Rust 1.90+', purpose: 'パフォーマンスと安全性のためのコア言語' },
-        { name: 'WakaTime API', purpose: 'コーディング統計データソース' },
-        { name: 'GitHub API', purpose: 'リポジトリ管理と更新' },
-      ],
-      tools: [
-        { name: 'Docker', purpose: '柔軟なデプロイメントのためのコンテナ化' },
-        { name: 'GitHub Actions', purpose: 'README自動更新' },
-        { name: 'Cargo', purpose: 'Rustパッケージ管理とビルド' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'backend',
+        items: [
+          { name: 'Rust 1.90+', purpose: 'パフォーマンスと安全性のためのコア言語' },
+          { name: 'WakaTime API', purpose: 'コーディング統計データソース' },
+          { name: 'GitHub API', purpose: 'リポジトリ管理と更新' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Docker', purpose: '柔軟なデプロイメントのためのコンテナ化' },
+          { name: 'GitHub Actions', purpose: 'README自動更新' },
+          { name: 'Cargo', purpose: 'Rustパッケージ管理とビルド' },
+        ],
+      },
+    ],
   },
 
   'nginx-modsecurity': {
@@ -246,19 +294,25 @@ export default {
       '攻撃面を削減するマルチステージビルド',
       'GitHub Actionsによる自動化CI/CD',
     ],
-    techStack: {
-      backend: [
-        { name: 'Nginx 1.28.0', purpose: '高性能Webサーバー' },
-        { name: 'ModSecurity v3.0.14', purpose: 'OWASP WAFエンジン' },
-        { name: 'Alpine Linux', purpose: '軽量で安全なベースイメージ' },
-        { name: 'Lua 5.4', purpose: '高度なルールのスクリプトサポート' },
-      ],
-      tools: [
-        { name: 'Docker', purpose: 'コンテナ化とデプロイメント' },
-        { name: 'GitHub Actions', purpose: '自動ビルドと公開' },
-        { name: 'Multi-stage builds', purpose: 'イメージサイズとセキュリティの最適化' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'infrastructure',
+        items: [
+          { name: 'Nginx 1.28.0', purpose: '高性能Webサーバー' },
+          { name: 'ModSecurity v3.0.14', purpose: 'OWASP WAFエンジン' },
+          { name: 'Alpine Linux', purpose: '軽量で安全なベースイメージ' },
+          { name: 'Lua 5.4', purpose: '高度なルールのスクリプトサポート' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Docker', purpose: 'コンテナ化とデプロイメント' },
+          { name: 'GitHub Actions', purpose: '自動ビルドと公開' },
+          { name: 'Multi-stage builds', purpose: 'イメージサイズとセキュリティの最適化' },
+        ],
+      },
+    ],
     performance: [
       { name: 'イメージサイズ', value: '約60MB' },
       { name: 'アーキテクチャ', value: 'AMD64 + ARM64' },
@@ -280,18 +334,24 @@ export default {
       'シンプルなYAMLベースの設定',
       'systemdサービス統合',
     ],
-    techStack: {
-      backend: [
-        { name: 'Shell Script', purpose: 'コア自動化ロジック' },
-        { name: 'acme.sh', purpose: 'ACMEプロトコルSSL証明書管理' },
-        { name: 'systemd', purpose: 'サービス管理とデーモンプロセス' },
-      ],
-      tools: [
-        { name: 'Docker', purpose: 'コンテナオーケストレーション' },
-        { name: 'Docker Compose', purpose: 'マルチコンテナセットアップ' },
-        { name: 'Unix Sockets', purpose: 'ホスト-コンテナ通信' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'automation',
+        items: [
+          { name: 'Shell Script', purpose: 'コア自動化ロジック' },
+          { name: 'acme.sh', purpose: 'ACMEプロトコルSSL証明書管理' },
+          { name: 'systemd', purpose: 'サービス管理とデーモンプロセス' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Docker', purpose: 'コンテナオーケストレーション' },
+          { name: 'Docker Compose', purpose: 'マルチコンテナセットアップ' },
+          { name: 'Unix Sockets', purpose: 'ホスト-コンテナ通信' },
+        ],
+      },
+    ],
   },
 
   'uptime-verse': {
@@ -305,9 +365,5 @@ export default {
       'マルチノードサービス可用性監視（予定）',
       'リアルタイム接続パルス監視（予定）',
     ],
-    techStack: {
-      backend: [],
-      tools: [],
-    },
   },
 }

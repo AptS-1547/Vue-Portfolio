@@ -1,5 +1,7 @@
 <template>
-  <main class="min-h-screen bg-gray-50 py-8 px-4 xl:px-8 2xl:px-16 overflow-x-hidden pt-24">
+  <main
+    class="min-h-screen bg-gray-50 dark:bg-gray-950 py-8 px-4 xl:px-8 2xl:px-16 overflow-x-hidden pt-24"
+  >
     <div class="max-w-4xl mx-auto w-full">
       <!-- 返回按钮 -->
       <div class="mb-6 animate-back-button">
@@ -26,24 +28,27 @@
       <div v-else class="space-y-8">
         <!-- 项目头部 -->
         <div
-          class="bg-white/80 backdrop-blur-md rounded-lg border border-gray-200 p-6 lg:p-8 animate-header-slide hover:shadow-xl hover:scale-[1.01] transition-all duration-700"
+          class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-lg border border-gray-200 dark:border-gray-800 p-6 lg:p-8 animate-header-slide hover:shadow-xl hover:scale-[1.01] transition-all duration-700"
         >
           <div class="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-6">
             <div class="flex-1">
               <div class="flex items-center space-x-3 mb-4 animate-status-fade">
                 <div :class="statusColor" class="w-3 h-3 rounded-full animate-status-pulse"></div>
-                <span class="text-sm font-medium text-gray-500 uppercase tracking-wide">{{
-                  $t(`common.projectStatus.${project.status}`)
-                }}</span>
-                <span class="text-sm text-gray-400">{{ project.language }}</span>
+                <span
+                  class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide"
+                  >{{ $t(`common.projectStatus.${project.status}`) }}</span
+                >
+                <span class="text-sm text-gray-400 dark:text-gray-500">{{ project.language }}</span>
                 <LicenseDisplay :license="project.license || 'MIT'" />
               </div>
               <h1
-                class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4 animate-title-emerge hover:text-[var(--color-primary)] transition-colors duration-500"
+                class="text-3xl lg:text-4xl font-bold text-gray-800 dark:text-gray-100 mb-4 animate-title-emerge hover:text-[var(--color-primary)] transition-colors duration-500"
               >
                 {{ project.title }}
               </h1>
-              <p class="text-lg text-gray-600 leading-relaxed animate-description-flow">
+              <p
+                class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed animate-description-flow"
+              >
                 {{ project.description }}
               </p>
             </div>
@@ -57,7 +62,7 @@
               class="px-3 py-1 rounded-full text-sm font-medium hover:scale-110 transition-all duration-300 animate-tag-bounce cursor-pointer"
               :style="{
                 animationDelay: `${index * 0.1}s`,
-                backgroundColor: getTagColor(tag).hoverBackgroundColor,
+                backgroundColor: getTagColor(tag, isDark).hoverBackgroundColor,
                 color: 'white',
               }"
             >
@@ -93,20 +98,22 @@
 
         <!-- 项目详细描述 -->
         <div
-          class="bg-white/80 backdrop-blur-md rounded-lg border border-gray-200 p-6 lg:p-8 animate-section-slide hover:shadow-xl hover:scale-[1.01] transition-all duration-700"
+          class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-lg border border-gray-200 dark:border-gray-800 p-6 lg:p-8 animate-section-slide hover:shadow-xl hover:scale-[1.01] transition-all duration-700"
           style="animation-delay: 0.2s"
         >
           <h2
-            class="text-2xl font-bold text-gray-800 mb-4 animate-section-title hover:text-[var(--color-primary)] transition-colors duration-500"
+            class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4 animate-section-title hover:text-[var(--color-primary)] transition-colors duration-500"
           >
             {{ $t('common.sections.aboutProject') }}
           </h2>
           <div class="prose prose-gray max-w-none">
-            <p class="text-gray-600 leading-relaxed mb-4 animate-text-reveal">
+            <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-4 animate-text-reveal">
               {{ project.longDescription || project.description }}
             </p>
             <div v-if="project.features" class="mt-6 animate-features-slide">
-              <h3 class="text-lg font-semibold text-gray-800 mb-3 animate-features-title">
+              <h3
+                class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-3 animate-features-title"
+              >
                 {{ $t('common.sections.keyFeatures') }}
               </h3>
               <ul class="space-y-2">
@@ -117,7 +124,7 @@
                   :style="{ animationDelay: `${index * 0.1}s` }"
                 >
                   <span class="text-green-500 mt-1 animate-check-bounce">✓</span>
-                  <span class="text-gray-600">{{ feature }}</span>
+                  <span class="text-gray-600 dark:text-gray-400">{{ feature }}</span>
                 </li>
               </ul>
             </div>
@@ -126,66 +133,33 @@
 
         <!-- 技术栈详情 -->
         <div
-          class="bg-white/80 backdrop-blur-md rounded-lg border border-gray-200 p-6 lg:p-8 animate-section-slide hover:shadow-xl hover:scale-[1.01] transition-all duration-700"
+          class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-lg border border-gray-200 dark:border-gray-800 p-6 lg:p-8 animate-section-slide hover:shadow-xl hover:scale-[1.01] transition-all duration-700"
           style="animation-delay: 0.4s"
         >
           <h2
-            class="text-2xl font-bold text-gray-800 mb-4 animate-section-title hover:text-[var(--color-secondary)] transition-colors duration-500"
+            class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4 animate-section-title hover:text-[var(--color-secondary)] transition-colors duration-500"
           >
             {{ $t('common.sections.techStack') }}
           </h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div
-              v-if="project.techStack?.backend"
+              v-for="(category, categoryIndex) in project.techStack"
+              :key="category.name"
               class="space-y-3 animate-tech-section"
-              style="animation-delay: 0.6s"
+              :style="{ animationDelay: `${0.6 + categoryIndex * 0.1}s` }"
             >
-              <h3 class="text-lg font-semibold text-gray-800 animate-tech-title">{{ $t('common.techCategories.backend') }}</h3>
+              <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 animate-tech-title">
+                {{ $t(`common.techCategories.${category.name}`) }}
+              </h3>
               <div class="space-y-2">
                 <div
-                  v-for="(tech, index) in project.techStack.backend"
+                  v-for="(tech, index) in category.items"
                   :key="tech.name"
-                  class="flex justify-between items-center hover:bg-gray-50 hover:scale-105 p-2 rounded transition-all duration-300 animate-tech-item"
-                  :style="{ animationDelay: `${0.8 + index * 0.1}s` }"
+                  class="flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-800 hover:scale-105 p-2 rounded transition-all duration-300 animate-tech-item"
+                  :style="{ animationDelay: `${0.8 + categoryIndex * 0.2 + index * 0.1}s` }"
                 >
-                  <span class="text-gray-600 font-medium">{{ tech.name }}</span>
-                  <span class="text-sm text-gray-500">{{ tech.purpose }}</span>
-                </div>
-              </div>
-            </div>
-            <div
-              v-if="project.techStack?.frontend"
-              class="space-y-3 animate-tech-section"
-              style="animation-delay: 0.7s"
-            >
-              <h3 class="text-lg font-semibold text-gray-800 animate-tech-title">{{ $t('common.techCategories.frontend') }}</h3>
-              <div class="space-y-2">
-                <div
-                  v-for="(tech, index) in project.techStack.frontend"
-                  :key="tech.name"
-                  class="flex justify-between items-center hover:bg-gray-50 hover:scale-105 p-2 rounded transition-all duration-300 animate-tech-item"
-                  :style="{ animationDelay: `${1 + index * 0.1}s` }"
-                >
-                  <span class="text-gray-600 font-medium">{{ tech.name }}</span>
-                  <span class="text-sm text-gray-500">{{ tech.purpose }}</span>
-                </div>
-              </div>
-            </div>
-            <div
-              v-if="project.techStack?.tools"
-              class="space-y-3 animate-tech-section"
-              style="animation-delay: 0.8s"
-            >
-              <h3 class="text-lg font-semibold text-gray-800 animate-tech-title">{{ $t('common.techCategories.tools') }}</h3>
-              <div class="space-y-2">
-                <div
-                  v-for="(tech, index) in project.techStack.tools"
-                  :key="tech.name"
-                  class="flex justify-between items-center hover:bg-gray-50 hover:scale-105 p-2 rounded transition-all duration-300 animate-tech-item"
-                  :style="{ animationDelay: `${1.2 + index * 0.1}s` }"
-                >
-                  <span class="text-gray-600 font-medium">{{ tech.name }}</span>
-                  <span class="text-sm text-gray-500">{{ tech.purpose }}</span>
+                  <span class="text-gray-600 dark:text-gray-400 font-medium">{{ tech.name }}</span>
+                  <span class="text-sm text-gray-500 dark:text-gray-500">{{ tech.purpose }}</span>
                 </div>
               </div>
             </div>
@@ -195,11 +169,11 @@
         <!-- 性能指标（如果有） -->
         <div
           v-if="project.performance"
-          class="bg-white/80 backdrop-blur-md rounded-lg border border-gray-200 p-6 lg:p-8 animate-section-slide hover:shadow-xl hover:scale-[1.01] transition-all duration-700"
+          class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-lg border border-gray-200 dark:border-gray-800 p-6 lg:p-8 animate-section-slide hover:shadow-xl hover:scale-[1.01] transition-all duration-700"
           style="animation-delay: 0.6s"
         >
           <h2
-            class="text-2xl font-bold text-gray-800 mb-4 animate-section-title hover:text-[var(--color-primary)] transition-colors duration-500"
+            class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4 animate-section-title hover:text-[var(--color-primary)] transition-colors duration-500"
           >
             {{ $t('common.sections.performance') }}
           </h2>
@@ -207,13 +181,15 @@
             <div
               v-for="(metric, index) in project.performance"
               :key="metric.name"
-              class="text-center p-4 bg-gray-50/50 backdrop-blur-sm rounded-lg hover:bg-gradient-to-br hover:from-orange-50 hover:to-cyan-50 hover:scale-105 hover:-translate-y-1 transition-all duration-500 animate-metric-card"
+              class="text-center p-4 bg-gray-50/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-lg hover:bg-gradient-to-br hover:from-orange-50 hover:to-cyan-50 dark:hover:from-orange-950/30 dark:hover:to-cyan-950/30 hover:scale-105 hover:-translate-y-1 transition-all duration-500 animate-metric-card"
               :style="{ animationDelay: `${1.5 + index * 0.2}s` }"
             >
               <div class="text-2xl font-bold text-[var(--color-primary)] mb-1 animate-metric-value">
                 {{ metric.value }}
               </div>
-              <div class="text-sm text-gray-600 animate-metric-label">{{ metric.name }}</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400 animate-metric-label">
+                {{ metric.name }}
+              </div>
             </div>
           </div>
         </div>
@@ -230,11 +206,13 @@ import LicenseDisplay from '@/components/project/LicenseDisplay.vue'
 import ErrorState from '@/components/common/ErrorState.vue'
 import { CodeBracketIcon, RocketLaunchIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
 import { useProjectsI18n } from '@/composables/useProjectsI18n'
+import { useTheme } from '@/composables/useTheme'
 import { getTagColor } from '@/utils/colorHash'
 
 const route = useRoute()
 const { t } = useI18n()
 const { projects } = useProjectsI18n()
+const { isDark } = useTheme()
 
 // 确保页面加载时在正确位置
 onMounted(() => {
@@ -249,16 +227,18 @@ const projectsData = computed(() => projects.value)
 const project = computed(() => projectsData.value.find((p) => p.id === projectId.value))
 
 const statusColor = computed(() => {
-  if (!project.value) return 'bg-gray-400'
+  if (!project.value) return 'bg-gray-400 dark:bg-gray-500'
   switch (project.value.status) {
     case 'active':
-      return 'bg-green-400'
+      return 'bg-green-500 dark:bg-green-400'
     case 'in-development':
-      return 'bg-yellow-400'
+      return 'bg-yellow-500 dark:bg-yellow-400'
+    case 'planned':
+      return 'bg-blue-500 dark:bg-blue-400'
     case 'archived':
-      return 'bg-gray-400'
+      return 'bg-gray-500 dark:bg-gray-400'
     default:
-      return 'bg-gray-400'
+      return 'bg-gray-500 dark:bg-gray-400'
   }
 })
 </script>

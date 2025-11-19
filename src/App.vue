@@ -11,17 +11,14 @@
 
 <script setup lang="ts">
 import AppHeader from '@/components/layout/AppHeader.vue'
-import { generateCSSVariables } from '@/config/theme'
+import { useTheme } from '@/composables/useTheme'
 import { onMounted, nextTick } from 'vue'
 
-// 在组件挂载时应用 CSS 变量
-onMounted(() => {
-  const cssVariables = generateCSSVariables()
-  const root = document.documentElement
+const { initTheme } = useTheme()
 
-  Object.entries(cssVariables).forEach(([key, value]) => {
-    root.style.setProperty(key, value)
-  })
+// 在组件挂载时初始化主题
+onMounted(() => {
+  initTheme()
 })
 
 // 页面进入动画开始时

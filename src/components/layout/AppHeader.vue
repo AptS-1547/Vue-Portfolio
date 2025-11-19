@@ -55,6 +55,9 @@
 
           <!-- Language Switcher -->
           <LanguageSwitcher />
+
+          <!-- Theme Switcher -->
+          <ThemeSwitcher />
         </div>
 
         <!-- Mobile Menu Button -->
@@ -101,8 +104,11 @@
           </template>
 
           <!-- Language Switcher for Mobile -->
-          <div class="pt-2 mt-2 border-t border-gray-200">
+          <div
+            class="pt-2 mt-2 border-t border-gray-200 dark:border-gray-700 flex items-center justify-between px-2"
+          >
             <LanguageSwitcher />
+            <ThemeSwitcher />
           </div>
         </div>
       </transition>
@@ -117,6 +123,7 @@ import { useI18n } from 'vue-i18n'
 import { RocketLaunchIcon, Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { navigationConfig } from '@/config/navigation'
 import LanguageSwitcher from '@/components/common/LanguageSwitcher.vue'
+import ThemeSwitcher from '@/components/common/ThemeSwitcher.vue'
 
 const route = useRoute()
 const mobileMenuOpen = ref(false)

@@ -89,8 +89,8 @@ onUnmounted(() => {
     <button
       ref="buttonRef"
       @click="toggleDropdown"
-      class="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-600 transition-all duration-200 rounded-md hover:text-[#ed9a28] hover:bg-gray-50 hover:scale-105 touch:hover:scale-100"
-      :class="{ 'text-[#ed9a28] bg-gray-50': isOpen }"
+      class="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 transition-all duration-200 rounded-md hover:text-[#ed9a28] hover:bg-gray-50 dark:hover:bg-gray-800 hover:scale-105 touch:hover:scale-100"
+      :class="{ 'text-[#ed9a28] bg-gray-50 dark:bg-gray-800': isOpen }"
       aria-label="Change language"
     >
       <LanguageIcon class="w-5 h-5" />
@@ -114,7 +114,7 @@ onUnmounted(() => {
         <div
           v-if="isOpen"
           v-click-outside="closeDropdown"
-          class="fixed w-48 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden z-[9999]"
+          class="fixed w-48 bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden z-[9999]"
           :style="{
             top: `${dropdownPosition.top}px`,
             right: `${dropdownPosition.right}px`,
@@ -128,15 +128,12 @@ onUnmounted(() => {
               class="w-full flex items-center justify-between px-4 py-2 text-sm transition-colors duration-150"
               :class="[
                 locale === lang.code
-                  ? 'bg-gradient-to-r from-orange-50 to-cyan-50 text-[#ed9a28] font-medium'
-                  : 'text-gray-700 hover:bg-gray-50 hover:text-[#ed9a28]',
+                  ? 'bg-gradient-to-r from-orange-50 to-cyan-50 dark:from-orange-950/30 dark:to-cyan-950/30 text-[#ed9a28] font-medium'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-[#ed9a28]',
               ]"
             >
               <span>{{ lang.label }}</span>
-              <CheckIcon
-                v-if="locale === lang.code"
-                class="w-4 h-4 text-[#ed9a28]"
-              />
+              <CheckIcon v-if="locale === lang.code" class="w-4 h-4 text-[#ed9a28]" />
             </button>
           </div>
         </div>

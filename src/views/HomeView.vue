@@ -1,5 +1,7 @@
 <template>
-  <main class="min-h-screen bg-gray-50 flex flex-col lg:flex-row overflow-x-hidden pt-16">
+  <main
+    class="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col lg:flex-row overflow-x-hidden pt-16"
+  >
     <!-- 左侧个人信息栏 -->
     <ProfileSidebar :personal-info="personalInfo" />
 

@@ -14,19 +14,25 @@ export default {
       '使用 Docker 跨平台部署',
       '最小内存占用和快速启动',
     ],
-    techStack: {
-      backend: [
-        { name: 'Rust', purpose: '性能优先的核心语言' },
-        { name: 'Actix-web', purpose: '高性能 Web 框架' },
-        { name: 'SQLite', purpose: '嵌入式数据库持久化' },
-        { name: 'Bloom Filter', purpose: '高效的 URL 存在性检查' },
-      ],
-      tools: [
-        { name: 'Docker', purpose: '容器化和部署' },
-        { name: 'GitHub Actions', purpose: 'CI/CD 流水线' },
-        { name: 'Cargo', purpose: '包管理和构建' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'backend',
+        items: [
+          { name: 'Rust', purpose: '性能优先的核心语言' },
+          { name: 'Actix-web', purpose: '高性能 Web 框架' },
+          { name: 'SQLite', purpose: '嵌入式数据库持久化' },
+          { name: 'Bloom Filter', purpose: '高效的 URL 存在性检查' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Docker', purpose: '容器化和部署' },
+          { name: 'GitHub Actions', purpose: 'CI/CD 流水线' },
+          { name: 'Cargo', purpose: '包管理和构建' },
+        ],
+      },
+    ],
     performance: [
       { name: 'QPS', value: '70万+' },
       { name: '内存使用', value: '<50MB' },
@@ -49,24 +55,33 @@ export default {
       '用于用户和租户管理的管理面板',
       'API 优先设计，提供完整的 REST API',
     ],
-    techStack: {
-      backend: [
-        { name: 'Rust', purpose: '核心系统实现' },
-        { name: 'Actix-web', purpose: '现代异步 Web 框架' },
-        { name: 'PostgreSQL', purpose: '主要数据存储' },
-        { name: 'Redis', purpose: '会话和缓存管理' },
-      ],
-      frontend: [
-        { name: 'Vue.js 3', purpose: '管理面板前端' },
-        { name: 'TypeScript', purpose: '类型安全开发' },
-        { name: 'Tailwind CSS', purpose: '实用优先的样式' },
-      ],
-      tools: [
-        { name: 'Docker Compose', purpose: '本地开发环境' },
-        { name: 'Kubernetes', purpose: '生产环境部署' },
-        { name: 'OpenAPI', purpose: 'API 文档' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'backend',
+        items: [
+          { name: 'Rust', purpose: '核心系统实现' },
+          { name: 'Actix-web', purpose: '现代异步 Web 框架' },
+          { name: 'PostgreSQL', purpose: '主要数据存储' },
+          { name: 'Redis', purpose: '会话和缓存管理' },
+        ],
+      },
+      {
+        name: 'frontend',
+        items: [
+          { name: 'Vue.js 3', purpose: '管理面板前端' },
+          { name: 'TypeScript', purpose: '类型安全开发' },
+          { name: 'Tailwind CSS', purpose: '实用优先的样式' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Docker Compose', purpose: '本地开发环境' },
+          { name: 'Kubernetes', purpose: '生产环境部署' },
+          { name: 'OpenAPI', purpose: 'API 文档' },
+        ],
+      },
+    ],
   },
 
   nebulink: {
@@ -84,16 +99,22 @@ export default {
       '分布式系统架构',
       '高性能 CDN 控制系统',
     ],
-    techStack: {
-      backend: [
-        { name: 'Rust', purpose: '性能优先的核心系统实现' },
-        { name: 'Actix-web', purpose: '高性能异步 Web 框架' },
-      ],
-      tools: [
-        { name: 'Cargo', purpose: 'Rust 包管理和构建' },
-        { name: 'GitHub', purpose: '版本控制和协作' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'backend',
+        items: [
+          { name: 'Rust', purpose: '性能优先的核心系统实现' },
+          { name: 'Actix-web', purpose: '高性能异步 Web 框架' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Cargo', purpose: 'Rust 包管理和构建' },
+          { name: 'GitHub', purpose: '版本控制和协作' },
+        ],
+      },
+    ],
   },
 
   'sled-gui': {
@@ -111,25 +132,34 @@ export default {
       'Tauri 优化带来的轻量级打包体积',
       '热重载开发体验',
     ],
-    techStack: {
-      backend: [
-        { name: 'Rust', purpose: '核心应用逻辑和 Tauri 后端' },
-        { name: 'Tauri', purpose: '桌面应用框架和系统 API' },
-        { name: 'Sled', purpose: '嵌入式键值数据库集成' },
-        { name: 'tokio', purpose: '数据库操作的异步运行时' },
-      ],
-      frontend: [
-        { name: 'Vue 3', purpose: '响应式 UI 框架与 Composition API' },
-        { name: 'TypeScript', purpose: '类型安全的前端开发' },
-        { name: 'Tailwind CSS', purpose: '实用优先的样式系统' },
-        { name: 'Vite', purpose: '为 Tauri 优化的快速构建工具' },
-      ],
-      tools: [
-        { name: 'Tauri CLI', purpose: '构建和开发工具链' },
-        { name: 'Cargo', purpose: 'Rust 包管理' },
-        { name: 'ESLint + Prettier', purpose: '代码质量和格式化' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'backend',
+        items: [
+          { name: 'Rust', purpose: '核心应用逻辑和 Tauri 后端' },
+          { name: 'Tauri', purpose: '桌面应用框架和系统 API' },
+          { name: 'Sled', purpose: '嵌入式键值数据库集成' },
+          { name: 'tokio', purpose: '数据库操作的异步运行时' },
+        ],
+      },
+      {
+        name: 'frontend',
+        items: [
+          { name: 'Vue 3', purpose: '响应式 UI 框架与 Composition API' },
+          { name: 'TypeScript', purpose: '类型安全的前端开发' },
+          { name: 'Tailwind CSS', purpose: '实用优先的样式系统' },
+          { name: 'Vite', purpose: '为 Tauri 优化的快速构建工具' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Tauri CLI', purpose: '构建和开发工具链' },
+          { name: 'Cargo', purpose: 'Rust 包管理' },
+          { name: 'ESLint + Prettier', purpose: '代码质量和格式化' },
+        ],
+      },
+    ],
   },
 
   'onebot-github-webhook': {
@@ -149,22 +179,28 @@ export default {
       '计划中：私有仓库的 GitHub API 轮询',
       '计划中：自定义 Jinja2 模板系统',
     ],
-    techStack: {
-      backend: [
-        { name: 'Python 3.8+', purpose: '核心编程语言' },
-        { name: 'FastAPI', purpose: '高性能异步 Web 框架' },
-        { name: 'Uvicorn', purpose: '生产环境 ASGI 服务器' },
-        { name: 'Pydantic', purpose: '数据验证和设置管理' },
-        { name: 'aiohttp', purpose: 'OneBot 通信的异步 HTTP 客户端' },
-        { name: 'PyYAML', purpose: '配置文件解析' },
-      ],
-      tools: [
-        { name: 'Docker', purpose: '容器化和部署' },
-        { name: 'GitHub Actions', purpose: 'CI/CD 流水线' },
-        { name: 'Poetry', purpose: 'Python 依赖管理' },
-        { name: 'pytest', purpose: '单元测试框架' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'backend',
+        items: [
+          { name: 'Python 3.8+', purpose: '核心编程语言' },
+          { name: 'FastAPI', purpose: '高性能异步 Web 框架' },
+          { name: 'Uvicorn', purpose: '生产环境 ASGI 服务器' },
+          { name: 'Pydantic', purpose: '数据验证和设置管理' },
+          { name: 'aiohttp', purpose: 'OneBot 通信的异步 HTTP 客户端' },
+          { name: 'PyYAML', purpose: '配置文件解析' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Docker', purpose: '容器化和部署' },
+          { name: 'GitHub Actions', purpose: 'CI/CD 流水线' },
+          { name: 'Poetry', purpose: 'Python 依赖管理' },
+          { name: 'pytest', purpose: '单元测试框架' },
+        ],
+      },
+    ],
     performance: [
       { name: '响应时间', value: '<100ms' },
       { name: '内存使用', value: '<100MB' },
@@ -187,19 +223,25 @@ export default {
       '使用 meta 标签进行 SEO 优化',
       '图片懒加载实现快速加载',
     ],
-    techStack: {
-      frontend: [
-        { name: 'Vue.js 3', purpose: '渐进式 Web 框架' },
-        { name: 'TypeScript', purpose: '类型安全和更好的开发体验' },
-        { name: 'Tailwind CSS', purpose: '实用优先的 CSS 框架' },
-        { name: 'Vue Router', purpose: '客户端路由' },
-      ],
-      tools: [
-        { name: 'Vite', purpose: '快速构建工具和开发服务器' },
-        { name: 'ESLint', purpose: '代码检查和格式化' },
-        { name: 'Prettier', purpose: '代码格式化' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'frontend',
+        items: [
+          { name: 'Vue.js 3', purpose: '渐进式 Web 框架' },
+          { name: 'TypeScript', purpose: '类型安全和更好的开发体验' },
+          { name: 'Tailwind CSS', purpose: '实用优先的 CSS 框架' },
+          { name: 'Vue Router', purpose: '客户端路由' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Vite', purpose: '快速构建工具和开发服务器' },
+          { name: 'ESLint', purpose: '代码检查和格式化' },
+          { name: 'Prettier', purpose: '代码格式化' },
+        ],
+      },
+    ],
   },
 
   'wakatime-readme-updater': {
@@ -217,18 +259,24 @@ export default {
       '可配置的统计收集时间范围',
       '小型二进制占用，高效集成 CI/CD',
     ],
-    techStack: {
-      backend: [
-        { name: 'Rust 1.90+', purpose: '性能和安全的核心语言' },
-        { name: 'WakaTime API', purpose: '编码统计数据源' },
-        { name: 'GitHub API', purpose: '仓库管理和更新' },
-      ],
-      tools: [
-        { name: 'Docker', purpose: '灵活部署的容器化' },
-        { name: 'GitHub Actions', purpose: '自动化 README 更新' },
-        { name: 'Cargo', purpose: 'Rust 包管理和构建' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'backend',
+        items: [
+          { name: 'Rust 1.90+', purpose: '性能和安全的核心语言' },
+          { name: 'WakaTime API', purpose: '编码统计数据源' },
+          { name: 'GitHub API', purpose: '仓库管理和更新' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Docker', purpose: '灵活部署的容器化' },
+          { name: 'GitHub Actions', purpose: '自动化 README 更新' },
+          { name: 'Cargo', purpose: 'Rust 包管理和构建' },
+        ],
+      },
+    ],
   },
 
   'nginx-modsecurity': {
@@ -246,19 +294,25 @@ export default {
       '多阶段构建减少攻击面',
       '使用 GitHub Actions 自动化 CI/CD',
     ],
-    techStack: {
-      backend: [
-        { name: 'Nginx 1.28.0', purpose: '高性能 Web 服务器' },
-        { name: 'ModSecurity v3.0.14', purpose: 'OWASP WAF 引擎' },
-        { name: 'Alpine Linux', purpose: '轻量级且安全的基础镜像' },
-        { name: 'Lua 5.4', purpose: '高级规则的脚本支持' },
-      ],
-      tools: [
-        { name: 'Docker', purpose: '容器化和部署' },
-        { name: 'GitHub Actions', purpose: '自动化构建和发布' },
-        { name: 'Multi-stage builds', purpose: '优化镜像大小和安全性' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'infrastructure',
+        items: [
+          { name: 'Nginx 1.28.0', purpose: '高性能 Web 服务器' },
+          { name: 'ModSecurity v3.0.14', purpose: 'OWASP WAF 引擎' },
+          { name: 'Alpine Linux', purpose: '轻量级且安全的基础镜像' },
+          { name: 'Lua 5.4', purpose: '高级规则的脚本支持' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Docker', purpose: '容器化和部署' },
+          { name: 'GitHub Actions', purpose: '自动化构建和发布' },
+          { name: 'Multi-stage builds', purpose: '优化镜像大小和安全性' },
+        ],
+      },
+    ],
     performance: [
       { name: '镜像大小', value: '约 60MB' },
       { name: '架构支持', value: 'AMD64 + ARM64' },
@@ -280,18 +334,24 @@ export default {
       '简单的基于 YAML 的配置',
       'systemd 服务集成',
     ],
-    techStack: {
-      backend: [
-        { name: 'Shell Script', purpose: '核心自动化逻辑' },
-        { name: 'acme.sh', purpose: 'ACME 协议 SSL 证书管理' },
-        { name: 'systemd', purpose: '服务管理和守护进程' },
-      ],
-      tools: [
-        { name: 'Docker', purpose: '容器编排' },
-        { name: 'Docker Compose', purpose: '多容器设置' },
-        { name: 'Unix Sockets', purpose: '主机-容器通信' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'automation',
+        items: [
+          { name: 'Shell Script', purpose: '核心自动化逻辑' },
+          { name: 'acme.sh', purpose: 'ACME 协议 SSL 证书管理' },
+          { name: 'systemd', purpose: '服务管理和守护进程' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Docker', purpose: '容器编排' },
+          { name: 'Docker Compose', purpose: '多容器设置' },
+          { name: 'Unix Sockets', purpose: '主机-容器通信' },
+        ],
+      },
+    ],
   },
 
   'uptime-verse': {
@@ -305,9 +365,5 @@ export default {
       '多节点服务可用性监控（计划中）',
       '实时连接脉搏监控（计划中）',
     ],
-    techStack: {
-      backend: [],
-      tools: [],
-    },
   },
 }

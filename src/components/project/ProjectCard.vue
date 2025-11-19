@@ -1,103 +1,115 @@
 <template>
-  <div
-    class="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg hover:border-[var(--color-primary)] hover:-translate-y-1 hover:scale-105 touch:hover:translate-y-0 touch:hover:scale-100 transition-all duration-200 group animate-card-entrance w-full overflow-hidden"
+  <Card
+    class="group hover:shadow-xl hover:border-primary hover:-translate-y-1 transition-all duration-300 w-full"
   >
-    <!-- 项目状态标识 -->
-    <div class="flex justify-between items-start mb-4 animate-status-bar">
-      <div class="flex items-center space-x-2">
-        <div class="w-3 h-3 rounded-full animate-status-pulse" :class="statusColorClass"></div>
-        <span
-          class="text-xs font-medium text-gray-500 uppercase tracking-wide animate-status-text"
-          >{{ project.status.replace('-', ' ') }}</span
-        >
+    <CardHeader class="pb-3">
+      <!-- 项目状态标识 -->
+      <div class="flex justify-between items-start mb-2">
+        <div class="flex items-center space-x-2">
+          <div class="w-2.5 h-2.5 rounded-full animate-pulse" :class="statusColorClass"></div>
+          <span
+            class="text-xs font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wide"
+          >
+            {{ project.status.replace('-', ' ') }}
+          </span>
+        </div>
+        <span class="text-xs text-gray-500 dark:text-gray-500">{{ project.language }}</span>
       </div>
-      <div class="text-xs text-gray-400 animate-language-badge">{{ project.language }}</div>
-    </div>
 
-    <!-- 项目标题和描述 -->
-    <h3
-      class="font-bold text-gray-800 text-lg mb-3 group-hover:text-[var(--color-primary)] transition-colors duration-200 hover:scale-105 touch:hover:scale-100 animate-title-slide"
-    >
-      {{ project.title }}
-    </h3>
+      <!-- 项目标题 -->
+      <CardTitle class="group-hover:text-primary transition-colors duration-200">
+        {{ project.title }}
+      </CardTitle>
+    </CardHeader>
 
-    <p class="text-gray-600 text-sm leading-relaxed mb-4 animate-description-fade">
-      {{ project.longDescription || project.description }}
-    </p>
+    <CardContent class="space-y-4">
+      <!-- 项目描述 -->
+      <CardDescription class="leading-relaxed">
+        {{ project.longDescription || project.description }}
+      </CardDescription>
 
-    <!-- 技术标签 -->
-    <div class="flex flex-wrap gap-1 mb-4 animate-tags-flow w-full overflow-hidden">
-      <span
-        v-for="(tag, index) in project.tags.slice(0, 4)"
-        :key="tag"
-        class="px-2 py-1 rounded text-xs font-medium hover:scale-105 touch:hover:scale-100 transition-all duration-200 animate-tag-pop cursor-pointer"
-        :style="{
-          animationDelay: `${index * 0.05}s`,
-          backgroundColor: getTagColor(tag).backgroundColor,
-          color: getTagColor(tag).textColor,
-        }"
-        @mouseenter="handleTagHover($event, tag, true)"
-        @mouseleave="handleTagHover($event, tag, false)"
-      >
-        {{ tag }}
-      </span>
-      <span
-        v-if="project.tags.length > 4"
-        class="bg-gray-100/60 text-gray-600 px-2 py-1 rounded text-xs animate-tag-pop"
-        style="animation-delay: 0.2s"
-      >
-        +{{ project.tags.length - 4 }}
-      </span>
-    </div>
-
-    <!-- 操作按钮 -->
-    <div
-      class="flex justify-between items-center pt-4 border-t border-gray-200 animate-actions-slide"
-    >
-      <router-link
-        :to="`/projects/${project.id}`"
-        class="inline-flex items-center text-sm text-[var(--color-primary)] hover:text-[var(--color-secondary)] transition-colors duration-200 group-hover:translate-x-1"
-      >
-        <span>View Details</span>
-        <span class="ml-1 transition-transform duration-200 group-hover:translate-x-1">→</span>
-      </router-link>
-
-      <div class="flex space-x-2 animate-buttons-stagger">
-        <a
-          :href="project.githubUrl"
-          target="_blank"
-          class="inline-flex items-center text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded hover:bg-[var(--color-primary)] hover:text-white hover:scale-105 touch:hover:scale-100 transition-all duration-200 group animate-button-bounce"
-          title="View on GitHub"
-          style="animation-delay: 0.05s"
+      <!-- 技术标签 -->
+      <div class="flex flex-wrap gap-1.5">
+        <Badge
+          v-for="(tag, index) in project.tags.slice(0, 4)"
+          :key="tag"
+          :style="{
+            backgroundColor: getTagColor(tag, isDark).backgroundColor,
+            color: getTagColor(tag, isDark).textColor,
+            borderColor: getTagColor(tag, isDark).backgroundColor,
+          }"
+          class="hover:scale-105 transition-transform duration-200 cursor-pointer border"
+          @mouseenter="handleTagHover($event, tag, true)"
+          @mouseleave="handleTagHover($event, tag, false)"
         >
-          <CodeBracketIcon class="w-4 h-4" />
-        </a>
-        <a
-          v-if="project.liveUrl"
-          :href="project.liveUrl"
-          target="_blank"
-          class="inline-flex items-center text-xs bg-[image:var(--gradient-primary)] text-white px-2 py-1 rounded hover:bg-[image:var(--gradient-primary-reverse)] hover:scale-105 touch:hover:scale-100 transition-all duration-200 group animate-button-bounce"
-          title="Live Demo"
-          style="animation-delay: 0.1s"
-        >
-          <RocketLaunchIcon class="w-4 h-4" />
-        </a>
+          {{ tag }}
+        </Badge>
+        <Badge v-if="project.tags.length > 4" variant="secondary">
+          +{{ project.tags.length - 4 }}
+        </Badge>
       </div>
-    </div>
+    </CardContent>
 
-    <!-- 许可证信息 -->
-    <div class="flex items-center justify-between mt-4 animate-license-fade">
-      <span class="text-xs text-gray-500">License:</span>
-      <LicenseDisplay :license="project.license || 'MIT'" />
-    </div>
-  </div>
+    <CardFooter class="flex-col space-y-3 pt-4">
+      <!-- 操作按钮 -->
+      <div
+        class="flex justify-between items-center w-full border-t border-gray-200 dark:border-gray-800 pt-4"
+      >
+        <router-link
+          :to="`/projects/${project.id}`"
+          class="inline-flex items-center text-sm text-primary hover:text-secondary transition-colors duration-200 group/link"
+        >
+          <span>查看详情</span>
+          <span class="ml-1 transition-transform duration-200 group-hover/link:translate-x-1"
+            >→</span
+          >
+        </router-link>
+
+        <div class="flex space-x-2">
+          <a
+            :href="project.githubUrl"
+            target="_blank"
+            class="inline-flex items-center justify-center w-8 h-8 text-xs bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded hover:bg-primary hover:text-white transition-all duration-200"
+            title="View on GitHub"
+          >
+            <CodeBracketIcon class="w-4 h-4" />
+          </a>
+          <a
+            v-if="project.liveUrl"
+            :href="project.liveUrl"
+            target="_blank"
+            class="inline-flex items-center justify-center w-8 h-8 text-xs bg-gradient-to-r from-primary to-secondary text-white rounded hover:from-secondary hover:to-primary transition-all duration-200"
+            title="Live Demo"
+          >
+            <RocketLaunchIcon class="w-4 h-4" />
+          </a>
+        </div>
+      </div>
+
+      <!-- 许可证信息 -->
+      <div
+        class="flex items-center justify-between w-full text-xs text-gray-600 dark:text-gray-400"
+      >
+        <span>许可证:</span>
+        <LicenseDisplay :license="project.license || 'MIT'" />
+      </div>
+    </CardFooter>
+  </Card>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import Card from '@/components/ui/Card.vue'
+import CardHeader from '@/components/ui/CardHeader.vue'
+import CardTitle from '@/components/ui/CardTitle.vue'
+import CardDescription from '@/components/ui/CardDescription.vue'
+import CardContent from '@/components/ui/CardContent.vue'
+import CardFooter from '@/components/ui/CardFooter.vue'
+import Badge from '@/components/ui/Badge.vue'
 import LicenseDisplay from './LicenseDisplay.vue'
 import { getTagColor } from '@/utils/colorHash'
 import { useHoverEffect } from '@/composables/useHoverEffect'
+import { useTheme } from '@/composables/useTheme'
 import { CodeBracketIcon, RocketLaunchIcon } from '@heroicons/vue/24/outline'
 import type { Project } from '@/types/project'
 
@@ -108,24 +120,29 @@ const props = defineProps<{
 // 使用统一的悬停效果 composable
 const { handleColorHover } = useHoverEffect()
 
+// 获取主题状态
+const { isDark } = useTheme()
+
 // 修复状态颜色计算
 const statusColorClass = computed(() => {
   switch (props.project.status) {
     case 'active':
-      return 'bg-green-400'
+      return 'bg-green-500 dark:bg-green-400'
     case 'in-development':
-      return 'bg-yellow-400'
+      return 'bg-yellow-500 dark:bg-yellow-400'
+    case 'planned':
+      return 'bg-blue-500 dark:bg-blue-400'
     case 'archived':
-      return 'bg-gray-400'
+      return 'bg-gray-500 dark:bg-gray-400'
     default:
-      return 'bg-gray-400'
+      return 'bg-gray-500 dark:bg-gray-400'
   }
 })
 
 // 处理标签悬停（使用 composable）
 const handleTagHover = (event: Event, tag: string, isEnter: boolean) => {
   const target = event.target as HTMLElement
-  const colors = getTagColor(tag)
+  const colors = getTagColor(tag, isDark.value)
 
   const hoverColors = isEnter
     ? { backgroundColor: colors.hoverBackgroundColor, textColor: 'white' }
@@ -136,85 +153,12 @@ const handleTagHover = (event: Event, tag: string, isEnter: boolean) => {
 </script>
 
 <style scoped>
-/* ProjectCard 特有样式 - 所有通用动画已移至全局 */
-
-/* 卡片入场动画 */
-.animate-card-entrance {
-  animation: cardEntrance var(--animation-duration-slow) var(--animation-easing-ease-in-out)
-    forwards;
-  opacity: 0;
-}
-
-/* 状态栏动画 */
-.animate-status-bar {
-  animation: fadeInDown var(--animation-duration-normal) ease-out forwards;
-  animation-delay: 0.05s;
-  opacity: 0;
-}
-
-.animate-status-pulse {
-  animation: statusPulse 1.5s ease-in-out infinite;
-}
-
-.animate-status-text {
-  animation: fadeInLeft var(--animation-duration-normal) ease-out forwards;
-  animation-delay: 0.1s;
-  opacity: 0;
-}
-
-.animate-language-badge {
-  animation: fadeInRight var(--animation-duration-normal) ease-out forwards;
-  animation-delay: 0.1s;
-  opacity: 0;
-}
-
-/* 标题动画 */
-.animate-title-slide {
-  animation: fadeInUp var(--animation-duration-slow) var(--animation-easing-ease-in-out) forwards;
-  animation-delay: 0.15s;
-  opacity: 0;
-}
-
-/* 描述动画 */
-.animate-description-fade {
-  animation: blurUp var(--animation-duration-slow) ease-out forwards;
-  animation-delay: 0.2s;
-  opacity: 0;
-}
-
-/* 标签流动画 */
-.animate-tags-flow {
-  animation: fadeInUp var(--animation-duration-normal) ease-out forwards;
-  animation-delay: 0.25s;
-  opacity: 0;
-}
-
-.animate-tag-pop {
-  animation: bounceIn var(--animation-duration-normal) var(--animation-easing-bounce) forwards;
-  opacity: 0;
-}
-
-/* 操作按钮动画 */
-.animate-actions-slide {
-  animation: fadeInUp var(--animation-duration-normal) ease-out forwards;
-  animation-delay: 0.3s;
-  opacity: 0;
-}
-
-.animate-buttons-stagger {
-  animation: fadeInRight var(--animation-duration-normal) ease-out forwards;
-  opacity: 0;
-}
-
-.animate-button-bounce {
-  animation: bounceIn var(--animation-duration-normal) var(--animation-easing-bounce) forwards;
-  opacity: 0;
-}
-
-/* 许可证信息动画 */
-.animate-license-fade {
-  animation: fadeInUp var(--animation-duration-normal) ease-out forwards;
-  animation-delay: 0.35s;
-  opacity: 0;
+/* 减少运动偏好支持 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 </style>

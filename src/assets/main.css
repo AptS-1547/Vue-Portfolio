@@ -1,5 +1,11 @@
 @import 'tailwindcss';
 
+/* Tailwind 自定义颜色配置 */
+@theme {
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+}
+
 /* 导入自定义样式 */
 @import '../styles/variables.css';
 @import '../styles/animations.css';

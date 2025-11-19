@@ -1,7 +1,7 @@
 <template>
   <section class="animate-section-slide" :style="{ animationDelay: animationDelay }">
     <h2
-      class="text-lg lg:text-xl font-semibold text-gray-800 mb-3 lg:mb-4 border-b border-gray-200 pb-2 hover:text-[var(--color-primary)] transition-colors duration-200 relative group"
+      class="text-lg lg:text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3 lg:mb-4 border-b border-gray-200 dark:border-gray-700 pb-2 hover:text-[var(--color-primary)] transition-colors duration-200 relative group"
     >
       {{ skills.title }}
       <span
@@ -12,13 +12,13 @@
       <div
         v-for="category in skills.categories"
         :key="category.name"
-        class="bg-white p-3 lg:p-4 rounded-lg border border-gray-200 hover:shadow-lg hover:-translate-y-1 touch:hover:translate-y-0 transition-all duration-200 cursor-pointer group"
+        class="bg-white dark:bg-gray-900 p-3 lg:p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:-translate-y-1 touch:hover:translate-y-0 transition-all duration-200 cursor-pointer group"
         :style="{ '--hover-border': category.borderColor }"
         @mouseenter="handleCategoryHover($event, category, true)"
         @mouseleave="handleCategoryHover($event, category, false)"
       >
         <h3
-          class="font-medium text-gray-800 mb-2 text-sm lg:text-base group-hover:transition-colors duration-200"
+          class="font-medium text-gray-800 dark:text-gray-100 mb-2 text-sm lg:text-base group-hover:transition-colors duration-200"
           :style="{ '--hover-text': category.hoverColor }"
         >
           {{ category.name }}
@@ -27,7 +27,7 @@
           <span
             v-for="tech in category.technologies"
             :key="tech.name"
-            class="inline-block bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs lg:text-sm ml-1 first:ml-0 hover:text-white transition-all duration-200"
+            class="inline-block bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2 py-1 rounded text-xs lg:text-sm ml-1 first:ml-0 hover:text-white transition-all duration-200"
             :style="{ '--tech-hover': tech.hoverColor }"
             @mouseenter="handleTechHover($event, tech, true)"
             @mouseleave="handleTechHover($event, tech, false)"

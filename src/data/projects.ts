@@ -22,19 +22,25 @@ export const projects: Project[] = [
       'Cross-platform deployment with Docker',
       'Minimal memory footprint and fast startup',
     ],
-    techStack: {
-      backend: [
-        { name: 'Rust', purpose: 'Core language for performance' },
-        { name: 'Actix-web', purpose: 'High-performance web framework' },
-        { name: 'SQLite', purpose: 'Embedded database for persistence' },
-        { name: 'Bloom Filter', purpose: 'Efficient URL existence checking' },
-      ],
-      tools: [
-        { name: 'Docker', purpose: 'Containerization and deployment' },
-        { name: 'GitHub Actions', purpose: 'CI/CD pipeline' },
-        { name: 'Cargo', purpose: 'Package management and building' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'backend',
+        items: [
+          { name: 'Rust', purpose: 'Core language for performance' },
+          { name: 'Actix-web', purpose: 'High-performance web framework' },
+          { name: 'SQLite', purpose: 'Embedded database for persistence' },
+          { name: 'Bloom Filter', purpose: 'Efficient URL existence checking' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Docker', purpose: 'Containerization and deployment' },
+          { name: 'GitHub Actions', purpose: 'CI/CD pipeline' },
+          { name: 'Cargo', purpose: 'Package management and building' },
+        ],
+      },
+    ],
     performance: [
       { name: 'QPS', value: '700K+' },
       { name: 'Memory Usage', value: '<50MB' },
@@ -62,24 +68,33 @@ export const projects: Project[] = [
       'Admin dashboard for user and tenant management',
       'API-first design with comprehensive REST APIs',
     ],
-    techStack: {
-      backend: [
-        { name: 'Rust', purpose: 'Core system implementation' },
-        { name: 'Actix-web', purpose: 'Modern async web framework' },
-        { name: 'PostgreSQL', purpose: 'Primary data storage' },
-        { name: 'Redis', purpose: 'Session and cache management' },
-      ],
-      frontend: [
-        { name: 'Vue.js 3', purpose: 'Admin dashboard frontend' },
-        { name: 'TypeScript', purpose: 'Type-safe development' },
-        { name: 'Tailwind CSS', purpose: 'Utility-first styling' },
-      ],
-      tools: [
-        { name: 'Docker Compose', purpose: 'Local development environment' },
-        { name: 'Kubernetes', purpose: 'Production deployment' },
-        { name: 'OpenAPI', purpose: 'API documentation' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'backend',
+        items: [
+          { name: 'Rust', purpose: 'Core system implementation' },
+          { name: 'Actix-web', purpose: 'Modern async web framework' },
+          { name: 'PostgreSQL', purpose: 'Primary data storage' },
+          { name: 'Redis', purpose: 'Session and cache management' },
+        ],
+      },
+      {
+        name: 'frontend',
+        items: [
+          { name: 'Vue.js 3', purpose: 'Admin dashboard frontend' },
+          { name: 'TypeScript', purpose: 'Type-safe development' },
+          { name: 'Tailwind CSS', purpose: 'Utility-first styling' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Docker Compose', purpose: 'Local development environment' },
+          { name: 'Kubernetes', purpose: 'Production deployment' },
+          { name: 'OpenAPI', purpose: 'API documentation' },
+        ],
+      },
+    ],
   },
   {
     id: 'nebulink',
@@ -90,7 +105,7 @@ export const projects: Project[] = [
     tags: ['Rust', 'Actix-web', 'CDN', 'Distributed System', 'Load Balancing'],
     githubUrl: 'https://github.com/AptS-1547/Nebulink',
     language: 'Rust',
-    status: 'in-development',
+    status: 'planned',
     license: 'Apache-2.0',
     features: [
       'Global node registration and heartbeat monitoring',
@@ -102,16 +117,22 @@ export const projects: Project[] = [
       'Distributed system architecture',
       'High-performance CDN control system',
     ],
-    techStack: {
-      backend: [
-        { name: 'Rust', purpose: 'Core system implementation for performance' },
-        { name: 'Actix-web', purpose: 'High-performance async web framework' },
-      ],
-      tools: [
-        { name: 'Cargo', purpose: 'Rust package management and building' },
-        { name: 'GitHub', purpose: 'Version control and collaboration' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'backend',
+        items: [
+          { name: 'Rust', purpose: 'Core system implementation for performance' },
+          { name: 'Actix-web', purpose: 'High-performance async web framework' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Cargo', purpose: 'Rust package management and building' },
+          { name: 'GitHub', purpose: 'Version control and collaboration' },
+        ],
+      },
+    ],
   },
   {
     id: 'sled-gui',
@@ -122,7 +143,7 @@ export const projects: Project[] = [
     tags: ['Tauri', 'Rust', 'Vue.js', 'TypeScript', 'Sled', 'Desktop App'],
     githubUrl: 'https://github.com/AptS-1547/sled-gui',
     language: 'Rust',
-    status: 'in-development',
+    status: 'planned',
     license: 'MIT',
     features: [
       "Native desktop performance with Tauri's Rust core",
@@ -134,25 +155,34 @@ export const projects: Project[] = [
       "Lightweight bundle size with Tauri's optimization",
       'Hot-reload development experience',
     ],
-    techStack: {
-      backend: [
-        { name: 'Rust', purpose: 'Core application logic and Tauri backend' },
-        { name: 'Tauri', purpose: 'Desktop app framework and system APIs' },
-        { name: 'Sled', purpose: 'Embedded key-value database integration' },
-        { name: 'tokio', purpose: 'Async runtime for database operations' },
-      ],
-      frontend: [
-        { name: 'Vue 3', purpose: 'Reactive UI framework with Composition API' },
-        { name: 'TypeScript', purpose: 'Type-safe frontend development' },
-        { name: 'Tailwind CSS', purpose: 'Utility-first styling system' },
-        { name: 'Vite', purpose: 'Fast build tool optimized for Tauri' },
-      ],
-      tools: [
-        { name: 'Tauri CLI', purpose: 'Build and development toolchain' },
-        { name: 'Cargo', purpose: 'Rust package management' },
-        { name: 'ESLint + Prettier', purpose: 'Code quality and formatting' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'backend',
+        items: [
+          { name: 'Rust', purpose: 'Core application logic and Tauri backend' },
+          { name: 'Tauri', purpose: 'Desktop app framework and system APIs' },
+          { name: 'Sled', purpose: 'Embedded key-value database integration' },
+          { name: 'tokio', purpose: 'Async runtime for database operations' },
+        ],
+      },
+      {
+        name: 'frontend',
+        items: [
+          { name: 'Vue 3', purpose: 'Reactive UI framework with Composition API' },
+          { name: 'TypeScript', purpose: 'Type-safe frontend development' },
+          { name: 'Tailwind CSS', purpose: 'Utility-first styling system' },
+          { name: 'Vite', purpose: 'Fast build tool optimized for Tauri' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Tauri CLI', purpose: 'Build and development toolchain' },
+          { name: 'Cargo', purpose: 'Rust package management' },
+          { name: 'ESLint + Prettier', purpose: 'Code quality and formatting' },
+        ],
+      },
+    ],
   },
   {
     id: 'onebot-github-webhook',
@@ -177,22 +207,28 @@ export const projects: Project[] = [
       'Planned: GitHub API polling for private repositories',
       'Planned: Custom Jinja2 template system',
     ],
-    techStack: {
-      backend: [
-        { name: 'Python 3.8+', purpose: 'Core programming language' },
-        { name: 'FastAPI', purpose: 'High-performance async web framework' },
-        { name: 'Uvicorn', purpose: 'ASGI server for production deployment' },
-        { name: 'Pydantic', purpose: 'Data validation and settings management' },
-        { name: 'aiohttp', purpose: 'Async HTTP client for OneBot communication' },
-        { name: 'PyYAML', purpose: 'Configuration file parsing' },
-      ],
-      tools: [
-        { name: 'Docker', purpose: 'Containerization and deployment' },
-        { name: 'GitHub Actions', purpose: 'CI/CD pipeline' },
-        { name: 'Poetry', purpose: 'Python dependency management' },
-        { name: 'pytest', purpose: 'Unit testing framework' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'backend',
+        items: [
+          { name: 'Python 3.8+', purpose: 'Core programming language' },
+          { name: 'FastAPI', purpose: 'High-performance async web framework' },
+          { name: 'Uvicorn', purpose: 'ASGI server for production deployment' },
+          { name: 'Pydantic', purpose: 'Data validation and settings management' },
+          { name: 'aiohttp', purpose: 'Async HTTP client for OneBot communication' },
+          { name: 'PyYAML', purpose: 'Configuration file parsing' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Docker', purpose: 'Containerization and deployment' },
+          { name: 'GitHub Actions', purpose: 'CI/CD pipeline' },
+          { name: 'Poetry', purpose: 'Python dependency management' },
+          { name: 'pytest', purpose: 'Unit testing framework' },
+        ],
+      },
+    ],
     performance: [
       { name: 'Response Time', value: '<100ms' },
       { name: 'Memory Usage', value: '<100MB' },
@@ -220,19 +256,25 @@ export const projects: Project[] = [
       'SEO optimized with meta tags',
       'Fast loading with lazy loading images',
     ],
-    techStack: {
-      frontend: [
-        { name: 'Vue.js 3', purpose: 'Progressive web framework' },
-        { name: 'TypeScript', purpose: 'Type safety and better DX' },
-        { name: 'Tailwind CSS', purpose: 'Utility-first CSS framework' },
-        { name: 'Vue Router', purpose: 'Client-side routing' },
-      ],
-      tools: [
-        { name: 'Vite', purpose: 'Fast build tool and dev server' },
-        { name: 'ESLint', purpose: 'Code linting and formatting' },
-        { name: 'Prettier', purpose: 'Code formatting' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'frontend',
+        items: [
+          { name: 'Vue.js 3', purpose: 'Progressive web framework' },
+          { name: 'TypeScript', purpose: 'Type safety and better DX' },
+          { name: 'Tailwind CSS', purpose: 'Utility-first CSS framework' },
+          { name: 'Vue Router', purpose: 'Client-side routing' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Vite', purpose: 'Fast build tool and dev server' },
+          { name: 'ESLint', purpose: 'Code linting and formatting' },
+          { name: 'Prettier', purpose: 'Code formatting' },
+        ],
+      },
+    ],
   },
   {
     id: 'wakatime-readme-updater',
@@ -255,18 +297,24 @@ export const projects: Project[] = [
       'Configurable timeframe for statistics collection',
       'Small binary footprint for efficient CI/CD integration',
     ],
-    techStack: {
-      backend: [
-        { name: 'Rust 1.90+', purpose: 'Core language for performance and safety' },
-        { name: 'WakaTime API', purpose: 'Coding statistics data source' },
-        { name: 'GitHub API', purpose: 'Repository management and updates' },
-      ],
-      tools: [
-        { name: 'Docker', purpose: 'Containerization for flexible deployment' },
-        { name: 'GitHub Actions', purpose: 'Automated README updates' },
-        { name: 'Cargo', purpose: 'Rust package management and building' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'backend',
+        items: [
+          { name: 'Rust 1.90+', purpose: 'Core language for performance and safety' },
+          { name: 'WakaTime API', purpose: 'Coding statistics data source' },
+          { name: 'GitHub API', purpose: 'Repository management and updates' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Docker', purpose: 'Containerization for flexible deployment' },
+          { name: 'GitHub Actions', purpose: 'Automated README updates' },
+          { name: 'Cargo', purpose: 'Rust package management and building' },
+        ],
+      },
+    ],
   },
   {
     id: 'nginx-modsecurity',
@@ -289,19 +337,25 @@ export const projects: Project[] = [
       'Multi-stage builds for reduced attack surface',
       'Automated CI/CD with GitHub Actions',
     ],
-    techStack: {
-      backend: [
-        { name: 'Nginx 1.28.0', purpose: 'High-performance web server' },
-        { name: 'ModSecurity v3.0.14', purpose: 'OWASP WAF engine' },
-        { name: 'Alpine Linux', purpose: 'Lightweight and secure base image' },
-        { name: 'Lua 5.4', purpose: 'Scripting support for advanced rules' },
-      ],
-      tools: [
-        { name: 'Docker', purpose: 'Containerization and deployment' },
-        { name: 'GitHub Actions', purpose: 'Automated building and publishing' },
-        { name: 'Multi-stage builds', purpose: 'Optimized image size and security' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'infrastructure',
+        items: [
+          { name: 'Nginx 1.28.0', purpose: 'High-performance web server' },
+          { name: 'ModSecurity v3.0.14', purpose: 'OWASP WAF engine' },
+          { name: 'Alpine Linux', purpose: 'Lightweight and secure base image' },
+          { name: 'Lua 5.4', purpose: 'Scripting support for advanced rules' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Docker', purpose: 'Containerization and deployment' },
+          { name: 'GitHub Actions', purpose: 'Automated building and publishing' },
+          { name: 'Multi-stage builds', purpose: 'Optimized image size and security' },
+        ],
+      },
+    ],
     performance: [
       { name: 'Image Size', value: '~60MB' },
       { name: 'Architectures', value: 'AMD64 + ARM64' },
@@ -328,18 +382,24 @@ export const projects: Project[] = [
       'Simple YAML-based configuration',
       'systemd service integration',
     ],
-    techStack: {
-      backend: [
-        { name: 'Shell Script', purpose: 'Core automation logic' },
-        { name: 'acme.sh', purpose: 'ACME protocol SSL certificate management' },
-        { name: 'systemd', purpose: 'Service management and daemon process' },
-      ],
-      tools: [
-        { name: 'Docker', purpose: 'Container orchestration' },
-        { name: 'Docker Compose', purpose: 'Multi-container setup' },
-        { name: 'Unix Sockets', purpose: 'Host-container communication' },
-      ],
-    },
+    techStack: [
+      {
+        name: 'automation',
+        items: [
+          { name: 'Shell Script', purpose: 'Core automation logic' },
+          { name: 'acme.sh', purpose: 'ACME protocol SSL certificate management' },
+          { name: 'systemd', purpose: 'Service management and daemon process' },
+        ],
+      },
+      {
+        name: 'tools',
+        items: [
+          { name: 'Docker', purpose: 'Container orchestration' },
+          { name: 'Docker Compose', purpose: 'Multi-container setup' },
+          { name: 'Unix Sockets', purpose: 'Host-container communication' },
+        ],
+      },
+    ],
   },
   {
     id: 'uptime-verse',
@@ -347,10 +407,10 @@ export const projects: Project[] = [
     description: "A distributed uptime network that listens to the internet's pulse",
     longDescription:
       'Uptime Verse aims to be a distributed uptime monitoring network designed to track internet connectivity and service availability across globally distributed nodes. The project is in early development stages and focuses on monitoring uptime across distributed nodes to track internet health metrics.',
-    tags: ['Distributed System', 'Monitoring', 'Uptime', 'Network'],
+    tags: ['Rust', 'Distributed System', 'Monitoring', 'Uptime', 'Network'],
     githubUrl: 'https://github.com/AptS-1547/uptime-verse',
-    language: 'Python',
-    status: 'in-development',
+    language: 'Rust',
+    status: 'planned',
     license: 'Apache-2.0',
     features: [
       'Distributed uptime monitoring network (planned)',
@@ -358,9 +418,5 @@ export const projects: Project[] = [
       'Multi-node service availability monitoring (planned)',
       'Real-time connectivity pulse monitoring (planned)',
     ],
-    techStack: {
-      backend: [],
-      tools: [],
-    },
   },
 ]

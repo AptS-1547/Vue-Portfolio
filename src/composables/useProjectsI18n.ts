@@ -19,24 +19,18 @@ export function useProjectsI18n() {
       features: project.features
         ? project.features.map((_, index) => t(`projects.${project.id}.features.${index}`))
         : [],
-      techStack: {
-        backend: project.techStack?.backend?.map((tech, index) => ({
+      techStack: project.techStack?.map((category, categoryIndex) => ({
+        name: category.name,
+        items: category.items.map((tech, index) => ({
           name: tech.name,
-          purpose: t(`projects.${project.id}.techStack.backend.${index}.purpose`),
+          purpose: t(`projects.${project.id}.techStack.${categoryIndex}.items.${index}.purpose`),
+        })),
+      })),
+      performance:
+        project.performance?.map((perf, index) => ({
+          name: t(`projects.${project.id}.performance.${index}.name`),
+          value: t(`projects.${project.id}.performance.${index}.value`),
         })) || [],
-        frontend: project.techStack?.frontend?.map((tech, index) => ({
-          name: tech.name,
-          purpose: t(`projects.${project.id}.techStack.frontend.${index}.purpose`),
-        })) || [],
-        tools: project.techStack?.tools?.map((tech, index) => ({
-          name: tech.name,
-          purpose: t(`projects.${project.id}.techStack.tools.${index}.purpose`),
-        })) || [],
-      },
-      performance: project.performance?.map((perf, index) => ({
-        name: t(`projects.${project.id}.performance.${index}.name`),
-        value: t(`projects.${project.id}.performance.${index}.value`),
-      })) || [],
     }))
   })
 

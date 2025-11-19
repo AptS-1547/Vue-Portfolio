@@ -21,6 +21,7 @@ export default {
   projectStatus: {
     active: '活跃',
     'in-development': '开发中',
+    planned: '暂未启动',
     archived: '已归档',
   },
 
@@ -36,6 +37,8 @@ export default {
   techCategories: {
     backend: '后端',
     frontend: '前端',
+    infrastructure: '基础设施',
+    automation: '自动化',
     tools: '工具与运维',
   },
 

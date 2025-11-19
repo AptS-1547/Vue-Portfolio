@@ -21,6 +21,7 @@ export default {
   projectStatus: {
     active: 'Active',
     'in-development': 'In Development',
+    planned: 'Planned',
     archived: 'Archived',
   },
 
@@ -37,6 +38,8 @@ export default {
     backend: 'Backend',
     frontend: 'Frontend',
     tools: 'Tools & DevOps',
+    infrastructure: 'Infrastructure',
+    automation: 'Automation',
   },
 
   // 错误状态

@@ -1,7 +1,7 @@
 <template>
   <section class="animate-section-slide" :style="{ animationDelay: animationDelay }">
     <h2
-      class="text-lg lg:text-xl font-semibold text-gray-800 mb-3 lg:mb-4 border-b border-gray-200 pb-2 hover:text-[var(--color-primary)] transition-colors duration-200 relative group"
+      class="text-lg lg:text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3 lg:mb-4 border-b border-gray-200 dark:border-gray-700 pb-2 hover:text-[var(--color-primary)] transition-colors duration-200 relative group"
     >
       {{ experience.title }}
       <span
@@ -12,24 +12,26 @@
       <div
         v-for="position in experience.positions"
         :key="`${position.company}-${position.period}`"
-        class="bg-white p-4 lg:p-6 rounded-lg border border-gray-200 hover:shadow-lg hover:-translate-y-1 touch:hover:translate-y-0 transition-all duration-200"
+        class="bg-white dark:bg-gray-900 p-4 lg:p-6 rounded-lg border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:-translate-y-1 touch:hover:translate-y-0 transition-all duration-200"
         :style="{ '--hover-border': position.hoverColor }"
         @mouseenter="handlePositionHover($event, position, true)"
         @mouseleave="handlePositionHover($event, position, false)"
       >
         <div class="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-2">
           <h3
-            class="font-semibold text-gray-800 text-sm lg:text-base transition-colors duration-200"
+            class="font-semibold text-gray-800 dark:text-gray-100 text-sm lg:text-base transition-colors duration-200"
             :style="{ '--hover-text': position.hoverColor }"
           >
             {{ position.title }}
           </h3>
-          <span class="text-xs lg:text-sm text-gray-500 mt-1 lg:mt-0">{{ position.period }}</span>
+          <span class="text-xs lg:text-sm text-gray-500 dark:text-gray-500 mt-1 lg:mt-0">{{
+            position.period
+          }}</span>
         </div>
-        <p class="text-gray-600 mb-2 text-sm lg:text-base">
+        <p class="text-gray-600 dark:text-gray-400 mb-2 text-sm lg:text-base">
           {{ position.company }}
         </p>
-        <p class="text-gray-600 text-xs lg:text-sm leading-relaxed">
+        <p class="text-gray-600 dark:text-gray-400 text-xs lg:text-sm leading-relaxed">
           {{ position.description }}
         </p>
       </div>
