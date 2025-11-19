@@ -25,16 +25,16 @@
 </template>
 
 <script setup lang="ts">
-import { profileConfig } from '@/data/profile'
 import { onMounted, nextTick } from 'vue'
+import { useProfileI18n } from '@/composables/useProfileI18n'
 import ProfileSidebar from '@/components/sections/ProfileSidebar.vue'
 import AboutSection from '@/components/sections/AboutSection.vue'
 import SkillsSection from '@/components/sections/SkillsSection.vue'
 import ExperienceSection from '@/components/sections/ExperienceSection.vue'
 import FeaturedProjectsSection from '@/components/sections/FeaturedProjectsSection.vue'
 
-// 解构配置
-const { personalInfo, aboutMe, skills, experience, featuredProjects } = profileConfig
+// 使用 i18n 数据
+const { personalInfo, aboutMe, skills, experience, featuredProjects } = useProfileI18n()
 
 // 确保页面加载时在正确位置
 onMounted(() => {

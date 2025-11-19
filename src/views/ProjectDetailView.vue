@@ -8,7 +8,7 @@
           class="inline-flex items-center text-[var(--color-primary)] hover:text-[var(--color-secondary)] transition-all duration-500 hover:scale-105 hover:-translate-y-0.5 touch:hover:scale-100 touch:hover:translate-y-0 group"
         >
           <span class="mr-2 transition-transform duration-500 group-hover:-translate-x-1">←</span>
-          <span>Back to Projects</span>
+          <span>{{ $t('common.buttons.backToProjects') }}</span>
         </router-link>
       </div>
 
@@ -16,10 +16,10 @@
       <ErrorState
         v-if="!project"
         :icon-component="MagnifyingGlassIcon"
-        title="Project not found"
-        message="The project you're looking for doesn't exist."
+        :title="$t('common.errors.projectNotFound')"
+        :message="$t('common.errors.projectNotFoundMessage')"
         back-route="/projects"
-        back-text="Back to Projects"
+        :back-text="$t('common.buttons.backToProjects')"
       />
 
       <!-- 项目详情 -->
@@ -33,7 +33,7 @@
               <div class="flex items-center space-x-3 mb-4 animate-status-fade">
                 <div :class="statusColor" class="w-3 h-3 rounded-full animate-status-pulse"></div>
                 <span class="text-sm font-medium text-gray-500 uppercase tracking-wide">{{
-                  project.status.replace('-', ' ')
+                  $t(`common.projectStatus.${project.status}`)
                 }}</span>
                 <span class="text-sm text-gray-400">{{ project.language }}</span>
                 <LicenseDisplay :license="project.license || 'MIT'" />
@@ -75,7 +75,7 @@
               <CodeBracketIcon
                 class="w-5 h-5 mr-2 transition-transform duration-300 group-hover:rotate-12"
               />
-              <span>View on GitHub</span>
+              <span>{{ $t('common.buttons.viewOnGithub') }}</span>
             </a>
             <a
               v-if="project.liveUrl"
@@ -86,7 +86,7 @@
               <RocketLaunchIcon
                 class="w-5 h-5 mr-2 transition-transform duration-300 group-hover:scale-125"
               />
-              <span>Live Demo</span>
+              <span>{{ $t('common.buttons.liveDemo') }}</span>
             </a>
           </div>
         </div>
@@ -99,7 +99,7 @@
           <h2
             class="text-2xl font-bold text-gray-800 mb-4 animate-section-title hover:text-[var(--color-primary)] transition-colors duration-500"
           >
-            About This Project
+            {{ $t('common.sections.aboutProject') }}
           </h2>
           <div class="prose prose-gray max-w-none">
             <p class="text-gray-600 leading-relaxed mb-4 animate-text-reveal">
@@ -107,7 +107,7 @@
             </p>
             <div v-if="project.features" class="mt-6 animate-features-slide">
               <h3 class="text-lg font-semibold text-gray-800 mb-3 animate-features-title">
-                Key Features
+                {{ $t('common.sections.keyFeatures') }}
               </h3>
               <ul class="space-y-2">
                 <li
@@ -132,7 +132,7 @@
           <h2
             class="text-2xl font-bold text-gray-800 mb-4 animate-section-title hover:text-[var(--color-secondary)] transition-colors duration-500"
           >
-            Technical Stack
+            {{ $t('common.sections.techStack') }}
           </h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div
@@ -140,7 +140,7 @@
               class="space-y-3 animate-tech-section"
               style="animation-delay: 0.6s"
             >
-              <h3 class="text-lg font-semibold text-gray-800 animate-tech-title">Backend</h3>
+              <h3 class="text-lg font-semibold text-gray-800 animate-tech-title">{{ $t('common.techCategories.backend') }}</h3>
               <div class="space-y-2">
                 <div
                   v-for="(tech, index) in project.techStack.backend"
@@ -158,7 +158,7 @@
               class="space-y-3 animate-tech-section"
               style="animation-delay: 0.7s"
             >
-              <h3 class="text-lg font-semibold text-gray-800 animate-tech-title">Frontend</h3>
+              <h3 class="text-lg font-semibold text-gray-800 animate-tech-title">{{ $t('common.techCategories.frontend') }}</h3>
               <div class="space-y-2">
                 <div
                   v-for="(tech, index) in project.techStack.frontend"
@@ -176,7 +176,7 @@
               class="space-y-3 animate-tech-section"
               style="animation-delay: 0.8s"
             >
-              <h3 class="text-lg font-semibold text-gray-800 animate-tech-title">Tools & DevOps</h3>
+              <h3 class="text-lg font-semibold text-gray-800 animate-tech-title">{{ $t('common.techCategories.tools') }}</h3>
               <div class="space-y-2">
                 <div
                   v-for="(tech, index) in project.techStack.tools"
@@ -201,7 +201,7 @@
           <h2
             class="text-2xl font-bold text-gray-800 mb-4 animate-section-title hover:text-[var(--color-primary)] transition-colors duration-500"
           >
-            Performance Metrics
+            {{ $t('common.sections.performance') }}
           </h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div
@@ -225,14 +225,16 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import LicenseDisplay from '@/components/project/LicenseDisplay.vue'
 import ErrorState from '@/components/common/ErrorState.vue'
 import { CodeBracketIcon, RocketLaunchIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
-import { projects } from '@/data/projects'
+import { useProjectsI18n } from '@/composables/useProjectsI18n'
 import { getTagColor } from '@/utils/colorHash'
-import type { Project } from '@/types/project'
 
 const route = useRoute()
+const { t } = useI18n()
+const { projects } = useProjectsI18n()
 
 // 确保页面加载时在正确位置
 onMounted(() => {
@@ -243,7 +245,7 @@ onMounted(() => {
 
 const projectId = computed(() => route.params.id as string)
 
-const projectsData = ref<Project[]>(projects)
+const projectsData = computed(() => projects.value)
 const project = computed(() => projectsData.value.find((p) => p.id === projectId.value))
 
 const statusColor = computed(() => {

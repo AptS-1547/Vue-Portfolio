@@ -4,11 +4,10 @@
       <!-- 页面标题 -->
       <div class="text-center mb-12 animate-hero-entrance">
         <h1 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4 animate-title-emerge">
-          My Projects
+          {{ $t('profile.pages.projects.title') }}
         </h1>
         <p class="text-gray-600 text-lg max-w-2xl mx-auto animate-subtitle-flow">
-          A collection of my open-source projects and technical contributions, spanning from
-          high-performance backend services to modern frontend applications.
+          {{ $t('profile.pages.projects.subtitle') }}
         </p>
       </div>
 
@@ -55,10 +54,10 @@
           <MagnifyingGlassIcon class="w-16 h-16" />
         </div>
         <h3 class="text-xl font-semibold text-gray-600 mb-2 animate-empty-title">
-          No projects found
+          {{ $t('common.errors.noProjects') }}
         </h3>
         <p class="text-gray-500 animate-empty-text">
-          Try adjusting your filters to see more projects.
+          {{ $t('common.errors.noProjectsMessage') }}
         </p>
       </div>
     </div>
@@ -69,11 +68,11 @@
 import { ref, computed, onMounted, nextTick } from 'vue'
 import ProjectCard from '@/components/project/ProjectCard.vue'
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
-import { projects } from '@/data/projects'
+import { useProjectsI18n } from '@/composables/useProjectsI18n'
 import { getTagColor } from '@/utils/colorHash'
-import type { Project } from '@/types/project'
 
-const projectsData = ref<Project[]>(projects)
+const { projects } = useProjectsI18n()
+const projectsData = computed(() => projects.value)
 const selectedTags = ref<string[]>([])
 
 const allTags = computed(() => {

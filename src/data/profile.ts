@@ -52,7 +52,7 @@ export const personalInfo: PersonalInfo = {
 // 关于我部分
 export const aboutMe: AboutMe = {
   title: 'About Me',
-  content: `I'm a passionate full-stack developer with 6 years of experience building robust web applications. I specialize in modern tech stacks including Rust for backend systems, Node.js for APIs, Python for data processing, and Vue.js/Nuxt.js for frontend development. I love sharing knowledge through technical writing and contributing to open-source projects.`,
+  content: `I'm a passionate full-stack developer with 6 years of experience building robust web applications. I specialize in modern tech stacks including Rust for backend systems, Node.js for APIs, Python for data processing, and Vue.js/Next.js for frontend development. I love sharing knowledge through technical writing and contributing to open-source projects.`,
 }
 
 // 技能配置
@@ -75,7 +75,7 @@ export const skills: Skills = {
       borderColor: '#6dd0e0',
       technologies: [
         { name: 'Vue.js', hoverColor: '#6dd0e0' },
-        { name: 'Nuxt.js', hoverColor: '#6dd0e0' },
+        { name: 'Next.js', hoverColor: '#6dd0e0' },
         { name: 'TypeScript', hoverColor: '#6dd0e0' },
       ],
     },
