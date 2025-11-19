@@ -5,7 +5,7 @@
       <div class="mb-6 animate-back-button">
         <router-link
           to="/projects"
-          class="inline-flex items-center text-[#ed9a28] hover:text-[#6dd0e0] transition-all duration-500 hover:scale-105 hover:-translate-y-0.5 touch:hover:scale-100 touch:hover:translate-y-0 group"
+          class="inline-flex items-center text-[var(--color-primary)] hover:text-[var(--color-secondary)] transition-all duration-500 hover:scale-105 hover:-translate-y-0.5 touch:hover:scale-100 touch:hover:translate-y-0 group"
         >
           <span class="mr-2 transition-transform duration-500 group-hover:-translate-x-1">←</span>
           <span>Back to Projects</span>
@@ -13,15 +13,14 @@
       </div>
 
       <!-- 项目不存在提示 -->
-      <div v-if="!project" class="text-center py-12 animate-not-found">
-        <div class="text-gray-400 text-6xl mb-4 animate-search-spin">🔍</div>
-        <h3 class="text-xl font-semibold text-gray-600 mb-2 animate-not-found-title">
-          Project not found
-        </h3>
-        <p class="text-gray-500 animate-not-found-text">
-          The project you're looking for doesn't exist.
-        </p>
-      </div>
+      <ErrorState
+        v-if="!project"
+        :icon-component="MagnifyingGlassIcon"
+        title="Project not found"
+        message="The project you're looking for doesn't exist."
+        back-route="/projects"
+        back-text="Back to Projects"
+      />
 
       <!-- 项目详情 -->
       <div v-else class="space-y-8">
@@ -40,7 +39,7 @@
                 <LicenseDisplay :license="project.license || 'MIT'" />
               </div>
               <h1
-                class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4 animate-title-emerge hover:text-[#ed9a28] transition-colors duration-500"
+                class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4 animate-title-emerge hover:text-[var(--color-primary)] transition-colors duration-500"
               >
                 {{ project.title }}
               </h1>
@@ -73,16 +72,16 @@
               target="_blank"
               class="inline-flex items-center justify-center px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-900 hover:scale-105 hover:-translate-y-1 transition-all duration-500 hover:shadow-xl group"
             >
-              <span class="mr-2 transition-transform duration-300 group-hover:rotate-12">💻</span>
+              <CodeBracketIcon class="w-5 h-5 mr-2 transition-transform duration-300 group-hover:rotate-12" />
               <span>View on GitHub</span>
             </a>
             <a
               v-if="project.liveUrl"
               :href="project.liveUrl"
               target="_blank"
-              class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-[#ed9a28] to-[#6dd0e0] text-white rounded-lg hover:from-[#6dd0e0] hover:to-[#ed9a28] hover:scale-105 hover:-translate-y-1 transition-all duration-500 hover:shadow-xl group"
+              class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white rounded-lg hover:from-[var(--color-secondary)] hover:to-[var(--color-primary)] hover:scale-105 hover:-translate-y-1 transition-all duration-500 hover:shadow-xl group"
             >
-              <span class="mr-2 transition-transform duration-300 group-hover:scale-125">🚀</span>
+              <RocketLaunchIcon class="w-5 h-5 mr-2 transition-transform duration-300 group-hover:scale-125" />
               <span>Live Demo</span>
             </a>
           </div>
@@ -94,7 +93,7 @@
           style="animation-delay: 0.2s"
         >
           <h2
-            class="text-2xl font-bold text-gray-800 mb-4 animate-section-title hover:text-[#ed9a28] transition-colors duration-500"
+            class="text-2xl font-bold text-gray-800 mb-4 animate-section-title hover:text-[var(--color-primary)] transition-colors duration-500"
           >
             About This Project
           </h2>
@@ -127,7 +126,7 @@
           style="animation-delay: 0.4s"
         >
           <h2
-            class="text-2xl font-bold text-gray-800 mb-4 animate-section-title hover:text-[#6dd0e0] transition-colors duration-500"
+            class="text-2xl font-bold text-gray-800 mb-4 animate-section-title hover:text-[var(--color-secondary)] transition-colors duration-500"
           >
             Technical Stack
           </h2>
@@ -196,7 +195,7 @@
           style="animation-delay: 0.6s"
         >
           <h2
-            class="text-2xl font-bold text-gray-800 mb-4 animate-section-title hover:text-[#ed9a28] transition-colors duration-500"
+            class="text-2xl font-bold text-gray-800 mb-4 animate-section-title hover:text-[var(--color-primary)] transition-colors duration-500"
           >
             Performance Metrics
           </h2>
@@ -207,7 +206,7 @@
               class="text-center p-4 bg-gray-50/50 backdrop-blur-sm rounded-lg hover:bg-gradient-to-br hover:from-orange-50 hover:to-cyan-50 hover:scale-105 hover:-translate-y-1 transition-all duration-500 animate-metric-card"
               :style="{ animationDelay: `${1.5 + index * 0.2}s` }"
             >
-              <div class="text-2xl font-bold text-[#ed9a28] mb-1 animate-metric-value">
+              <div class="text-2xl font-bold text-[var(--color-primary)] mb-1 animate-metric-value">
                 {{ metric.value }}
               </div>
               <div class="text-sm text-gray-600 animate-metric-label">{{ metric.name }}</div>
@@ -223,6 +222,8 @@
 import { ref, computed, onMounted, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
 import LicenseDisplay from '@/components/LicenseDisplay.vue'
+import ErrorState from '@/components/common/ErrorState.vue'
+import { CodeBracketIcon, RocketLaunchIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
 import { projects } from '@/data/projects'
 import { getTagColor } from '@/utils/colorHash'
 import type { Project } from '@/types/project'
@@ -257,40 +258,10 @@ const statusColor = computed(() => {
 </script>
 
 <style scoped>
-/* 现代动画关键帧 */
-@keyframes backButton {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
+/* 简化的动画关键帧 - 从 26 个精简为 8 个核心动画 */
 
-@keyframes notFound {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes searchSpin {
-  0%,
-  100% {
-    transform: rotate(0deg) scale(1);
-  }
-  50% {
-    transform: rotate(180deg) scale(1.1);
-  }
-}
-
-@keyframes notFoundTitle {
+/* 通用淡入 + 上移动画 */
+@keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -301,29 +272,8 @@ const statusColor = computed(() => {
   }
 }
 
-@keyframes notFoundText {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes headerSlide {
-  from {
-    opacity: 0;
-    transform: translateY(50px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes statusFade {
+/* 通用淡入 + 左移动画 */
+@keyframes fadeInLeft {
   from {
     opacity: 0;
     transform: translateX(-20px);
@@ -334,159 +284,58 @@ const statusColor = computed(() => {
   }
 }
 
-@keyframes statusPulse {
-  0%,
-  100% {
-    transform: translateX(0);
+/* 通用缩放动画 */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
     opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 弹性缩放动画 */
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  60% {
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 搜索旋转动画 */
+@keyframes searchSpin {
+  0%, 100% {
+    transform: rotate(0deg);
   }
   50% {
-    transform: scale(1.2);
+    transform: rotate(180deg);
+  }
+}
+
+/* 状态脉冲动画 */
+@keyframes statusPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
     opacity: 0.7;
+    transform: scale(1.2);
   }
 }
 
-@keyframes titleEmerge {
-  0% {
-    opacity: 0;
-    transform: translateY(-20px) scale(0.9);
-    filter: blur(5px);
-  }
-  60% {
-    opacity: 0.8;
-    transform: translateY(-5px) scale(1.02);
-    filter: blur(1px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
-}
-
-@keyframes descriptionFlow {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-    filter: blur(2px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
-
-@keyframes tagsStagger {
-  from {
-    transform: translateY(30px);
-    opacity: 0;
-    filter: blur(0);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes tagBounce {
-  0% {
-    opacity: 0;
-    transform: translateY(20px) scale(0.8);
-  }
-  60% {
-    opacity: 1;
-    transform: translateY(-3px) scale(1.05);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes buttonsSlide {
-  from {
-    opacity: 0;
-    transform: translateY(40px) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes sectionSlide {
-  from {
-    opacity: 0;
-    transform: translateY(60px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes sectionTitle {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes textReveal {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-    filter: blur(2px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
-
-@keyframes featuresSlide {
-  from {
-    transform: translateX(-40px);
-    opacity: 0;
-    filter: blur(0);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes featuresTitle {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes featureItem {
-  from {
-    opacity: 0;
-    transform: translateX(-20px) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-  }
-}
-
+/* 悬停弹跳动画 */
 @keyframes checkBounce {
-  0%,
-  100% {
+  0%, 100% {
     transform: scale(1);
   }
   50% {
@@ -494,7 +343,8 @@ const statusColor = computed(() => {
   }
 }
 
-@keyframes techSection {
+/* 卡片入场动画 */
+@keyframes cardEntrance {
   from {
     opacity: 0;
     transform: translateY(30px) scale(0.95);
@@ -505,69 +355,14 @@ const statusColor = computed(() => {
   }
 }
 
-@keyframes techTitle {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes techItem {
-  from {
-    opacity: 0;
-    transform: translateX(-15px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-  }
-}
-
-@keyframes metricCard {
-  from {
-    opacity: 0;
-    transform: translateY(40px) scale(0.8) rotateX(20deg);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1) rotateX(0deg);
-  }
-}
-
-@keyframes metricValue {
-  from {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes metricLabel {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* 动画类 */
+/* 动画类 - 使用 CSS 变量控制时长 */
 .animate-back-button {
-  animation: backButton 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: fadeInLeft var(--animation-duration-slow, 300ms) var(--animation-easing-ease-out) forwards;
 }
 
 .animate-not-found {
-  animation: notFound 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  animation-delay: 0.2s;
+  animation: scaleIn var(--animation-duration-slow, 300ms) var(--animation-easing-ease-out) forwards;
+  animation-delay: 0.1s;
   opacity: 0;
 }
 
@@ -576,111 +371,108 @@ const statusColor = computed(() => {
 }
 
 .animate-not-found-title {
-  animation: notFoundTitle 0.6s ease-out forwards;
-  animation-delay: 0.4s;
+  animation: fadeInUp var(--animation-duration-slow, 300ms) ease-out forwards;
+  animation-delay: 0.2s;
   opacity: 0;
 }
 
 .animate-not-found-text {
-  animation: notFoundText 0.6s ease-out forwards;
-  animation-delay: 0.6s;
+  animation: fadeInUp var(--animation-duration-slow, 300ms) ease-out forwards;
+  animation-delay: 0.3s;
   opacity: 0;
 }
 
 .animate-header-slide {
-  animation: headerSlide 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  animation-delay: 0.1s;
+  animation: cardEntrance var(--animation-duration-slow, 300ms) var(--animation-easing-ease-out) forwards;
+  animation-delay: 0.05s;
   opacity: 0;
 }
 
 .animate-status-fade {
-  animation: statusFade 0.6s ease-out forwards;
-  animation-delay: 0.3s;
+  animation: fadeInLeft var(--animation-duration-normal, 200ms) ease-out forwards;
+  animation-delay: 0.1s;
   opacity: 0;
 }
 
 .animate-status-pulse {
   animation: statusPulse 2s ease-in-out infinite;
-  animation-delay: 0.3s;
-  opacity: 0;
 }
 
 .animate-title-emerge {
-  animation: titleEmerge 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-  animation-delay: 0.5s;
+  animation: bounceIn var(--animation-duration-slow, 300ms) var(--animation-easing-bounce) forwards;
+  animation-delay: 0.15s;
   opacity: 0;
 }
 
 .animate-description-flow {
-  animation: descriptionFlow 0.8s ease-out forwards;
-  animation-delay: 0.7s;
-  opacity: 0;
-}
-
-.animate-tags-stagger {
-  animation: tagsStagger 0.6s ease-out forwards;
-  animation-delay: 0.9s;
-  opacity: 0;
-}
-
-.animate-tag-bounce {
-  animation: tagBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-  animation-delay: 0.9s;
-  opacity: 0;
-}
-
-.animate-buttons-slide {
-  animation: buttonsSlide 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  animation-delay: 1.2s;
-  opacity: 0;
-}
-
-.animate-section-slide {
-  animation: sectionSlide 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  animation-delay: 1.2s;
-  opacity: 0;
-}
-
-.animate-section-title {
-  animation: sectionTitle 0.6s ease-out forwards;
+  animation: fadeInUp var(--animation-duration-slow, 300ms) ease-out forwards;
   animation-delay: 0.2s;
   opacity: 0;
 }
 
+.animate-tags-stagger {
+  animation: fadeInUp var(--animation-duration-normal, 200ms) ease-out forwards;
+  animation-delay: 0.25s;
+  opacity: 0;
+}
+
+.animate-tag-bounce {
+  animation: bounceIn var(--animation-duration-normal, 200ms) var(--animation-easing-bounce) forwards;
+  opacity: 0;
+}
+
+.animate-buttons-slide {
+  animation: fadeInUp var(--animation-duration-slow, 300ms) var(--animation-easing-ease-out) forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+
+.animate-section-slide {
+  animation: cardEntrance var(--animation-duration-slow, 300ms) var(--animation-easing-ease-out) forwards;
+  opacity: 0;
+}
+
+.animate-section-title {
+  animation: fadeInLeft var(--animation-duration-normal, 200ms) ease-out forwards;
+  animation-delay: 0.1s;
+  opacity: 0;
+}
+
 .animate-text-reveal {
-  animation: textReveal 0.8s ease-out forwards;
-  animation-delay: 0.4s;
+  animation: fadeInUp var(--animation-duration-slow, 300ms) ease-out forwards;
+  animation-delay: 0.15s;
   opacity: 0;
 }
 
 .animate-features-slide {
-  animation: featuresSlide 0.8s ease-out forwards;
-  animation-delay: 0.6s;
+  animation: fadeInLeft var(--animation-duration-slow, 300ms) ease-out forwards;
+  animation-delay: 0.2s;
   opacity: 0;
 }
 
 .animate-features-title {
-  animation: featuresTitle 0.6s ease-out forwards;
-  animation-delay: 0.8s;
+  animation: fadeInUp var(--animation-duration-normal, 200ms) ease-out forwards;
+  animation-delay: 0.25s;
   opacity: 0;
 }
 
 .animate-feature-item {
-  animation: featureItem 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  animation-delay: 0.8s;
+  animation: fadeInLeft var(--animation-duration-normal, 200ms) var(--animation-easing-ease-out) forwards;
   opacity: 0;
 }
 
 .animate-check-bounce:hover {
-  animation: checkBounce 0.6s ease-in-out;
+  animation: checkBounce var(--animation-duration-slow, 300ms) ease-in-out;
 }
 
 .animate-tech-section {
-  animation: techSection 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: cardEntrance var(--animation-duration-slow, 300ms) var(--animation-easing-ease-out) forwards;
   opacity: 0;
 }
 
-.animate-check-bounce:hover {
-  animation: checkBounce 0.6s ease-in-out;
+.animate-metric-value {
+  animation: bounceIn var(--animation-duration-slow, 300ms) var(--animation-easing-bounce) forwards;
+  animation-delay: 0.1s;
+  opacity: 0;
 }
 </style>

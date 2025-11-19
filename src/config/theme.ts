@@ -91,6 +91,47 @@ export const animations = {
       small: '2px',
     },
   },
+
+  // 动画延迟配置（用于错开动画）
+  delay: {
+    none: '0s',
+    short: '0.05s',
+    normal: '0.1s',
+    long: '0.2s',
+    section1: '0.1s',
+    section2: '0.2s',
+    section3: '0.3s',
+    section4: '0.4s',
+  },
+
+  // 页面元素动画配置
+  pageAnimations: {
+    // 区块滑入动画
+    sectionSlide: {
+      duration: '300ms',
+      easing: 'ease-out',
+    },
+    // 卡片入场动画
+    cardEntrance: {
+      duration: '300ms',
+      easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+    },
+    // 标签弹出动画
+    tagPop: {
+      duration: '200ms',
+      easing: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+    },
+    // 文本淡入动画
+    textFade: {
+      duration: '300ms',
+      easing: 'ease-out',
+    },
+    // 按钮跳动动画
+    buttonBounce: {
+      duration: '200ms',
+      easing: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+    },
+  },
 }
 
 // 间距配置
@@ -198,18 +239,55 @@ export const components = {
 // CSS 变量生成器
 export const generateCSSVariables = () => {
   return {
+    // 颜色变量
     '--color-primary': colors.primary.main,
     '--color-primary-light': colors.primary.light,
     '--color-primary-dark': colors.primary.dark,
     '--color-secondary': colors.secondary.main,
     '--color-secondary-light': colors.secondary.light,
     '--color-secondary-dark': colors.secondary.dark,
+
+    // 渐变变量
     '--gradient-primary': colors.gradients.primary,
     '--gradient-primary-reverse': colors.gradients.primaryReverse,
+
+    // 动画时长变量
+    '--animation-duration-fast': animations.duration.fast,
     '--animation-duration-normal': animations.duration.normal,
-    '--animation-easing-default': animations.easing.easeOut,
+    '--animation-duration-slow': animations.duration.slow,
+
+    // 动画缓动变量
+    '--animation-easing-linear': animations.easing.linear,
+    '--animation-easing-ease-out': animations.easing.easeOut,
+    '--animation-easing-ease-in-out': animations.easing.easeInOut,
+    '--animation-easing-bounce': animations.easing.bounce,
+
+    // 动画延迟变量
+    '--animation-delay-short': animations.delay.short,
+    '--animation-delay-normal': animations.delay.normal,
+    '--animation-delay-long': animations.delay.long,
+    '--animation-delay-section-1': animations.delay.section1,
+    '--animation-delay-section-2': animations.delay.section2,
+    '--animation-delay-section-3': animations.delay.section3,
+    '--animation-delay-section-4': animations.delay.section4,
+
+    // 页面动画配置变量
+    '--animation-section-slide-duration': animations.pageAnimations.sectionSlide.duration,
+    '--animation-section-slide-easing': animations.pageAnimations.sectionSlide.easing,
+    '--animation-card-entrance-duration': animations.pageAnimations.cardEntrance.duration,
+    '--animation-card-entrance-easing': animations.pageAnimations.cardEntrance.easing,
+    '--animation-tag-pop-duration': animations.pageAnimations.tagPop.duration,
+    '--animation-tag-pop-easing': animations.pageAnimations.tagPop.easing,
+
+    // 变换变量
+    '--transform-scale-hover': animations.transform.scale.hover,
+    '--transform-translate-hover': animations.transform.translate.hover,
+
+    // 阴影变量
     '--shadow-card': components.card.shadow,
     '--shadow-card-hover': components.card.hoverShadow,
+
+    // 其他变量
     '--border-radius-default': borderRadius.lg,
     '--spacing-default': spacing.md,
   }

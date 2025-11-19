@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg hover:border-[#ed9a28] hover:-translate-y-1 hover:scale-105 touch:hover:translate-y-0 touch:hover:scale-100 transition-all duration-200 group animate-card-entrance w-full overflow-hidden"
+    class="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg hover:border-[var(--color-primary)] hover:-translate-y-1 hover:scale-105 touch:hover:translate-y-0 touch:hover:scale-100 transition-all duration-200 group animate-card-entrance w-full overflow-hidden"
   >
     <!-- 项目状态标识 -->
     <div class="flex justify-between items-start mb-4 animate-status-bar">
@@ -16,7 +16,7 @@
 
     <!-- 项目标题和描述 -->
     <h3
-      class="font-bold text-gray-800 text-lg mb-3 group-hover:text-[#ed9a28] transition-colors duration-200 hover:scale-105 touch:hover:scale-100 animate-title-slide"
+      class="font-bold text-gray-800 text-lg mb-3 group-hover:text-[var(--color-primary)] transition-colors duration-200 hover:scale-105 touch:hover:scale-100 animate-title-slide"
     >
       {{ project.title }}
     </h3>
@@ -56,7 +56,7 @@
     >
       <router-link
         :to="`/projects/${project.id}`"
-        class="inline-flex items-center text-sm text-[#ed9a28] hover:text-[#6dd0e0] transition-colors duration-200 group-hover:translate-x-1"
+        class="inline-flex items-center text-sm text-[var(--color-primary)] hover:text-[var(--color-secondary)] transition-colors duration-200 group-hover:translate-x-1"
       >
         <span>View Details</span>
         <span class="ml-1 transition-transform duration-200 group-hover:translate-x-1">→</span>
@@ -66,21 +66,21 @@
         <a
           :href="project.githubUrl"
           target="_blank"
-          class="inline-flex items-center text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded hover:bg-[#ed9a28] hover:text-white hover:scale-105 touch:hover:scale-100 transition-all duration-200 group animate-button-bounce"
+          class="inline-flex items-center text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded hover:bg-[var(--color-primary)] hover:text-white hover:scale-105 touch:hover:scale-100 transition-all duration-200 group animate-button-bounce"
           title="View on GitHub"
           style="animation-delay: 0.05s"
         >
-          <span>💻</span>
+          <CodeBracketIcon class="w-4 h-4" />
         </a>
         <a
           v-if="project.liveUrl"
           :href="project.liveUrl"
           target="_blank"
-          class="inline-flex items-center text-xs bg-gradient-to-r from-[#ed9a28] to-[#6dd0e0] text-white px-2 py-1 rounded hover:from-[#6dd0e0] hover:to-[#ed9a28] hover:scale-105 touch:hover:scale-100 transition-all duration-200 group animate-button-bounce"
+          class="inline-flex items-center text-xs bg-[image:var(--gradient-primary)] text-white px-2 py-1 rounded hover:bg-[image:var(--gradient-primary-reverse)] hover:scale-105 touch:hover:scale-100 transition-all duration-200 group animate-button-bounce"
           title="Live Demo"
           style="animation-delay: 0.1s"
         >
-          <span>🚀</span>
+          <RocketLaunchIcon class="w-4 h-4" />
         </a>
       </div>
     </div>
@@ -97,12 +97,16 @@
 import { computed } from 'vue'
 import LicenseDisplay from './LicenseDisplay.vue'
 import { getTagColor } from '@/utils/colorHash'
-import { colors } from '@/config/theme'
+import { useHoverEffect } from '@/composables/useHoverEffect'
+import { CodeBracketIcon, RocketLaunchIcon } from '@heroicons/vue/24/outline'
 import type { Project } from '@/types/project'
 
 const props = defineProps<{
   project: Project
 }>()
+
+// 使用统一的悬停效果 composable
+const { handleColorHover } = useHoverEffect()
 
 // 修复状态颜色计算
 const statusColorClass = computed(() => {
@@ -118,18 +122,16 @@ const statusColorClass = computed(() => {
   }
 })
 
-// 处理标签悬停
+// 处理标签悬停（使用 composable）
 const handleTagHover = (event: Event, tag: string, isEnter: boolean) => {
   const target = event.target as HTMLElement
   const colors = getTagColor(tag)
 
-  if (isEnter) {
-    target.style.backgroundColor = colors.hoverBackgroundColor
-    target.style.color = 'white'
-  } else {
-    target.style.backgroundColor = colors.backgroundColor
-    target.style.color = colors.textColor
-  }
+  const hoverColors = isEnter
+    ? { backgroundColor: colors.hoverBackgroundColor, textColor: 'white' }
+    : { backgroundColor: colors.backgroundColor, textColor: colors.textColor }
+
+  handleColorHover(target, hoverColors, isEnter)
 }
 </script>
 

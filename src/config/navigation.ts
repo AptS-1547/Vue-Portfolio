@@ -5,7 +5,6 @@
 
 // Logo 配置
 export const logo = {
-  icon: '🚀',
   text: 'AptS-1547',
   homeLink: '/',
   hoverColor: '#ed9a28',

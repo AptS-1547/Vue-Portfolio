@@ -10,7 +10,7 @@
           :class="`${styles.logo.base} ${styles.logo.hover} ${styles.logo.hoverColor} ${animations.logo.container}`"
           @click="closeMobileMenu"
         >
-          <span :class="animations.logo.icon">{{ logo.icon }}</span>
+          <RocketLaunchIcon :class="`w-5 h-5 ${animations.logo.icon}`" />
           <span :class="animations.logo.text">{{ logo.text }}</span>
         </router-link>
 
@@ -126,6 +126,7 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { RocketLaunchIcon } from '@heroicons/vue/24/outline'
 import { navigationConfig } from '@/config/navigation'
 
 const route = useRoute()

@@ -51,7 +51,9 @@
 
       <!-- 空状态 -->
       <div v-if="filteredProjects.length === 0" class="text-center py-12 animate-empty-state">
-        <div class="text-gray-400 text-6xl mb-4 animate-search-bounce">🔍</div>
+        <div class="flex justify-center text-gray-400 mb-4 animate-search-bounce">
+          <MagnifyingGlassIcon class="w-16 h-16" />
+        </div>
         <h3 class="text-xl font-semibold text-gray-600 mb-2 animate-empty-title">
           No projects found
         </h3>
@@ -66,6 +68,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, nextTick } from 'vue'
 import ProjectCard from '@/components/ProjectCard.vue'
+import { MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
 import { projects } from '@/data/projects'
 import { getTagColor } from '@/utils/colorHash'
 import type { Project } from '@/types/project'
