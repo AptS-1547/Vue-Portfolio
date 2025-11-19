@@ -50,11 +50,7 @@
 
     <!-- 项目列表骨架 -->
     <div v-else-if="type === 'project-list'" class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
-      <div
-        v-for="i in 4"
-        :key="i"
-        class="bg-white rounded-lg border border-gray-200 p-6"
-      >
+      <div v-for="i in 4" :key="i" class="bg-white rounded-lg border border-gray-200 p-6">
         <div class="flex justify-between items-start mb-4">
           <div class="flex items-center space-x-2">
             <div class="w-3 h-3 bg-gray-200 rounded-full"></div>
@@ -95,7 +91,8 @@ defineProps<{
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {

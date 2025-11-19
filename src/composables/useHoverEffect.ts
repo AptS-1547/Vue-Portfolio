@@ -20,11 +20,7 @@ export function useHoverEffect() {
    * @param colors - 悬停时的颜色配置
    * @param isEnter - true 表示鼠标进入，false 表示离开
    */
-  const handleColorHover = (
-    element: HTMLElement,
-    colors: HoverColors,
-    isEnter: boolean
-  ): void => {
+  const handleColorHover = (element: HTMLElement, colors: HoverColors, isEnter: boolean): void => {
     if (isEnter) {
       if (colors.backgroundColor) {
         element.style.backgroundColor = colors.backgroundColor
@@ -48,11 +44,7 @@ export function useHoverEffect() {
    * @param borderColor - 悬停时的边框颜色
    * @param isEnter - true 表示鼠标进入，false 表示离开
    */
-  const handleBorderHover = (
-    element: HTMLElement,
-    borderColor: string,
-    isEnter: boolean
-  ): void => {
+  const handleBorderHover = (element: HTMLElement, borderColor: string, isEnter: boolean): void => {
     element.style.borderColor = isEnter ? borderColor : ''
   }
 
@@ -70,7 +62,7 @@ export function useHoverEffect() {
     childSelector: string,
     color: string,
     isEnter: boolean,
-    options: CompoundHoverOptions = {}
+    options: CompoundHoverOptions = {},
   ): void => {
     const { changeBorder = true, changeChildColor = true } = options
 
@@ -91,8 +83,8 @@ export function useHoverEffect() {
    * @param handler - 悬停处理函数
    * @param args - 传递给处理函数的额外参数
    */
-  const createHoverHandler = <T extends any[]>(
-    handler: (element: HTMLElement, ...args: T) => void,
+  const createHoverHandler = <T extends unknown[]>(
+    handler: (element: HTMLElement, ...args: [...T, boolean]) => void,
     ...args: T
   ) => {
     return {
@@ -103,7 +95,7 @@ export function useHoverEffect() {
       onMouseleave: (event: Event) => {
         const element = event.currentTarget as HTMLElement
         handler(element, ...args, false)
-      }
+      },
     }
   }
 
@@ -111,6 +103,6 @@ export function useHoverEffect() {
     handleColorHover,
     handleBorderHover,
     handleCompoundHover,
-    createHoverHandler
+    createHoverHandler,
   }
 }

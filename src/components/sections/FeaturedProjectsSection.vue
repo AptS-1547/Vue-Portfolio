@@ -53,9 +53,7 @@
           :style="{ color: project.hoverColor }"
         >
           <span>{{ project.linkText }}</span>
-          <span class="ml-1 transition-transform duration-200 group-hover:translate-x-1"
-            >→</span
-          >
+          <span class="ml-1 transition-transform duration-200 group-hover:translate-x-1">→</span>
         </router-link>
       </div>
     </div>
@@ -75,11 +73,7 @@ defineProps<{
 const { handleCompoundHover } = useHoverEffect()
 
 // 项目卡片悬停
-const handleProjectHover = (
-  event: Event,
-  project: FeaturedProject,
-  isEnter: boolean
-) => {
+const handleProjectHover = (event: Event, project: FeaturedProject, isEnter: boolean) => {
   const target = event.currentTarget as HTMLElement
   handleCompoundHover(target, 'h3', project.hoverColor, isEnter)
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navigation />
+    <AppHeader />
     <router-view v-slot="{ Component, route }">
       <transition name="page" mode="out-in" @enter="onPageEnter" @leave="onPageLeave">
         <component :is="Component" :key="route.path" />
@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import Navigation from '@/components/layout/Navigation.vue'
+import AppHeader from '@/components/layout/AppHeader.vue'
 import { generateCSSVariables } from '@/config/theme'
 import { onMounted, nextTick } from 'vue'
 

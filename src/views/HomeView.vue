@@ -18,10 +18,7 @@
         <ExperienceSection :experience="experience" animation-delay="0.3s" />
 
         <!-- Featured Projects -->
-        <FeaturedProjectsSection
-          :featured-projects="featuredProjects"
-          animation-delay="0.4s"
-        />
+        <FeaturedProjectsSection :featured-projects="featuredProjects" animation-delay="0.4s" />
       </div>
     </div>
   </main>

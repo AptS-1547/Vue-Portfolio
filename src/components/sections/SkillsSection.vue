@@ -52,11 +52,7 @@ defineProps<{
 const { handleColorHover, handleCompoundHover } = useHoverEffect()
 
 // 技能类别悬停
-const handleCategoryHover = (
-  event: Event,
-  category: SkillCategory,
-  isEnter: boolean
-) => {
+const handleCategoryHover = (event: Event, category: SkillCategory, isEnter: boolean) => {
   const target = event.currentTarget as HTMLElement
   handleCompoundHover(target, 'h3', category.hoverColor, isEnter)
 }

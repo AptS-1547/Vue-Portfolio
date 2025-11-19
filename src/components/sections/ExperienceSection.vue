@@ -24,9 +24,7 @@
           >
             {{ position.title }}
           </h3>
-          <span class="text-xs lg:text-sm text-gray-500 mt-1 lg:mt-0">{{
-            position.period
-          }}</span>
+          <span class="text-xs lg:text-sm text-gray-500 mt-1 lg:mt-0">{{ position.period }}</span>
         </div>
         <p class="text-gray-600 mb-2 text-sm lg:text-base">
           {{ position.company }}

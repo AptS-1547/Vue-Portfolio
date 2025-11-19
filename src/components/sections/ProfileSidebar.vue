@@ -56,14 +56,10 @@
 </template>
 
 <script setup lang="ts">
+import type { Component } from 'vue'
 import { useHoverEffect } from '@/composables/useHoverEffect'
 import type { PersonalInfo } from '@/types/profile'
-import {
-  EnvelopeIcon,
-  DocumentTextIcon,
-  RssIcon,
-  CodeBracketIcon,
-} from '@heroicons/vue/24/outline'
+import { EnvelopeIcon, DocumentTextIcon, RssIcon, CodeBracketIcon } from '@heroicons/vue/24/outline'
 
 defineProps<{
   personalInfo: PersonalInfo
@@ -72,7 +68,7 @@ defineProps<{
 const { handleColorHover } = useHoverEffect()
 
 // 图标映射
-const iconComponents: Record<string, any> = {
+const iconComponents: Record<string, Component> = {
   DocumentTextIcon,
   RssIcon,
   CodeBracketIcon,

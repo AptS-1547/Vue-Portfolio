@@ -153,7 +153,8 @@
    ============================================ */
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
@@ -164,7 +165,8 @@
 }
 
 @keyframes statusPulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
@@ -216,7 +218,8 @@
 }
 
 @keyframes bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1) rotate(0deg);
   }
   25% {
@@ -237,22 +240,26 @@
 }
 
 .animate-fade-in-up {
-  animation: fadeInUp var(--animation-duration-slow, 300ms) var(--animation-easing-ease-out) forwards;
+  animation: fadeInUp var(--animation-duration-slow, 300ms) var(--animation-easing-ease-out)
+    forwards;
   opacity: 0;
 }
 
 .animate-fade-in-down {
-  animation: fadeInDown var(--animation-duration-slow, 300ms) var(--animation-easing-ease-out) forwards;
+  animation: fadeInDown var(--animation-duration-slow, 300ms) var(--animation-easing-ease-out)
+    forwards;
   opacity: 0;
 }
 
 .animate-fade-in-left {
-  animation: fadeInLeft var(--animation-duration-slow, 300ms) var(--animation-easing-ease-out) forwards;
+  animation: fadeInLeft var(--animation-duration-slow, 300ms) var(--animation-easing-ease-out)
+    forwards;
   opacity: 0;
 }
 
 .animate-fade-in-right {
-  animation: fadeInRight var(--animation-duration-slow, 300ms) var(--animation-easing-ease-out) forwards;
+  animation: fadeInRight var(--animation-duration-slow, 300ms) var(--animation-easing-ease-out)
+    forwards;
   opacity: 0;
 }
 
@@ -262,7 +269,8 @@
 }
 
 .animate-scale-in-up {
-  animation: scaleInUp var(--animation-duration-slow, 300ms) var(--animation-easing-ease-out) forwards;
+  animation: scaleInUp var(--animation-duration-slow, 300ms) var(--animation-easing-ease-out)
+    forwards;
   opacity: 0;
 }
 
@@ -272,17 +280,20 @@
 }
 
 .animate-bounce-in-up {
-  animation: bounceInUp var(--animation-duration-slower, 400ms) var(--animation-easing-bounce) forwards;
+  animation: bounceInUp var(--animation-duration-slower, 400ms) var(--animation-easing-bounce)
+    forwards;
   opacity: 0;
 }
 
 .animate-card-entrance {
-  animation: cardEntrance var(--animation-duration-slow, 300ms) var(--animation-easing-ease-in-out) forwards;
+  animation: cardEntrance var(--animation-duration-slow, 300ms) var(--animation-easing-ease-in-out)
+    forwards;
   opacity: 0;
 }
 
 .animate-card-float {
-  animation: cardFloat var(--animation-duration-slower, 400ms) var(--animation-easing-bounce) forwards;
+  animation: cardFloat var(--animation-duration-slower, 400ms) var(--animation-easing-bounce)
+    forwards;
   opacity: 0;
 }
 
@@ -316,11 +327,27 @@
    动画延迟工具类
    ============================================ */
 
-.animation-delay-1 { animation-delay: 0.05s; }
-.animation-delay-2 { animation-delay: 0.1s; }
-.animation-delay-3 { animation-delay: 0.15s; }
-.animation-delay-4 { animation-delay: 0.2s; }
-.animation-delay-5 { animation-delay: 0.25s; }
-.animation-delay-6 { animation-delay: 0.3s; }
-.animation-delay-7 { animation-delay: 0.35s; }
-.animation-delay-8 { animation-delay: 0.4s; }
+.animation-delay-1 {
+  animation-delay: 0.05s;
+}
+.animation-delay-2 {
+  animation-delay: 0.1s;
+}
+.animation-delay-3 {
+  animation-delay: 0.15s;
+}
+.animation-delay-4 {
+  animation-delay: 0.2s;
+}
+.animation-delay-5 {
+  animation-delay: 0.25s;
+}
+.animation-delay-6 {
+  animation-delay: 0.3s;
+}
+.animation-delay-7 {
+  animation-delay: 0.35s;
+}
+.animation-delay-8 {
+  animation-delay: 0.4s;
+}

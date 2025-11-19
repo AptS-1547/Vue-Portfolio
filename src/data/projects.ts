@@ -344,7 +344,7 @@ export const projects: Project[] = [
   {
     id: 'uptime-verse',
     title: 'Uptime Verse',
-    description: 'A distributed uptime network that listens to the internet\'s pulse',
+    description: "A distributed uptime network that listens to the internet's pulse",
     longDescription:
       'Uptime Verse aims to be a distributed uptime monitoring network designed to track internet connectivity and service availability across globally distributed nodes. The project is in early development stages and focuses on monitoring uptime across distributed nodes to track internet health metrics.',
     tags: ['Distributed System', 'Monitoring', 'Uptime', 'Network'],

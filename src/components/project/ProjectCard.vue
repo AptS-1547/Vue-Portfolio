@@ -140,7 +140,8 @@ const handleTagHover = (event: Event, tag: string, isEnter: boolean) => {
 
 /* 卡片入场动画 */
 .animate-card-entrance {
-  animation: cardEntrance var(--animation-duration-slow) var(--animation-easing-ease-in-out) forwards;
+  animation: cardEntrance var(--animation-duration-slow) var(--animation-easing-ease-in-out)
+    forwards;
   opacity: 0;
 }
 

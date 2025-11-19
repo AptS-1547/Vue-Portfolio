@@ -42,8 +42,8 @@ withDefaults(
     message: 'The resource you are looking for does not exist.',
     showBackButton: true,
     backRoute: '/',
-    backText: 'Go Back'
-  }
+    backText: 'Go Back',
+  },
 )
 </script>
 

@@ -72,7 +72,9 @@
               target="_blank"
               class="inline-flex items-center justify-center px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-900 hover:scale-105 hover:-translate-y-1 transition-all duration-500 hover:shadow-xl group"
             >
-              <CodeBracketIcon class="w-5 h-5 mr-2 transition-transform duration-300 group-hover:rotate-12" />
+              <CodeBracketIcon
+                class="w-5 h-5 mr-2 transition-transform duration-300 group-hover:rotate-12"
+              />
               <span>View on GitHub</span>
             </a>
             <a
@@ -81,7 +83,9 @@
               target="_blank"
               class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white rounded-lg hover:from-[var(--color-secondary)] hover:to-[var(--color-primary)] hover:scale-105 hover:-translate-y-1 transition-all duration-500 hover:shadow-xl group"
             >
-              <RocketLaunchIcon class="w-5 h-5 mr-2 transition-transform duration-300 group-hover:scale-125" />
+              <RocketLaunchIcon
+                class="w-5 h-5 mr-2 transition-transform duration-300 group-hover:scale-125"
+              />
               <span>Live Demo</span>
             </a>
           </div>
@@ -349,7 +353,8 @@ const statusColor = computed(() => {
 }
 
 .animate-feature-item {
-  animation: fadeInLeft var(--animation-duration-normal) var(--animation-easing-ease-in-out) forwards;
+  animation: fadeInLeft var(--animation-duration-normal) var(--animation-easing-ease-in-out)
+    forwards;
   opacity: 0;
 }
 

@@ -299,11 +299,11 @@ export const themeUtils = {
   getRgbColor: (colorPath: string) => {
     // 例如: getRgbColor('primary.rgb') => '237, 154, 40'
     const keys = colorPath.split('.')
-    let value: any = colors
+    let value: unknown = colors
     for (const key of keys) {
-      value = value[key]
+      value = (value as Record<string, unknown>)[key]
     }
-    return value
+    return value as string
   },
 
   // 获取 RGBA 颜色
