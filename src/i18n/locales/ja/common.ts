@@ -1,4 +1,12 @@
 export default {
+  // ページタイトル
+  pageTitles: {
+    home: 'AptS-1547 - フルスタック開発者',
+    projects: 'マイプロジェクト',
+    projectDetail: '{title}',
+    notFound: 'ページが見つかりません',
+  },
+
   // ボタンとリンク
   buttons: {
     viewProject: 'プロジェクトを見る',

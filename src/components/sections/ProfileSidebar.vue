@@ -57,7 +57,7 @@
 
 <script setup lang="ts">
 import type { Component } from 'vue'
-import { useHoverEffect } from '@/composables/useHoverEffect'
+import { useHoverEffect } from '@/utils/hoverEffect'
 import type { PersonalInfo } from '@/types/profile'
 import { EnvelopeIcon, DocumentTextIcon, RssIcon, CodeBracketIcon } from '@heroicons/vue/24/outline'
 

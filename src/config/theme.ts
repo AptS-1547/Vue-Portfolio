@@ -196,6 +196,12 @@ export const animations = {
       hover: '-2px',
       small: '2px',
     },
+    distance: {
+      sm: '10px',
+      md: '20px',
+      lg: '40px',
+      xl: '60px',
+    },
   },
 
   // 动画延迟配置（用于错开动画）
@@ -420,6 +426,10 @@ export const generateCSSVariables = (theme: 'light' | 'dark' = 'light') => {
     // 变换变量
     '--transform-scale-hover': animations.transform.scale.hover,
     '--transform-translate-hover': animations.transform.translate.hover,
+    '--transform-distance-sm': animations.transform.distance.sm,
+    '--transform-distance-md': animations.transform.distance.md,
+    '--transform-distance-lg': animations.transform.distance.lg,
+    '--transform-distance-xl': animations.transform.distance.xl,
 
     // 阴影变量
     '--shadow-card': components.card.shadow,

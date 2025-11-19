@@ -91,9 +91,8 @@ onMounted(() => {
   opacity: 0;
 }
 
-/* 卡片浮动动画 */
+/* 卡片浮动动画 - 移除 opacity: 0，避免卡片不显示 */
 .animate-card-float {
   animation: cardFloat var(--animation-duration-slower) var(--animation-easing-bounce) forwards;
-  opacity: 0;
 }
 </style>

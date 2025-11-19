@@ -1,4 +1,12 @@
 export default {
+  // 页面标题
+  pageTitles: {
+    home: 'AptS-1547 - Full Stack Developer',
+    projects: 'My Projects',
+    projectDetail: '{title}',
+    notFound: 'Page Not Found',
+  },
+
   // 按钮和链接
   buttons: {
     viewProject: 'View Project',

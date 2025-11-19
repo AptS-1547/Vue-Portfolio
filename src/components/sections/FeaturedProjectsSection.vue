@@ -62,8 +62,9 @@
 
 <script setup lang="ts">
 import { getTagColor } from '@/utils/colorHash'
-import { useHoverEffect } from '@/composables/useHoverEffect'
-import { useTheme } from '@/composables/useTheme'
+import { useHoverEffect } from '@/utils/hoverEffect'
+import { useThemeStore } from '@/stores/theme'
+import { storeToRefs } from 'pinia'
 import type { FeaturedProjects, FeaturedProject } from '@/types/profile'
 
 defineProps<{
@@ -72,7 +73,8 @@ defineProps<{
 }>()
 
 const { handleCompoundHover } = useHoverEffect()
-const { isDark } = useTheme()
+const themeStore = useThemeStore()
+const { isDark } = storeToRefs(themeStore)
 
 // 项目卡片悬停
 const handleProjectHover = (event: Event, project: FeaturedProject, isEnter: boolean) => {

@@ -1,6 +1,7 @@
 /**
- * 统一的悬停效果处理 Composable
+ * 统一的悬停效果处理工具函数
  * 用于替代各个组件中重复的悬停逻辑
+ * 注意：这是纯工具函数，不使用 Vue 响应式 API
  */
 
 interface HoverColors {

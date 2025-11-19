@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { SunIcon, MoonIcon, ComputerDesktopIcon } from '@heroicons/vue/24/outline'
-import { useTheme } from '@/composables/useTheme'
+import { useThemeStore } from '@/stores/theme'
+import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 
-const { themeMode, setTheme, toggleTheme } = useTheme()
+const themeStore = useThemeStore()
+const { themeMode } = storeToRefs(themeStore)
+const { setTheme, toggleTheme } = themeStore
 const showMenu = ref(false)
 
 const themes = [

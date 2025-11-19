@@ -206,13 +206,15 @@ import LicenseDisplay from '@/components/project/LicenseDisplay.vue'
 import ErrorState from '@/components/common/ErrorState.vue'
 import { CodeBracketIcon, RocketLaunchIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
 import { useProjectsI18n } from '@/composables/useProjectsI18n'
-import { useTheme } from '@/composables/useTheme'
+import { useThemeStore } from '@/stores/theme'
+import { storeToRefs } from 'pinia'
 import { getTagColor } from '@/utils/colorHash'
 
 const route = useRoute()
 const { t } = useI18n()
 const { projects } = useProjectsI18n()
-const { isDark } = useTheme()
+const themeStore = useThemeStore()
+const { isDark } = storeToRefs(themeStore)
 
 // 确保页面加载时在正确位置
 onMounted(() => {

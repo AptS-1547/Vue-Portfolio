@@ -135,15 +135,12 @@
 
 @keyframes cardFloat {
   0% {
-    opacity: 0;
     transform: translateY(var(--transform-distance-xl, 60px)) scale(0.8) rotateX(30deg);
   }
   60% {
-    opacity: 0.8;
     transform: translateY(-10px) scale(1.02) rotateX(-5deg);
   }
   100% {
-    opacity: 1;
     transform: translateY(0) scale(1) rotateX(0deg);
   }
 }
@@ -294,7 +291,7 @@
 .animate-card-float {
   animation: cardFloat var(--animation-duration-slower, 400ms) var(--animation-easing-bounce)
     forwards;
-  opacity: 0;
+  /* 移除 opacity: 0，避免动画未播放时卡片不显示 */
 }
 
 .animate-pulse {

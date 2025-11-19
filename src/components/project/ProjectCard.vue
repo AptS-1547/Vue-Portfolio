@@ -108,8 +108,9 @@ import CardFooter from '@/components/ui/CardFooter.vue'
 import Badge from '@/components/ui/Badge.vue'
 import LicenseDisplay from './LicenseDisplay.vue'
 import { getTagColor } from '@/utils/colorHash'
-import { useHoverEffect } from '@/composables/useHoverEffect'
-import { useTheme } from '@/composables/useTheme'
+import { useHoverEffect } from '@/utils/hoverEffect'
+import { useThemeStore } from '@/stores/theme'
+import { storeToRefs } from 'pinia'
 import { CodeBracketIcon, RocketLaunchIcon } from '@heroicons/vue/24/outline'
 import type { Project } from '@/types/project'
 
@@ -121,7 +122,8 @@ const props = defineProps<{
 const { handleColorHover } = useHoverEffect()
 
 // 获取主题状态
-const { isDark } = useTheme()
+const themeStore = useThemeStore()
+const { isDark } = storeToRefs(themeStore)
 
 // 修复状态颜色计算
 const statusColorClass = computed(() => {

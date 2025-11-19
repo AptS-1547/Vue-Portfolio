@@ -1,4 +1,12 @@
 export default {
+  // 页面标题
+  pageTitles: {
+    home: 'AptS-1547 - 全栈开发者',
+    projects: '我的项目',
+    projectDetail: '{title}',
+    notFound: '页面未找到',
+  },
+
   // 按钮和链接
   buttons: {
     viewProject: '查看项目',

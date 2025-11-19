@@ -11,15 +11,7 @@
 
 <script setup lang="ts">
 import AppHeader from '@/components/layout/AppHeader.vue'
-import { useTheme } from '@/composables/useTheme'
-import { onMounted, nextTick } from 'vue'
-
-const { initTheme } = useTheme()
-
-// 在组件挂载时初始化主题
-onMounted(() => {
-  initTheme()
-})
+import { nextTick } from 'vue'
 
 // 页面进入动画开始时
 const onPageEnter = () => {

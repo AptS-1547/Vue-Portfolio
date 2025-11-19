@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import ProjectsView from '../views/ProjectsView.vue'
+import i18n from '@/i18n'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,19 +8,34 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: () => import('../views/HomeView.vue'),
+      meta: {
+        titleKey: 'common.pageTitles.home',
+      },
     },
     {
       path: '/projects',
       name: 'projects',
-      component: ProjectsView,
+      component: () => import('../views/ProjectsView.vue'),
       meta: {
-        title: 'Projects - AptS-1547',
+        titleKey: 'common.pageTitles.projects',
       },
     },
     {
       path: '/projects/:id',
       name: 'ProjectDetail',
       component: () => import('../views/ProjectDetailView.vue'),
+      meta: {
+        titleKey: 'common.pageTitles.projectDetail',
+        requiresProjectTitle: true,
+      },
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: () => import('../views/NotFoundView.vue'),
+      meta: {
+        titleKey: 'common.pageTitles.notFound',
+      },
     },
   ],
   scrollBehavior(to, from, savedPosition) {
@@ -50,6 +65,35 @@ const router = createRouter({
       behavior: 'smooth',
     }
   },
+})
+
+// 路由守卫：自动更新页面标题
+router.beforeEach((to, _from, next) => {
+  // 获取当前语言的翻译函数
+  const t = i18n.global.t
+
+  // 获取路由的 titleKey
+  const titleKey = to.meta.titleKey as string | undefined
+
+  if (titleKey) {
+    let title = t(titleKey)
+
+    // 如果需要动态项目标题
+    if (to.meta.requiresProjectTitle && to.params.id) {
+      // 尝试从 i18n 获取项目标题
+      const projectTitleKey = `projects.${to.params.id}.title`
+      const projectTitle = t(projectTitleKey)
+      // 如果翻译存在且不是key本身，则使用项目标题替换占位符
+      if (projectTitle && projectTitle !== projectTitleKey) {
+        title = title.replace('{title}', projectTitle)
+      }
+    }
+
+    // 更新页面标题
+    document.title = title
+  }
+
+  next()
 })
 
 export default router

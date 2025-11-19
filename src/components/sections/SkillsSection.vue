@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import { useHoverEffect } from '@/composables/useHoverEffect'
+import { useHoverEffect } from '@/utils/hoverEffect'
 import type { Skills, SkillCategory, Technology } from '@/types/profile'
 
 defineProps<{

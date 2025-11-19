@@ -1,4 +1,5 @@
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed } from 'vue'
+import { defineStore } from 'pinia'
 import { generateCSSVariables } from '@/config/theme'
 
 export type ThemeMode = 'light' | 'dark' | 'system'
@@ -6,9 +7,28 @@ export type ResolvedTheme = 'light' | 'dark'
 
 const STORAGE_KEY = 'theme-preference'
 
-// 全局状态，确保所有组件共享同一个主题状态
-const themeMode = ref<ThemeMode>('system')
-const resolvedTheme = ref<ResolvedTheme>('light')
+// localStorage 降级方案：内存缓存
+const memoryStorage: Record<string, string> = {}
+
+// 安全的 localStorage 包装器
+const storage = {
+  getItem: (key: string): string | null => {
+    try {
+      return localStorage.getItem(key)
+    } catch (e) {
+      console.warn('localStorage.getItem failed, using memory storage:', e)
+      return memoryStorage[key] || null
+    }
+  },
+  setItem: (key: string, value: string): void => {
+    try {
+      localStorage.setItem(key, value)
+    } catch (e) {
+      console.warn('localStorage.setItem failed, using memory storage:', e)
+      memoryStorage[key] = value
+    }
+  },
+}
 
 // 检测系统主题
 const getSystemTheme = (): ResolvedTheme => {
@@ -46,54 +66,63 @@ const applyTheme = (theme: ResolvedTheme) => {
 }
 
 // 监听系统主题变化
-const watchSystemTheme = () => {
+let systemThemeCleanup: (() => void) | null = null
+
+const watchSystemTheme = (currentMode: ThemeMode, onThemeChange: (theme: ResolvedTheme) => void) => {
   if (typeof window === 'undefined') return
+
+  // 清理之前的监听器
+  if (systemThemeCleanup) {
+    systemThemeCleanup()
+  }
 
   const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
   const handler = () => {
-    if (themeMode.value === 'system') {
+    if (currentMode === 'system') {
       const newTheme = getSystemTheme()
-      resolvedTheme.value = newTheme
-      applyTheme(newTheme)
+      onThemeChange(newTheme)
     }
   }
 
   mediaQuery.addEventListener('change', handler)
-  return () => mediaQuery.removeEventListener('change', handler)
+  systemThemeCleanup = () => mediaQuery.removeEventListener('change', handler)
 }
 
-export function useTheme() {
-  // 切换主题模式
+export const useThemeStore = defineStore('theme', () => {
+  // State
+  const themeMode = ref<ThemeMode>('system')
+  const resolvedTheme = ref<ResolvedTheme>('light')
+
+  // Getters
+  const isDark = computed(() => resolvedTheme.value === 'dark')
+
+  // Actions
   const setTheme = (mode: ThemeMode) => {
     themeMode.value = mode
     const resolved = resolveTheme(mode)
     resolvedTheme.value = resolved
     applyTheme(resolved)
 
-    // 保存到 localStorage
-    try {
-      localStorage.setItem(STORAGE_KEY, mode)
-    } catch (e) {
-      console.warn('Failed to save theme preference:', e)
-    }
+    // 保存到 storage（带降级）
+    storage.setItem(STORAGE_KEY, mode)
+
+    // 更新系统主题监听
+    watchSystemTheme(mode, (newTheme) => {
+      resolvedTheme.value = newTheme
+      applyTheme(newTheme)
+    })
   }
 
-  // 切换亮色/暗色（忽略 system 模式）
   const toggleTheme = () => {
     setTheme(resolvedTheme.value === 'dark' ? 'light' : 'dark')
   }
 
-  // 初始化主题
-  const initTheme = () => {
-    // 从 localStorage 读取偏好
+  const initialize = () => {
+    // 从 storage 读取偏好（带降级）
     let savedTheme: ThemeMode = 'system'
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY)
-      if (saved === 'light' || saved === 'dark' || saved === 'system') {
-        savedTheme = saved
-      }
-    } catch (e) {
-      console.warn('Failed to read theme preference:', e)
+    const saved = storage.getItem(STORAGE_KEY)
+    if (saved === 'light' || saved === 'dark' || saved === 'system') {
+      savedTheme = saved
     }
 
     themeMode.value = savedTheme
@@ -101,28 +130,21 @@ export function useTheme() {
     applyTheme(resolvedTheme.value)
 
     // 监听系统主题变化
-    watchSystemTheme()
+    watchSystemTheme(savedTheme, (newTheme) => {
+      resolvedTheme.value = newTheme
+      applyTheme(newTheme)
+    })
   }
 
-  // 计算属性：是否为暗色模式
-  const isDark = computed(() => resolvedTheme.value === 'dark')
-
-  onMounted(() => {
-    // 如果还没初始化过，就初始化
-    if (!document.documentElement.classList.contains('dark') && resolvedTheme.value === 'light') {
-      initTheme()
-    }
-  })
-
   return {
-    // 状态
+    // State
     themeMode: computed(() => themeMode.value),
     resolvedTheme: computed(() => resolvedTheme.value),
     isDark,
 
-    // 方法
+    // Actions
     setTheme,
     toggleTheme,
-    initTheme,
+    initialize,
   }
-}
+})
