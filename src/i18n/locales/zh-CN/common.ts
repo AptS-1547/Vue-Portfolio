@@ -64,4 +64,9 @@ export default {
   loading: {
     default: '加载中...',
   },
+
+  // 无障碍
+  accessibility: {
+    skipToContent: '跳转到主内容',
+  },
 }

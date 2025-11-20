@@ -87,7 +87,7 @@ personalInfo = {
 personalInfo.socialLinks = [
   {
     name: 'Personal Blog', // 显示名称
-    url: 'https://www.esaps.net/', // 链接地址
+    url: 'https://me.esaps.net/', // 链接地址
     icon: '📝', // 图标 (emoji)
     hoverColor: '#ed9a28', // 悬停颜色
   },

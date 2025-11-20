@@ -24,7 +24,7 @@ export const navigationMenu = [
   },
   {
     name: 'Blog',
-    path: 'https://www.esaps.net/',
+    path: 'https://me.esaps.net/',
     type: 'external' as const,
     target: '_blank',
   },

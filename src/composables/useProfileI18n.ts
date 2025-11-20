@@ -21,13 +21,13 @@ export function useProfileI18n() {
     socialLinks: [
       {
         name: t('profile.socialLinks.personalBlog'),
-        url: 'https://www.esaps.net/',
+        url: 'https://me.esaps.net/',
         icon: 'DocumentTextIcon',
         hoverColor: '#ed9a28',
       },
       {
         name: t('profile.socialLinks.rssFeed'),
-        url: 'https://www.esaps.net/feed/',
+        url: 'https://me.esaps.net/feed/',
         icon: 'RssIcon',
         hoverColor: '#6dd0e0',
       },

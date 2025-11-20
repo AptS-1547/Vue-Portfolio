@@ -1,17 +1,28 @@
 <template>
   <div>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">
+      {{ t('common.accessibility.skipToContent') }}
+    </a>
+
     <AppHeader />
-    <router-view v-slot="{ Component, route }">
-      <transition name="page" mode="out-in" @enter="onPageEnter" @leave="onPageLeave">
-        <component :is="Component" :key="route.path" />
-      </transition>
-    </router-view>
+
+    <main id="main-content" tabindex="-1">
+      <router-view v-slot="{ Component, route }">
+        <transition name="page" mode="out-in" @enter="onPageEnter" @leave="onPageLeave">
+          <component :is="Component" :key="route.path" />
+        </transition>
+      </router-view>
+    </main>
   </div>
 </template>
 
 <script setup lang="ts">
 import AppHeader from '@/components/layout/AppHeader.vue'
 import { nextTick } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 // 页面进入动画开始时
 const onPageEnter = () => {
@@ -28,6 +39,32 @@ const onPageLeave = () => {
 </script>
 
 <style>
+/* Skip to main content link for keyboard navigation */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-primary);
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 0 0 4px 0;
+  font-weight: 500;
+  z-index: 9999;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Main content area */
+#main-content:focus {
+  outline: none;
+}
+
 /* 页面过渡动画 */
 .page-enter-active,
 .page-leave-active {

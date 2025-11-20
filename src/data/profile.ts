@@ -30,13 +30,13 @@ export const personalInfo: PersonalInfo = {
   socialLinks: [
     {
       name: 'Personal Blog',
-      url: 'https://www.esaps.net/',
+      url: 'https://me.esaps.net/',
       icon: 'DocumentTextIcon',
       hoverColor: '#ed9a28',
     },
     {
       name: 'RSS Feed',
-      url: 'https://www.esaps.net/feed/',
+      url: 'https://me.esaps.net/feed/',
       icon: 'RssIcon',
       hoverColor: '#6dd0e0',
     },

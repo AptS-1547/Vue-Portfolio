@@ -64,4 +64,9 @@ export default {
   loading: {
     default: '読み込み中...',
   },
+
+  // アクセシビリティ
+  accessibility: {
+    skipToContent: 'メインコンテンツへスキップ',
+  },
 }
