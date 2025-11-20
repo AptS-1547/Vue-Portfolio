@@ -68,7 +68,10 @@ const applyTheme = (theme: ResolvedTheme) => {
 // 监听系统主题变化
 let systemThemeCleanup: (() => void) | null = null
 
-const watchSystemTheme = (currentMode: ThemeMode, onThemeChange: (theme: ResolvedTheme) => void) => {
+const watchSystemTheme = (
+  currentMode: ThemeMode,
+  onThemeChange: (theme: ResolvedTheme) => void,
+) => {
   if (typeof window === 'undefined') return
 
   // 清理之前的监听器

@@ -51,11 +51,16 @@ function handleMetric(metric: Metric, callback?: (metric: WebVitalsMetric) => vo
 
   // 控制台输出（仅开发环境）
   if (import.meta.env.DEV) {
-    const emoji = vitalsMetric.rating === 'good' ? '✅' : vitalsMetric.rating === 'needs-improvement' ? '⚠️' : '❌'
+    const emoji =
+      vitalsMetric.rating === 'good'
+        ? '✅'
+        : vitalsMetric.rating === 'needs-improvement'
+          ? '⚠️'
+          : '❌'
     console.log(
       `${emoji} [Web Vitals] ${vitalsMetric.name}:`,
       `${vitalsMetric.value.toFixed(2)}ms`,
-      `(${vitalsMetric.rating})`
+      `(${vitalsMetric.rating})`,
     )
   }
 

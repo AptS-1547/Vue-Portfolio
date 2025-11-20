@@ -22,12 +22,12 @@ export function useHoverEffect() {
    * @param isEnter - true 表示鼠标进入，false 表示离开
    */
   const handleColorHover = (element: HTMLElement, colors: HoverColors, isEnter: boolean): void => {
-    // 直接设置颜色，无论是进入还是离开
+    // 进入时设置颜色，离开时清除样式
     if (colors.backgroundColor !== undefined) {
-      element.style.backgroundColor = colors.backgroundColor
+      element.style.backgroundColor = isEnter ? colors.backgroundColor : ''
     }
     if (colors.textColor !== undefined) {
-      element.style.color = colors.textColor
+      element.style.color = isEnter ? colors.textColor : ''
     }
   }
 

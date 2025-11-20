@@ -8,7 +8,7 @@
           background: `var(--gradient-primary)`,
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text'
+          backgroundClip: 'text',
         }"
       >
         404
@@ -26,18 +26,10 @@
 
       <!-- 返回按钮 -->
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <Button
-          @click="router.push('/')"
-          class="min-w-[140px]"
-          variant="default"
-        >
+        <Button @click="router.push('/')" class="min-w-[140px]" variant="default">
           {{ t('common.buttons.goBack') }}
         </Button>
-        <Button
-          @click="router.push('/projects')"
-          class="min-w-[140px]"
-          variant="outline"
-        >
+        <Button @click="router.push('/projects')" class="min-w-[140px]" variant="outline">
           {{ t('common.buttons.viewAll') }}
         </Button>
       </div>
