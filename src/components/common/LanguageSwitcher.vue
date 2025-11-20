@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n'
 import { SUPPORT_LOCALES, saveLocale, type Locale } from '@/i18n'
 import { LanguageIcon, ChevronDownIcon, CheckIcon } from '@heroicons/vue/24/outline'
 
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 const isOpen = ref(false)
 const buttonRef = ref<HTMLButtonElement | null>(null)
 const dropdownPosition = ref({ top: 0, right: 0 })
@@ -91,7 +91,7 @@ onUnmounted(() => {
       @click="toggleDropdown"
       class="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 transition-all duration-200 rounded-md hover:text-[var(--color-primary)] hover:bg-gray-50 dark:hover:bg-gray-800 hover:scale-105 touch:hover:scale-100"
       :class="{ 'text-primary bg-gray-50 dark:bg-gray-800': isOpen }"
-      aria-label="Change language"
+      :aria-label="t('common.accessibility.changeLanguage')"
     >
       <LanguageIcon class="w-5 h-5" />
       <span class="hidden lg:inline">{{ getCurrentLanguage()?.label }}</span>

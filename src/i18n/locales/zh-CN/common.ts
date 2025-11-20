@@ -68,5 +68,15 @@ export default {
   // 无障碍
   accessibility: {
     skipToContent: '跳转到主内容',
+    toggleNavigationMenu: '切换导航菜单',
+    changeLanguage: '更改语言',
+  },
+
+  // 主题
+  theme: {
+    light: '亮色',
+    dark: '暗色',
+    system: '跟随系统',
+    currentTheme: '当前主题',
   },
 }

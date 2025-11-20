@@ -1,7 +1,10 @@
 <template>
   <main
-    class="min-h-screen bg-gray-50 dark:bg-gray-950 py-8 px-4 xl:px-8 2xl:px-16 overflow-x-hidden pt-24"
+    class="min-h-screen bg-gray-50 dark:bg-gray-950 py-8 px-4 xl:px-8 2xl:px-16 overflow-x-hidden pt-24 relative"
   >
+    <!-- 粒子背景 -->
+    <ParticleBackground />
+
     <div class="max-w-4xl mx-auto w-full">
       <!-- 返回按钮 -->
       <div class="mb-6 animate-back-button">
@@ -204,6 +207,7 @@ import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import LicenseDisplay from '@/components/project/LicenseDisplay.vue'
 import ErrorState from '@/components/common/ErrorState.vue'
+import ParticleBackground from '@/components/common/ParticleBackground.vue'
 import { CodeBracketIcon, RocketLaunchIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
 import { useProjectsI18n } from '@/composables/useProjectsI18n'
 import { useThemeStore } from '@/stores/theme'

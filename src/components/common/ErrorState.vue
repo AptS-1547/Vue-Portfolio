@@ -5,10 +5,10 @@
       <span v-else>{{ icon }}</span>
     </div>
     <h3 class="text-xl font-semibold text-gray-600 mb-2">
-      {{ title }}
+      {{ displayTitle }}
     </h3>
     <p class="text-gray-500 mb-4">
-      {{ message }}
+      {{ displayMessage }}
     </p>
     <slot name="action">
       <router-link
@@ -17,16 +17,20 @@
         class="inline-flex items-center px-4 py-2 bg-[var(--color-primary)] text-white rounded-lg hover:bg-[var(--color-primary-dark)] transition-colors duration-200"
       >
         <span class="mr-2">←</span>
-        {{ backText }}
+        {{ displayBackText }}
       </router-link>
     </slot>
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import type { Component } from 'vue'
 
-withDefaults(
+const { t } = useI18n()
+
+const props = withDefaults(
   defineProps<{
     icon?: string
     iconComponent?: Component
@@ -38,13 +42,15 @@ withDefaults(
   }>(),
   {
     icon: '🔍',
-    title: 'Not Found',
-    message: 'The resource you are looking for does not exist.',
     showBackButton: true,
     backRoute: '/',
-    backText: 'Go Back',
   },
 )
+
+// 使用 computed 提供国际化的默认值
+const displayTitle = computed(() => props.title || t('common.errors.notFound'))
+const displayMessage = computed(() => props.message || t('common.errors.resourceNotFound'))
+const displayBackText = computed(() => props.backText || t('common.buttons.goBack'))
 </script>
 
 <style scoped>

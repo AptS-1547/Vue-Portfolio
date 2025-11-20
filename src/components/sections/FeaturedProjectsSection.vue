@@ -28,41 +28,75 @@
             if (el) cardRefs[index] = el as HTMLElement
           }
         "
-        class="transition-all duration-500 ease-out bg-white dark:bg-gray-900 p-4 lg:p-6 rounded-lg border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:-translate-y-1 touch:hover:translate-y-0 group animate-fade-in-up"
-        :style="{ '--hover-border': project.hoverColor, animationDelay: `${index * 150}ms` }"
+        class="relative group transition-all duration-500 ease-out rounded-2xl cursor-pointer animate-fade-in-up shadow-lg hover:shadow-2xl"
+        :style="{ animationDelay: `${index * 150}ms` }"
         @mouseenter="handleProjectHover($event, project, true)"
         @mouseleave="handleProjectHover($event, project, false)"
       >
-        <h3
-          class="font-semibold text-gray-800 dark:text-gray-100 mb-2 group-hover:transition-colors duration-200 text-sm lg:text-base"
-          :style="{ '--hover-text': project.hoverColor }"
-        >
-          {{ project.title }}
-        </h3>
-        <p class="text-gray-600 dark:text-gray-400 text-xs lg:text-sm mb-3">
-          {{ project.description }}
-        </p>
-        <div class="flex flex-wrap gap-1 mb-3">
-          <span
-            v-for="tag in project.tags"
-            :key="tag"
-            class="px-2 py-1 rounded text-xs font-medium transition-all duration-200"
+        <!-- 玻璃态背景 -->
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-white/80 via-white/60 to-white/40 dark:from-gray-900/80 dark:via-gray-900/60 dark:to-gray-900/40 backdrop-blur-xl rounded-2xl"
+        ></div>
+
+        <!-- 渐变边框 -->
+        <div
+          class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          :style="{
+            background: `linear-gradient(135deg, ${project.hoverColor}30, ${project.hoverColor}10)`,
+            padding: '1px',
+            WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+            WebkitMaskComposite: 'xor',
+            maskComposite: 'exclude'
+          }"
+        ></div>
+
+        <!-- 内容区域 -->
+        <div class="relative h-full flex flex-col p-5 lg:p-6 border border-gray-200/50 dark:border-gray-700/50 rounded-2xl transition-all duration-500 overflow-hidden">
+          <h3
+            class="font-bold text-gray-800 dark:text-gray-100 mb-3 text-base lg:text-lg bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 group-hover:from-[var(--hover-color)] group-hover:to-[var(--hover-color)] transition-all duration-500"
+            :style="{ '--hover-color': project.hoverColor }"
+          >
+            {{ project.title }}
+          </h3>
+          <p class="text-gray-700 dark:text-gray-300 text-xs lg:text-sm mb-4 leading-relaxed flex-grow">
+            {{ project.description }}
+          </p>
+
+          <!-- 技术标签 - 玻璃态 -->
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span
+              v-for="tag in project.tags"
+              :key="tag"
+              class="relative px-2.5 py-1 rounded-lg text-xs font-medium backdrop-blur-sm border-2 transition-all duration-300 hover:scale-110 cursor-pointer overflow-hidden group/tag shadow-sm hover:shadow-md"
+              :style="{
+                backgroundColor: getTagColor(tag, isDark).backgroundColor + '40',
+                borderColor: getTagColor(tag, isDark).backgroundColor,
+                color: getTagColor(tag, isDark).textColor,
+              }"
+            >
+              <!-- 标签悬停发光效果 -->
+              <span
+                class="absolute inset-0 opacity-0 group-hover/tag:opacity-100 transition-opacity duration-300"
+                :style="{
+                  background: `radial-gradient(circle at center, ${getTagColor(tag, isDark).backgroundColor}40 0%, transparent 70%)`,
+                }"
+              ></span>
+              <span class="relative z-10">{{ tag }}</span>
+            </span>
+          </div>
+
+          <!-- 查看详情链接 - 渐变文字 -->
+          <router-link
+            :to="`/projects/${project.id}`"
+            class="inline-flex items-center text-xs lg:text-sm font-medium bg-clip-text text-transparent bg-gradient-to-r transition-all duration-300 group/link"
             :style="{
-              backgroundColor: getTagColor(tag, isDark).backgroundColor,
-              color: getTagColor(tag, isDark).textColor,
+              backgroundImage: `linear-gradient(to right, ${project.hoverColor}, ${project.hoverColor}DD)`
             }"
           >
-            {{ tag }}
-          </span>
+            <span>{{ project.linkText }}</span>
+            <span class="ml-1 transition-transform duration-300 group-hover/link:translate-x-2">→</span>
+          </router-link>
         </div>
-        <router-link
-          :to="`/projects/${project.id}`"
-          class="inline-flex items-center text-xs lg:text-sm transition-colors duration-200"
-          :style="{ color: project.hoverColor }"
-        >
-          <span>{{ project.linkText }}</span>
-          <span class="ml-1 transition-transform duration-200 group-hover:translate-x-1">→</span>
-        </router-link>
       </div>
     </div>
   </section>

@@ -68,5 +68,15 @@ export default {
   // アクセシビリティ
   accessibility: {
     skipToContent: 'メインコンテンツへスキップ',
+    toggleNavigationMenu: 'ナビゲーションメニューを切り替え',
+    changeLanguage: '言語を変更',
+  },
+
+  // テーマ
+  theme: {
+    light: 'ライト',
+    dark: 'ダーク',
+    system: 'システム',
+    currentTheme: '現在のテーマ',
   },
 }

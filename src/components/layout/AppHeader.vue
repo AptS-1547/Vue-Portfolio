@@ -65,7 +65,7 @@
           @click="toggleMobileMenu"
           :class="`${styles.mobileMenu.button.base} ${styles.mobileMenu.button.hover}`"
           :aria-expanded="mobileMenuOpen"
-          aria-label="Toggle navigation menu"
+          :aria-label="t('common.accessibility.toggleNavigationMenu')"
         >
           <Bars3Icon v-if="!mobileMenuOpen" class="w-5 h-5" />
           <XMarkIcon v-else class="w-5 h-5" />
