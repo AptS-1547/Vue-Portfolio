@@ -3,8 +3,18 @@
  * 统一管理个人简介、技能、经历等信息
  */
 
+import type {
+  PersonalInfo,
+  AboutMe,
+  Skills,
+  Experience,
+  FeaturedProjects,
+  PageConfig,
+  ProfileConfig,
+} from '@/types/profile'
+
 // 基本个人信息
-export const personalInfo = {
+export const personalInfo: PersonalInfo = {
   name: 'AptS-1547',
   title: 'Full-Stack Developer',
   tagline: 'Building modern web applications with Rust, Node.js & Vue...',
@@ -20,33 +30,33 @@ export const personalInfo = {
   socialLinks: [
     {
       name: 'Personal Blog',
-      url: 'https://www.esaps.net/',
-      icon: '📝',
+      url: 'https://me.esaps.net/',
+      icon: 'DocumentTextIcon',
       hoverColor: '#ed9a28',
     },
     {
       name: 'RSS Feed',
-      url: 'https://www.esaps.net/feed/',
-      icon: '📡',
+      url: 'https://me.esaps.net/feed/',
+      icon: 'RssIcon',
       hoverColor: '#6dd0e0',
     },
     {
       name: 'GitHub',
       url: 'https://github.com/AptS-1547',
-      icon: '💻',
+      icon: 'CodeBracketIcon',
       hoverColor: '#374151',
     },
   ],
 }
 
 // 关于我部分
-export const aboutMe = {
+export const aboutMe: AboutMe = {
   title: 'About Me',
-  content: `I'm a passionate full-stack developer with 6 years of experience building robust web applications. I specialize in modern tech stacks including Rust for backend systems, Node.js for APIs, Python for data processing, and Vue.js/Nuxt.js for frontend development. I love sharing knowledge through technical writing and contributing to open-source projects.`,
+  content: `I'm a passionate full-stack developer with 6 years of experience building robust web applications. I specialize in modern tech stacks including Rust for backend systems, Node.js for APIs, Python for data processing, and Vue.js/Next.js for frontend development. I love sharing knowledge through technical writing and contributing to open-source projects.`,
 }
 
 // 技能配置
-export const skills = {
+export const skills: Skills = {
   title: 'Skills & Expertise',
   categories: [
     {
@@ -65,7 +75,7 @@ export const skills = {
       borderColor: '#6dd0e0',
       technologies: [
         { name: 'Vue.js', hoverColor: '#6dd0e0' },
-        { name: 'Nuxt.js', hoverColor: '#6dd0e0' },
+        { name: 'Next.js', hoverColor: '#6dd0e0' },
         { name: 'TypeScript', hoverColor: '#6dd0e0' },
       ],
     },
@@ -83,7 +93,7 @@ export const skills = {
 }
 
 // 工作经历配置
-export const experience = {
+export const experience: Experience = {
   title: 'Experience',
   positions: [
     {
@@ -111,7 +121,7 @@ export const experience = {
 }
 
 // 特色项目配置
-export const featuredProjects = {
+export const featuredProjects: FeaturedProjects = {
   title: 'Featured Projects',
   viewAllLink: {
     text: 'View All →',
@@ -138,7 +148,7 @@ export const featuredProjects = {
 }
 
 // 页面配置
-export const pageConfig = {
+export const pageConfig: PageConfig = {
   // 动画延迟配置
   animationDelays: {
     aboutMe: '0.3s',
@@ -160,7 +170,7 @@ export const pageConfig = {
 }
 
 // 导出默认配置
-export const profileConfig = {
+export const profileConfig: ProfileConfig = {
   personalInfo,
   aboutMe,
   skills,

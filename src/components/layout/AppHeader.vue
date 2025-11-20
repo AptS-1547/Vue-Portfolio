@@ -1,6 +1,6 @@
 <template>
   <nav
-    :class="`${styles.background} ${styles.backdropBlur} ${styles.border} ${styles.position} ${styles.zIndex} ${styles.shadow} ${animations.navbar.name} overflow-x-hidden w-full`"
+    :class="`${styles.background} ${styles.backdropBlur} ${styles.border} ${styles.position} ${styles.zIndex} ${styles.shadow} ${animations.navbar.name} w-full`"
   >
     <div :class="`${styles.container.maxWidth} mx-auto ${styles.container.padding} w-full`">
       <div :class="`flex justify-between items-center ${styles.container.innerPadding}`">
@@ -10,7 +10,7 @@
           :class="`${styles.logo.base} ${styles.logo.hover} ${styles.logo.hoverColor} ${animations.logo.container}`"
           @click="closeMobileMenu"
         >
-          <span :class="animations.logo.icon">{{ logo.icon }}</span>
+          <RocketLaunchIcon :class="`w-5 h-5 ${animations.logo.icon}`" />
           <span :class="animations.logo.text">{{ logo.text }}</span>
         </router-link>
 
@@ -28,7 +28,7 @@
                   : styles.desktopMenu.item.inactive,
               ]"
             >
-              {{ item.name }}
+              {{ getMenuItemName(item.name) }}
               <span
                 :class="[
                   styles.desktopMenu.underline.base,
@@ -46,12 +46,18 @@
               :target="item.target || '_self'"
               :class="`${styles.desktopMenu.item.base} ${styles.desktopMenu.item.hover} ${styles.desktopMenu.item.inactive}`"
             >
-              {{ item.name }}
+              {{ getMenuItemName(item.name) }}
               <span
                 :class="`${styles.desktopMenu.underline.base} ${styles.desktopMenu.underline.inactive}`"
               ></span>
             </a>
           </template>
+
+          <!-- Language Switcher -->
+          <LanguageSwitcher />
+
+          <!-- Theme Switcher -->
+          <ThemeSwitcher />
         </div>
 
         <!-- Mobile Menu Button -->
@@ -61,29 +67,8 @@
           :aria-expanded="mobileMenuOpen"
           aria-label="Toggle navigation menu"
         >
-          <svg
-            class="w-5 h-5 transition-transform duration-200"
-            :class="{ 'rotate-90': mobileMenuOpen }"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              v-if="!mobileMenuOpen"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            ></path>
-            <path
-              v-else
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            ></path>
-          </svg>
+          <Bars3Icon v-if="!mobileMenuOpen" class="w-5 h-5" />
+          <XMarkIcon v-else class="w-5 h-5" />
         </button>
       </div>
 
@@ -103,7 +88,7 @@
                   : styles.mobileMenu.item.inactive,
               ]"
             >
-              {{ item.name }}
+              {{ getMenuItemName(item.name) }}
             </router-link>
 
             <!-- 外部链接 -->
@@ -114,9 +99,17 @@
               @click="handleMobileNavClick"
               :class="`${styles.mobileMenu.item.base} ${styles.mobileMenu.item.hover} ${styles.mobileMenu.item.inactive}`"
             >
-              {{ item.name }}
+              {{ getMenuItemName(item.name) }}
             </a>
           </template>
+
+          <!-- Language Switcher for Mobile -->
+          <div
+            class="pt-2 mt-2 border-t border-gray-200 dark:border-gray-700 flex items-center justify-between px-2"
+          >
+            <LanguageSwitcher />
+            <ThemeSwitcher />
+          </div>
         </div>
       </transition>
     </div>
@@ -126,13 +119,24 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+import { RocketLaunchIcon, Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { navigationConfig } from '@/config/navigation'
+import LanguageSwitcher from '@/components/common/LanguageSwitcher.vue'
+import ThemeSwitcher from '@/components/common/ThemeSwitcher.vue'
 
 const route = useRoute()
 const mobileMenuOpen = ref(false)
+const { t } = useI18n()
 
 // 解构配置
 const { logo, menu, styles, animations, responsive } = navigationConfig
+
+// 获取翻译后的菜单项名称
+const getMenuItemName = (itemName: string) => {
+  const menuKey = itemName.toLowerCase()
+  return t(`navigation.menu.${menuKey}`)
+}
 
 // 判断路由是否激活
 const isActiveRoute = (path: string) => {

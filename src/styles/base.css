@@ -1,0 +1,159 @@
+/**
+ * 基础样式
+ * 全局样式、重置样式等
+ */
+
+/* 防止页面切换时出现滚动条闪烁 */
+html,
+body {
+  overflow-x: hidden;
+  min-height: 100vh;
+  background-color: var(--color-background-primary);
+  color: var(--color-text-primary);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+#app {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* 确保页面内容不被固定导航栏遮挡 */
+body {
+  padding-top: 0;
+}
+
+/* 全局滚动条样式 - 亮色模式 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gradient-primary);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gradient-primary-reverse);
+}
+
+/* 全局平滑滚动 */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 64px;
+}
+
+main {
+  scroll-margin-top: 64px;
+}
+
+/* 防止动画期间的水平滚动 */
+* {
+  box-sizing: border-box;
+}
+
+*:not(html):not(body) {
+  max-width: 100%;
+}
+
+/* ============================================
+   焦点可见性增强（无障碍）
+   ============================================ */
+
+/* 全局焦点样式 - 使用 :focus-visible 而非 :focus，避免鼠标点击时显示焦点轮廓 */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--border-radius-default);
+}
+
+/* 链接焦点样式 */
+a:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+/* 按钮焦点样式 */
+button:focus-visible,
+[role='button']:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+  box-shadow:
+    0 0 0 3px rgba(var(--color-primary-rgb, 99, 102, 241), 0.2),
+    0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 暗色模式下的焦点样式优化 */
+.dark *:focus-visible {
+  outline-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(var(--color-primary-rgb, 99, 102, 241), 0.3);
+}
+
+.dark a:focus-visible {
+  outline-color: var(--color-primary);
+}
+
+.dark button:focus-visible,
+.dark [role='button']:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(var(--color-primary-rgb, 99, 102, 241), 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 输入框焦点样式 */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+  border-color: var(--color-primary);
+}
+
+/* 卡片和可点击区域的焦点样式 */
+[tabindex='0']:focus-visible,
+[tabindex='-1']:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* 移动端特殊处理 */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+}
+
+/* 减少运动偏好设置 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 高对比度支持 */
+@media (prefers-contrast: high) {
+  * {
+    filter: contrast(1.2);
+  }
+}

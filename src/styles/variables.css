@@ -1,0 +1,14 @@
+/**
+ * CSS 变量定义
+ * 注意：大部分主题变量由 theme.ts 动态生成，此文件仅保留静态配置和无障碍特性
+ */
+
+/* 减少运动偏好支持（无障碍） */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --animation-duration-fast: 1ms !important;
+    --animation-duration-normal: 1ms !important;
+    --animation-duration-slow: 1ms !important;
+    --animation-duration-slower: 1ms !important;
+  }
+}
