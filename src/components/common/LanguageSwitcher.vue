@@ -89,8 +89,8 @@ onUnmounted(() => {
     <button
       ref="buttonRef"
       @click="toggleDropdown"
-      class="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 transition-all duration-200 rounded-md hover:text-[#ed9a28] hover:bg-gray-50 dark:hover:bg-gray-800 hover:scale-105 touch:hover:scale-100"
-      :class="{ 'text-[#ed9a28] bg-gray-50 dark:bg-gray-800': isOpen }"
+      class="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 transition-all duration-200 rounded-md hover:text-[var(--color-primary)] hover:bg-gray-50 dark:hover:bg-gray-800 hover:scale-105 touch:hover:scale-100"
+      :class="{ 'text-primary bg-gray-50 dark:bg-gray-800': isOpen }"
       aria-label="Change language"
     >
       <LanguageIcon class="w-5 h-5" />
@@ -128,12 +128,15 @@ onUnmounted(() => {
               class="w-full flex items-center justify-between px-4 py-2 text-sm transition-colors duration-150"
               :class="[
                 locale === lang.code
-                  ? 'bg-gradient-to-r from-orange-50 to-cyan-50 dark:from-orange-950/30 dark:to-cyan-950/30 text-[#ed9a28] font-medium'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-[#ed9a28]',
+                  ? 'bg-linear-to-r from-indigo-50 to-cyan-50 dark:from-indigo-950/30 dark:to-cyan-950/30 text-primary font-medium'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-primary',
               ]"
             >
               <span>{{ lang.label }}</span>
-              <CheckIcon v-if="locale === lang.code" class="w-4 h-4 text-[#ed9a28]" />
+              <CheckIcon
+                v-if="locale === lang.code"
+                class="w-4 h-4 text-primary"
+              />
             </button>
           </div>
         </div>

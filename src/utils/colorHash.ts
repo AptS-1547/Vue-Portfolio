@@ -12,11 +12,14 @@ function hashCode(str: string): number {
 }
 
 /**
- * 将哈希值转换为HSL颜色
+ * 将哈希值转换为HSL颜色（冷色调科技风：青-蓝-紫）
  */
 function hashToHSL(hash: number): { h: number; s: number; l: number } {
-  const h = Math.abs(hash) % 360
-  const s = 45 + (Math.abs(hash) % 30) // 45-75% 饱和度
+  // 将色相限制在 180-300 度范围（青色-蓝色-紫色）
+  const baseHue = 180
+  const hueRange = 120
+  const h = baseHue + (Math.abs(hash) % hueRange)
+  const s = 50 + (Math.abs(hash) % 30) // 50-80% 饱和度（提高饱和度增强科技感）
   const l = 55 + (Math.abs(hash) % 25) // 55-80% 亮度
   return { h, s, l }
 }

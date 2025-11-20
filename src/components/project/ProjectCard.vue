@@ -10,7 +10,7 @@
           <span
             class="text-xs font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wide"
           >
-            {{ project.status.replace('-', ' ') }}
+            {{ $t(`common.projectStatus.${project.status}`) }}
           </span>
         </div>
         <span class="text-xs text-gray-500 dark:text-gray-500">{{ project.language }}</span>
@@ -59,7 +59,7 @@
           :to="`/projects/${project.id}`"
           class="inline-flex items-center text-sm text-primary hover:text-secondary transition-colors duration-200 group/link"
         >
-          <span>查看详情</span>
+          <span>{{ $t('common.buttons.viewDetails') }}</span>
           <span class="ml-1 transition-transform duration-200 group-hover/link:translate-x-1"
             >→</span
           >
@@ -70,7 +70,7 @@
             :href="project.githubUrl"
             target="_blank"
             class="inline-flex items-center justify-center w-8 h-8 text-xs bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded hover:bg-primary hover:text-white transition-all duration-200"
-            title="View on GitHub"
+            :title="$t('common.buttons.viewOnGithub')"
           >
             <CodeBracketIcon class="w-4 h-4" />
           </a>
@@ -79,7 +79,7 @@
             :href="project.liveUrl"
             target="_blank"
             class="inline-flex items-center justify-center w-8 h-8 text-xs bg-gradient-to-r from-primary to-secondary text-white rounded hover:from-secondary hover:to-primary transition-all duration-200"
-            title="Live Demo"
+            :title="$t('common.buttons.liveDemo')"
           >
             <RocketLaunchIcon class="w-4 h-4" />
           </a>
@@ -90,7 +90,7 @@
       <div
         class="flex items-center justify-between w-full text-xs text-gray-600 dark:text-gray-400"
       >
-        <span>许可证:</span>
+        <span>{{ $t('common.labels.license') }}</span>
         <LicenseDisplay :license="project.license || 'MIT'" />
       </div>
     </CardFooter>
@@ -108,7 +108,6 @@ import CardFooter from '@/components/ui/CardFooter.vue'
 import Badge from '@/components/ui/Badge.vue'
 import LicenseDisplay from './LicenseDisplay.vue'
 import { getTagColor } from '@/utils/colorHash'
-import { useHoverEffect } from '@/utils/hoverEffect'
 import { useThemeStore } from '@/stores/theme'
 import { storeToRefs } from 'pinia'
 import { CodeBracketIcon, RocketLaunchIcon } from '@heroicons/vue/24/outline'
@@ -117,9 +116,6 @@ import type { Project } from '@/types/project'
 const props = defineProps<{
   project: Project
 }>()
-
-// 使用统一的悬停效果 composable
-const { handleColorHover } = useHoverEffect()
 
 // 获取主题状态
 const themeStore = useThemeStore()
@@ -141,16 +137,20 @@ const statusColorClass = computed(() => {
   }
 })
 
-// 处理标签悬停（使用 composable）
+// 处理标签悬停
 const handleTagHover = (event: Event, tag: string, isEnter: boolean) => {
   const target = event.target as HTMLElement
   const colors = getTagColor(tag, isDark.value)
 
-  const hoverColors = isEnter
-    ? { backgroundColor: colors.hoverBackgroundColor, textColor: 'white' }
-    : { backgroundColor: colors.backgroundColor, textColor: colors.textColor }
-
-  handleColorHover(target, hoverColors, isEnter)
+  if (isEnter) {
+    // 鼠标进入：应用悬停样式
+    target.style.backgroundColor = colors.hoverBackgroundColor
+    target.style.color = 'white'
+  } else {
+    // 鼠标离开：恢复原始样式
+    target.style.backgroundColor = colors.backgroundColor
+    target.style.color = colors.textColor
+  }
 }
 </script>
 

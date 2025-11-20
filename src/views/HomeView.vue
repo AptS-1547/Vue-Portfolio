@@ -1,7 +1,10 @@
 <template>
   <main
-    class="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col lg:flex-row overflow-x-hidden pt-16"
+    class="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col lg:flex-row overflow-x-hidden pt-16 relative"
   >
+    <!-- 粒子背景 -->
+    <ParticleBackground />
+
     <!-- 左侧个人信息栏 -->
     <ProfileSidebar :personal-info="personalInfo" />
 
@@ -34,6 +37,7 @@ import AboutSection from '@/components/sections/AboutSection.vue'
 import SkillsSection from '@/components/sections/SkillsSection.vue'
 import ExperienceSection from '@/components/sections/ExperienceSection.vue'
 import FeaturedProjectsSection from '@/components/sections/FeaturedProjectsSection.vue'
+import ParticleBackground from '@/components/common/ParticleBackground.vue'
 
 // 使用 i18n 数据
 const { personalInfo, aboutMe, skills, experience, featuredProjects } = useProfileI18n()
