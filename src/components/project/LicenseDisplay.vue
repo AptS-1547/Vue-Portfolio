@@ -1,6 +1,6 @@
 <template>
   <div class="inline-flex items-center space-x-2 animate-license-entrance">
-    <span class="text-sm text-gray-500 animate-label-fade">License:</span>
+    <span class="text-sm text-gray-500 animate-label-fade">{{ $t('common.labels.license') }}</span>
     <span
       :class="[
         'px-2 py-1 rounded text-xs font-medium transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 touch:hover:scale-100 touch:hover:translate-y-0 animate-badge-bounce',

@@ -68,5 +68,27 @@ export default {
   // 无障碍
   accessibility: {
     skipToContent: '跳转到主内容',
+    toggleNavigationMenu: '切换导航菜单',
+    changeLanguage: '更改语言',
+  },
+
+  // 主题
+  theme: {
+    light: '亮色',
+    dark: '暗色',
+    system: '跟随系统',
+    currentTheme: '当前主题',
+  },
+
+  // 时间相关
+  time: {
+    justNow: '刚刚',
+    minutesAgo: '{count} 分钟前',
+    hoursAgo: '{count} 小时前',
+    today: '今天',
+    yesterday: '昨天',
+    daysAgo: '{count} 天前',
+    weeksAgo: '{count} 周前',
+    monthsAgo: '{count} 月前',
   },
 }

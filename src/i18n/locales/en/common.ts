@@ -68,5 +68,27 @@ export default {
   // 无障碍
   accessibility: {
     skipToContent: 'Skip to main content',
+    toggleNavigationMenu: 'Toggle navigation menu',
+    changeLanguage: 'Change language',
+  },
+
+  // 主题
+  theme: {
+    light: 'Light',
+    dark: 'Dark',
+    system: 'System',
+    currentTheme: 'Current theme',
+  },
+
+  // 时间相关
+  time: {
+    justNow: 'Just now',
+    minutesAgo: '{count} minutes ago',
+    hoursAgo: '{count} hours ago',
+    today: 'Today',
+    yesterday: 'Yesterday',
+    daysAgo: '{count} days ago',
+    weeksAgo: '{count} weeks ago',
+    monthsAgo: '{count} months ago',
   },
 }

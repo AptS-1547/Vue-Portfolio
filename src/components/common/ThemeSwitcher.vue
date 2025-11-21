@@ -2,20 +2,27 @@
 import { SunIcon, MoonIcon, ComputerDesktopIcon } from '@heroicons/vue/24/outline'
 import { useThemeStore } from '@/stores/theme'
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const themeStore = useThemeStore()
 const { themeMode } = storeToRefs(themeStore)
 const { setTheme, toggleTheme } = themeStore
 const showMenu = ref(false)
 
-const themes = [
-  { value: 'light' as const, label: '亮色', icon: SunIcon },
-  { value: 'dark' as const, label: '暗色', icon: MoonIcon },
-  { value: 'system' as const, label: '跟随系统', icon: ComputerDesktopIcon },
-]
+const themes = computed(() => [
+  { value: 'light' as const, label: t('common.theme.light'), icon: SunIcon },
+  { value: 'dark' as const, label: t('common.theme.dark'), icon: MoonIcon },
+  { value: 'system' as const, label: t('common.theme.system'), icon: ComputerDesktopIcon },
+])
 
-const selectTheme = (value: (typeof themes)[number]['value']) => {
+const currentThemeLabel = computed(() => {
+  const theme = themes.value.find((t) => t.value === themeMode.value)
+  return theme ? theme.label : t('common.theme.system')
+})
+
+const selectTheme = (value: 'light' | 'dark' | 'system') => {
   setTheme(value)
   showMenu.value = false
 }
@@ -27,7 +34,7 @@ const selectTheme = (value: (typeof themes)[number]['value']) => {
     <button
       @click="toggleTheme"
       class="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
-      :aria-label="`当前主题: ${themeMode === 'light' ? '亮色' : themeMode === 'dark' ? '暗色' : '跟随系统'}`"
+      :aria-label="`${t('common.theme.currentTheme')}: ${currentThemeLabel}`"
     >
       <SunIcon v-if="themeMode === 'light'" class="w-5 h-5" />
       <MoonIcon v-else-if="themeMode === 'dark'" class="w-5 h-5" />

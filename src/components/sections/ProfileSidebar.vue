@@ -5,7 +5,11 @@
   >
     <!-- 头像 -->
     <div
-      class="w-24 h-24 lg:w-32 lg:h-32 rounded-full bg-gray-300 dark:bg-gray-700 mb-4 lg:mb-6 flex items-center justify-center overflow-hidden transition-transform duration-200 hover:scale-105"
+      ref="avatarRef"
+      class="w-24 h-24 lg:w-32 lg:h-32 rounded-full bg-gray-300 dark:bg-gray-700 mb-4 lg:mb-6 flex items-center justify-center overflow-hidden transition-all duration-300 hover:scale-105"
+      :style="avatarStyle"
+      @mousemove="handleAvatarMouseMove"
+      @mouseleave="handleAvatarMouseLeave"
     >
       <img
         :src="personalInfo.avatar.url"
@@ -43,12 +47,15 @@
           :key="social.name"
           :href="social.url"
           :title="social.name"
-          class="w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center transition-all duration-200"
+          class="w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center transition-all duration-300 hover:rotate-12 hover:scale-110"
           :style="{ '--hover-color': social.hoverColor }"
           @mouseenter="handleSocialHover($event, true)"
           @mouseleave="handleSocialHover($event, false)"
         >
-          <component :is="getIconComponent(social.icon)" class="w-4 h-4" />
+          <component
+            :is="getIconComponent(social.icon)"
+            class="w-4 h-4 transition-transform duration-300"
+          />
         </a>
       </div>
     </div>
@@ -56,6 +63,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed } from 'vue'
 import type { Component } from 'vue'
 import { useHoverEffect } from '@/utils/hoverEffect'
 import type { PersonalInfo } from '@/types/profile'
@@ -66,6 +74,8 @@ defineProps<{
 }>()
 
 const { handleColorHover } = useHoverEffect()
+const avatarRef = ref<HTMLElement>()
+const avatarTilt = ref({ x: 0, y: 0 })
 
 // 图标映射
 const iconComponents: Record<string, Component> = {
@@ -77,6 +87,33 @@ const iconComponents: Record<string, Component> = {
 // 获取图标组件
 const getIconComponent = (iconName: string) => {
   return iconComponents[iconName] || DocumentTextIcon
+}
+
+// 头像样式（带 3D 倾斜和发光）
+const avatarStyle = computed(() => ({
+  transform: `perspective(1000px) rotateX(${avatarTilt.value.y}deg) rotateY(${avatarTilt.value.x}deg)`,
+  boxShadow: `0 0 20px rgba(var(--color-primary-rgb), ${Math.abs(avatarTilt.value.x) / 50}), 0 0 40px rgba(var(--color-secondary-rgb), ${Math.abs(avatarTilt.value.y) / 50})`,
+}))
+
+// 头像鼠标移动事件（视差效果）
+const handleAvatarMouseMove = (event: MouseEvent) => {
+  if (!avatarRef.value) return
+
+  const rect = avatarRef.value.getBoundingClientRect()
+  const centerX = rect.left + rect.width / 2
+  const centerY = rect.top + rect.height / 2
+
+  const mouseX = event.clientX - centerX
+  const mouseY = event.clientY - centerY
+
+  // 限制倾斜角度在 -10 到 10 度之间
+  avatarTilt.value.x = Math.max(-10, Math.min(10, (mouseX / rect.width) * 20))
+  avatarTilt.value.y = Math.max(-10, Math.min(10, -(mouseY / rect.height) * 20))
+}
+
+// 头像鼠标离开事件（恢复原位）
+const handleAvatarMouseLeave = () => {
+  avatarTilt.value = { x: 0, y: 0 }
 }
 
 // 社交链接悬停

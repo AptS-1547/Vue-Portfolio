@@ -5,20 +5,20 @@
 
 // 亮色模式配色
 export const lightColors = {
-  // 主品牌色
+  // 主品牌色（靛蓝科技色）
   primary: {
-    main: '#ed9a28',
-    light: '#f5b959',
-    dark: '#d17d0a',
-    rgb: '237, 154, 40',
+    main: '#4F46E5',
+    light: '#6366F1',
+    dark: '#4338CA',
+    rgb: '79, 70, 229',
   },
 
-  // 次要色彩
+  // 次要色彩（青色科技色）
   secondary: {
-    main: '#6dd0e0',
-    light: '#8ee5f3',
-    dark: '#4abac9',
-    rgb: '109, 208, 224',
+    main: '#06B6D4',
+    light: '#22D3EE',
+    dark: '#0891B2',
+    rgb: '6, 182, 212',
   },
 
   // 状态色彩
@@ -75,30 +75,30 @@ export const lightColors = {
 
   // 渐变色配置
   gradients: {
-    primary: `linear-gradient(135deg, #ed9a28, #6dd0e0)`,
-    primaryReverse: `linear-gradient(135deg, #6dd0e0, #ed9a28)`,
-    warm: `linear-gradient(135deg, #f59e0b, #ed9a28)`,
-    cool: `linear-gradient(135deg, #3b82f6, #6dd0e0)`,
-    soft: `linear-gradient(135deg, rgba(237, 154, 40, 0.1), rgba(109, 208, 224, 0.1))`,
+    primary: `linear-gradient(135deg, #4F46E5, #06B6D4)`,
+    primaryReverse: `linear-gradient(135deg, #06B6D4, #4F46E5)`,
+    warm: `linear-gradient(135deg, #7C3AED, #8B5CF6)`,
+    cool: `linear-gradient(135deg, #0EA5E9, #06B6D4)`,
+    soft: `linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(6, 182, 212, 0.1))`,
   },
 }
 
 // 暗色模式配色
 export const darkColors = {
-  // 主品牌色（暗色模式下稍微提亮）
+  // 主品牌色（暗色模式下提亮）
   primary: {
-    main: '#f5b959',
-    light: '#ffd699',
-    dark: '#ed9a28',
-    rgb: '245, 185, 89',
+    main: '#818CF8',
+    light: '#A5B4FC',
+    dark: '#6366F1',
+    rgb: '129, 140, 248',
   },
 
-  // 次要色彩（暗色模式下稍微提亮）
+  // 次要色彩（暗色模式下提亮）
   secondary: {
-    main: '#8ee5f3',
-    light: '#b3f0f7',
-    dark: '#6dd0e0',
-    rgb: '142, 229, 243',
+    main: '#22D3EE',
+    light: '#67E8F9',
+    dark: '#06B6D4',
+    rgb: '34, 211, 238',
   },
 
   // 状态色彩（暗色模式下调整为更柔和的版本）
@@ -131,9 +131,9 @@ export const darkColors = {
     950: '#f9fafb',
   },
 
-  // 背景色
+  // 背景色（更深的蓝黑科技感）
   background: {
-    primary: '#030712',
+    primary: '#0A0A0F',
     secondary: '#111827',
     tertiary: '#1f2937',
   },
@@ -155,11 +155,11 @@ export const darkColors = {
 
   // 渐变色配置
   gradients: {
-    primary: `linear-gradient(135deg, #f5b959, #8ee5f3)`,
-    primaryReverse: `linear-gradient(135deg, #8ee5f3, #f5b959)`,
-    warm: `linear-gradient(135deg, #fbbf24, #f5b959)`,
-    cool: `linear-gradient(135deg, #60a5fa, #8ee5f3)`,
-    soft: `linear-gradient(135deg, rgba(245, 185, 89, 0.1), rgba(142, 229, 243, 0.1))`,
+    primary: `linear-gradient(135deg, #818CF8, #22D3EE)`,
+    primaryReverse: `linear-gradient(135deg, #22D3EE, #818CF8)`,
+    warm: `linear-gradient(135deg, #A78BFA, #C4B5FD)`,
+    cool: `linear-gradient(135deg, #60A5FA, #22D3EE)`,
+    soft: `linear-gradient(135deg, rgba(129, 140, 248, 0.1), rgba(34, 211, 238, 0.1))`,
   },
 }
 

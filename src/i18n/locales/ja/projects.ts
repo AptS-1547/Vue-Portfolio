@@ -1,5 +1,16 @@
 export default {
   shortlinker: {
+    id: 'shortlinker',
+
+    tags: ['Rust', 'Actix-web', 'SQLite', 'Docker', 'High-Performance'],
+
+    githubUrl: 'https://github.com/AptS-1547/shortlinker',
+
+    language: 'Rust',
+
+    status: 'active',
+
+    license: 'MIT',
     title: 'ShortLinker',
     description: 'RustとActix-webで構築された高性能URLショートナー',
     longDescription:
@@ -41,6 +52,17 @@ export default {
   },
 
   'ferrus-gate': {
+    id: 'ferrus-gate',
+
+    tags: ['Rust', 'OAuth2', 'OIDC', 'SAML', 'FIDO2', 'Authentication'],
+
+    githubUrl: 'https://github.com/FerrusGate/FerrusGate',
+
+    language: 'Rust',
+
+    status: 'in-development',
+
+    license: 'MIT',
     title: 'Ferrus Gate',
     description: 'OAuth2、OIDC、SAML、FIDO2をサポートする最新の認証ゲートウェイ',
     longDescription:
@@ -85,6 +107,17 @@ export default {
   },
 
   nebulink: {
+    id: 'nebulink',
+
+    tags: ['Rust', 'Actix-web', 'CDN', 'Distributed System', 'Load Balancing'],
+
+    githubUrl: 'https://github.com/AptS-1547/Nebulink',
+
+    language: 'Rust',
+
+    status: 'planned',
+
+    license: 'Apache-2.0',
     title: 'Nebulink',
     description: 'グローバルクラウドノードに基づく分散加速管理プラットフォーム',
     longDescription:
@@ -118,6 +151,17 @@ export default {
   },
 
   'sled-gui': {
+    id: 'sled-gui',
+
+    tags: ['Tauri', 'Rust', 'Vue.js', 'TypeScript', 'Sled', 'Desktop App'],
+
+    githubUrl: 'https://github.com/AptS-1547/sled-gui',
+
+    language: 'Rust',
+
+    status: 'planned',
+
+    license: 'MIT',
     title: 'Sled GUI',
     description: 'Tauriで構築されたSled KVデータベースのシンプルなビジュアルマネージャー',
     longDescription:
@@ -163,6 +207,17 @@ export default {
   },
 
   'onebot-github-webhook': {
+    id: 'onebot-github-webhook',
+
+    tags: ['Python', 'FastAPI', 'OneBot', 'GitHub API', 'WebSocket', 'Docker'],
+
+    githubUrl: 'https://github.com/AptS-1547/onebot-github-webhook',
+
+    language: 'Python',
+
+    status: 'active',
+
+    license: 'Apache-2.0',
     title: 'OneBot GitHub Webhook',
     description: 'OneBotプロトコル経由でGitHub WebhookをQQ通知サービスに接続',
     longDescription:
@@ -209,6 +264,17 @@ export default {
   },
 
   'vue-portfolio': {
+    id: 'vue-portfolio',
+
+    tags: ['Vue.js', 'TypeScript', 'Tailwind CSS', 'Responsive', 'Portfolio'],
+
+    githubUrl: 'https://github.com/AptS-1547/VUE-About-Me',
+
+    language: 'TypeScript',
+
+    status: 'active',
+
+    license: 'MIT',
     title: 'Vue Portfolio',
     description: 'Vue.jsと最新デザインで構築された個人ポートフォリオウェブサイト',
     longDescription:
@@ -245,6 +311,17 @@ export default {
   },
 
   'wakatime-readme-updater': {
+    id: 'wakatime-readme-updater',
+
+    tags: ['Rust', 'WakaTime', 'GitHub Actions', 'Docker', 'Automation'],
+
+    githubUrl: 'https://github.com/AptS-1547/wakatime-readme-updater',
+
+    language: 'Rust',
+
+    status: 'active',
+
+    license: 'MIT',
     title: 'WakaTime README Updater',
     description: 'WakaTimeコーディング統計をGitHub READMEに自動統合',
     longDescription:
@@ -280,6 +357,17 @@ export default {
   },
 
   'nginx-modsecurity': {
+    id: 'nginx-modsecurity',
+
+    tags: ['Docker', 'Nginx', 'ModSecurity', 'WAF', 'Security', 'Alpine'],
+
+    githubUrl: 'https://github.com/AptS-1547/nginx-modsecurity',
+
+    language: 'Dockerfile',
+
+    status: 'active',
+
+    license: 'MIT',
     title: 'Nginx with ModSecurity',
     description: 'NginxとOWASP ModSecurityを統合したエンタープライズグレードWAF Dockerイメージ',
     longDescription:
@@ -320,6 +408,17 @@ export default {
   },
 
   'acme-docker-reloader': {
+    id: 'acme-docker-reloader',
+
+    tags: ['Shell', 'Docker', 'acme.sh', 'SSL', 'Automation', 'systemd'],
+
+    githubUrl: 'https://github.com/AptS-1547/acme-docker-reloader',
+
+    language: 'Shell',
+
+    status: 'active',
+
+    license: 'MIT',
     title: 'ACME Docker Reloader',
     description: 'Dockerコンテナ向けの自動SSL証明書更新とサービスリロード',
     longDescription:
@@ -355,6 +454,17 @@ export default {
   },
 
   'uptime-verse': {
+    id: 'uptime-verse',
+
+    tags: ['Rust', 'Distributed System', 'Monitoring', 'Uptime', 'Network'],
+
+    githubUrl: 'https://github.com/AptS-1547/uptime-verse',
+
+    language: 'Rust',
+
+    status: 'planned',
+
+    license: 'Apache-2.0',
     title: 'Uptime Verse',
     description: 'インターネットの鼓動を聴く分散アップタイムネットワーク',
     longDescription:

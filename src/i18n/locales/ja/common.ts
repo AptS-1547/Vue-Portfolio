@@ -68,5 +68,27 @@ export default {
   // アクセシビリティ
   accessibility: {
     skipToContent: 'メインコンテンツへスキップ',
+    toggleNavigationMenu: 'ナビゲーションメニューを切り替え',
+    changeLanguage: '言語を変更',
+  },
+
+  // テーマ
+  theme: {
+    light: 'ライト',
+    dark: 'ダーク',
+    system: 'システム',
+    currentTheme: '現在のテーマ',
+  },
+
+  // 時間関連
+  time: {
+    justNow: 'たった今',
+    minutesAgo: '{count}分前',
+    hoursAgo: '{count}時間前',
+    today: '今日',
+    yesterday: '昨日',
+    daysAgo: '{count}日前',
+    weeksAgo: '{count}週間前',
+    monthsAgo: '{count}ヶ月前',
   },
 }

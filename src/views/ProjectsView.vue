@@ -1,7 +1,10 @@
 <template>
   <main
-    class="min-h-screen bg-gray-50 dark:bg-gray-950 py-8 px-4 xl:px-8 2xl:px-16 overflow-x-hidden pt-24"
+    class="min-h-screen bg-gray-50 dark:bg-gray-950 py-8 px-4 xl:px-8 2xl:px-16 overflow-x-hidden pt-24 relative"
   >
+    <!-- 粒子背景 -->
+    <ParticleBackground />
+
     <div class="max-w-6xl mx-auto w-full">
       <!-- 页面标题 -->
       <div class="text-center mb-12 animate-hero-entrance">
@@ -34,6 +37,7 @@
 <script setup lang="ts">
 import { computed, onMounted, nextTick } from 'vue'
 import ProjectCard from '@/components/project/ProjectCard.vue'
+import ParticleBackground from '@/components/common/ParticleBackground.vue'
 import { useProjectsI18n } from '@/composables/useProjectsI18n'
 
 const { projects } = useProjectsI18n()
