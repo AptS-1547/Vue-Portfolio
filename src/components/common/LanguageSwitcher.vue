@@ -25,9 +25,25 @@ const getCurrentLanguage = () => {
 const updateDropdownPosition = () => {
   if (buttonRef.value) {
     const rect = buttonRef.value.getBoundingClientRect()
+    const dropdownWidth = 192 // w-48 = 12rem = 192px
+
+    // 计算从右边对齐的位置
+    let rightPosition = window.innerWidth - rect.right
+
+    // 检查是否会溢出左边
+    const leftEdge = window.innerWidth - rightPosition - dropdownWidth
+    if (leftEdge < 0) {
+      // 如果会溢出，改为从左边对齐
+      rightPosition = window.innerWidth - rect.left - dropdownWidth
+      // 确保不会超出右边界
+      if (rightPosition < 0) {
+        rightPosition = 8 // 最小间距
+      }
+    }
+
     dropdownPosition.value = {
       top: rect.bottom + 8, // 按钮底部 + 8px 间距
-      right: window.innerWidth - rect.right, // 从右边对齐
+      right: Math.max(8, rightPosition), // 确保最小间距为 8px
     }
   }
 }
@@ -88,7 +104,7 @@ onUnmounted(() => {
     <!-- 语言按钮 -->
     <button
       ref="buttonRef"
-      @click="toggleDropdown"
+      @click.stop="toggleDropdown"
       class="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 transition-all duration-200 rounded-md hover:text-[var(--color-primary)] hover:bg-gray-50 dark:hover:bg-gray-800 hover:scale-105 touch:hover:scale-100"
       :class="{ 'text-primary bg-gray-50 dark:bg-gray-800': isOpen }"
       :aria-label="t('common.accessibility.changeLanguage')"

@@ -70,6 +70,7 @@ export default {
     skipToContent: 'Skip to main content',
     toggleNavigationMenu: 'Toggle navigation menu',
     changeLanguage: 'Change language',
+    closeMenu: 'Close menu',
   },
 
   // 主题
@@ -90,5 +91,11 @@ export default {
     daysAgo: '{count} days ago',
     weeksAgo: '{count} weeks ago',
     monthsAgo: '{count} months ago',
+  },
+
+  // 设置
+  settings: {
+    language: 'Language',
+    theme: 'Theme',
   },
 }

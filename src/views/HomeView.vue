@@ -16,14 +16,15 @@
         <!-- Skills -->
         <SkillsSection :skills="skills" animation-delay="0.2s" />
 
-        <!-- Timeline - 时间线/动态 -->
-        <TimelineSection github-username="AptS-1547" :initial-limit="10" :max-display="5" />
+        <!-- Experience -->
+        <ExperienceSection :experience="experience" animation-delay="0.4s" />
 
         <!-- Featured Projects -->
         <FeaturedProjectsSection :featured-projects="featuredProjects" animation-delay="0.3s" />
 
-        <!-- Experience -->
-        <ExperienceSection :experience="experience" animation-delay="0.4s" />
+        <!-- Timeline - 时间线/动态 -->
+        <TimelineSection github-username="AptS-1547" :initial-limit="10" :max-display="5" />
+
       </div>
     </div>
   </main>

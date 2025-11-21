@@ -70,6 +70,7 @@ export default {
     skipToContent: 'メインコンテンツへスキップ',
     toggleNavigationMenu: 'ナビゲーションメニューを切り替え',
     changeLanguage: '言語を変更',
+    closeMenu: 'メニューを閉じる',
   },
 
   // テーマ
@@ -90,5 +91,11 @@ export default {
     daysAgo: '{count}日前',
     weeksAgo: '{count}週間前',
     monthsAgo: '{count}ヶ月前',
+  },
+
+  // 設定
+  settings: {
+    language: '言語',
+    theme: 'テーマ',
   },
 }
