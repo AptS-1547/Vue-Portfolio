@@ -32,16 +32,13 @@
           {{ category.name }}
         </h3>
         <div class="space-y-1">
-          <span
+          <Tag
             v-for="tech in category.technologies"
             :key="tech.name"
-            class="inline-block bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2 py-1 rounded text-xs lg:text-sm ml-1 first:ml-0 hover:text-white transition-all duration-200"
-            :style="{ '--tech-hover': tech.hoverColor }"
-            @mouseenter="handleTechHover($event, tech, true)"
-            @mouseleave="handleTechHover($event, tech, false)"
-          >
-            {{ tech.name }}
-          </span>
+            variant="neutral"
+            :label="tech.name"
+            class="ml-1 first:ml-0"
+          />
         </div>
       </div>
     </div>
@@ -52,7 +49,8 @@
 import { ref, onMounted } from 'vue'
 import { useHoverEffect } from '@/utils/hoverEffect'
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
-import type { Skills, SkillCategory, Technology } from '@/types/profile'
+import Tag from '@/components/ui/Tag.vue'
+import type { Skills, SkillCategory } from '@/types/profile'
 
 const props = defineProps<{
   skills: Skills
@@ -68,12 +66,6 @@ useScrollAnimation(sectionRef, { threshold: 0.2, once: true })
 const handleCategoryHover = (event: Event, category: SkillCategory, isEnter: boolean) => {
   const target = event.currentTarget as HTMLElement
   handleCompoundHover(target, 'h3', category.hoverColor, isEnter)
-}
-
-// 技术标签悬停
-const handleTechHover = (event: Event, tech: Technology, isEnter: boolean) => {
-  const target = event.target as HTMLElement
-  handleColorHover(target, { backgroundColor: tech.hoverColor }, isEnter)
 }
 </script>
 

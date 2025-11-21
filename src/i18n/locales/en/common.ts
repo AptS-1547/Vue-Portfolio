@@ -79,4 +79,16 @@ export default {
     system: 'System',
     currentTheme: 'Current theme',
   },
+
+  // 时间相关
+  time: {
+    justNow: 'Just now',
+    minutesAgo: '{count} minutes ago',
+    hoursAgo: '{count} hours ago',
+    today: 'Today',
+    yesterday: 'Yesterday',
+    daysAgo: '{count} days ago',
+    weeksAgo: '{count} weeks ago',
+    monthsAgo: '{count} months ago',
+  },
 }

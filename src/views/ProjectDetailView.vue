@@ -58,19 +58,8 @@
           </div>
 
           <!-- 技术标签 -->
-          <div class="flex flex-wrap gap-2 mb-6 animate-tags-stagger">
-            <span
-              v-for="(tag, index) in project.tags"
-              :key="tag"
-              class="px-3 py-1 rounded-full text-sm font-medium hover:scale-110 transition-all duration-300 animate-tag-bounce cursor-pointer"
-              :style="{
-                animationDelay: `${index * 0.1}s`,
-                backgroundColor: getTagColor(tag, isDark).hoverBackgroundColor,
-                color: 'white',
-              }"
-            >
-              {{ tag }}
-            </span>
+          <div class="flex flex-wrap gap-1.5 mb-6 animate-tags-stagger">
+            <Tag v-for="tag in project.tags" :key="tag" variant="auto" :label="tag" />
           </div>
 
           <!-- 操作按钮 -->
@@ -205,20 +194,16 @@
 import { ref, computed, onMounted, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import Tag from '@/components/ui/Tag.vue'
 import LicenseDisplay from '@/components/project/LicenseDisplay.vue'
 import ErrorState from '@/components/common/ErrorState.vue'
 import ParticleBackground from '@/components/common/ParticleBackground.vue'
 import { CodeBracketIcon, RocketLaunchIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
 import { useProjectsI18n } from '@/composables/useProjectsI18n'
-import { useThemeStore } from '@/stores/theme'
-import { storeToRefs } from 'pinia'
-import { getTagColor } from '@/utils/colorHash'
 
 const route = useRoute()
 const { t } = useI18n()
 const { projects } = useProjectsI18n()
-const themeStore = useThemeStore()
-const { isDark } = storeToRefs(themeStore)
 
 // 确保页面加载时在正确位置
 onMounted(() => {

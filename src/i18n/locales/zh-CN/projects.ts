@@ -1,5 +1,16 @@
 export default {
   shortlinker: {
+    id: 'shortlinker',
+
+    tags: ['Rust', 'Actix-web', 'SQLite', 'Docker', 'High-Performance'],
+
+    githubUrl: 'https://github.com/AptS-1547/shortlinker',
+
+    language: 'Rust',
+
+    status: 'active',
+
+    license: 'MIT',
     title: 'ShortLinker - 短链接服务',
     description: '基于 Rust 和 Actix-web 构建的高性能 URL 短链接服务',
     longDescription:
@@ -41,6 +52,17 @@ export default {
   },
 
   'ferrus-gate': {
+    id: 'ferrus-gate',
+
+    tags: ['Rust', 'OAuth2', 'OIDC', 'SAML', 'FIDO2', 'Authentication'],
+
+    githubUrl: 'https://github.com/FerrusGate/FerrusGate',
+
+    language: 'Rust',
+
+    status: 'in-development',
+
+    license: 'MIT',
     title: 'Ferrus Gate - 身份网关',
     description: '支持 OAuth2、OIDC、SAML 和 FIDO2 的现代身份网关',
     longDescription:
@@ -85,6 +107,17 @@ export default {
   },
 
   nebulink: {
+    id: 'nebulink',
+
+    tags: ['Rust', 'Actix-web', 'CDN', 'Distributed System', 'Load Balancing'],
+
+    githubUrl: 'https://github.com/AptS-1547/Nebulink',
+
+    language: 'Rust',
+
+    status: 'planned',
+
+    license: 'Apache-2.0',
     title: 'Nebulink - 分布式加速平台',
     description: '基于全球云节点的分布式加速管理平台',
     longDescription:
@@ -118,6 +151,17 @@ export default {
   },
 
   'sled-gui': {
+    id: 'sled-gui',
+
+    tags: ['Tauri', 'Rust', 'Vue.js', 'TypeScript', 'Sled', 'Desktop App'],
+
+    githubUrl: 'https://github.com/AptS-1547/sled-gui',
+
+    language: 'Rust',
+
+    status: 'planned',
+
+    license: 'MIT',
     title: 'Sled GUI - 数据库可视化管理器',
     description: '基于 Tauri 构建的 Sled 键值数据库可视化管理器',
     longDescription:
@@ -163,6 +207,17 @@ export default {
   },
 
   'onebot-github-webhook': {
+    id: 'onebot-github-webhook',
+
+    tags: ['Python', 'FastAPI', 'OneBot', 'GitHub API', 'WebSocket', 'Docker'],
+
+    githubUrl: 'https://github.com/AptS-1547/onebot-github-webhook',
+
+    language: 'Python',
+
+    status: 'active',
+
+    license: 'Apache-2.0',
     title: 'OneBot GitHub Webhook - QQ 通知服务',
     description: '通过 OneBot 协议将 GitHub Webhook 推送到 QQ 的通知服务',
     longDescription:
@@ -209,6 +264,17 @@ export default {
   },
 
   'vue-portfolio': {
+    id: 'vue-portfolio',
+
+    tags: ['Vue.js', 'TypeScript', 'Tailwind CSS', 'Responsive', 'Portfolio'],
+
+    githubUrl: 'https://github.com/AptS-1547/VUE-About-Me',
+
+    language: 'TypeScript',
+
+    status: 'active',
+
+    license: 'MIT',
     title: 'Vue Portfolio - 个人作品集',
     description: '使用 Vue.js 和现代设计构建的个人作品集网站',
     longDescription:
@@ -245,6 +311,17 @@ export default {
   },
 
   'wakatime-readme-updater': {
+    id: 'wakatime-readme-updater',
+
+    tags: ['Rust', 'WakaTime', 'GitHub Actions', 'Docker', 'Automation'],
+
+    githubUrl: 'https://github.com/AptS-1547/wakatime-readme-updater',
+
+    language: 'Rust',
+
+    status: 'active',
+
+    license: 'MIT',
     title: 'WakaTime README Updater - 统计集成工具',
     description: '自动将 WakaTime 编码统计集成到 GitHub README',
     longDescription:
@@ -280,6 +357,17 @@ export default {
   },
 
   'nginx-modsecurity': {
+    id: 'nginx-modsecurity',
+
+    tags: ['Docker', 'Nginx', 'ModSecurity', 'WAF', 'Security', 'Alpine'],
+
+    githubUrl: 'https://github.com/AptS-1547/nginx-modsecurity',
+
+    language: 'Dockerfile',
+
+    status: 'active',
+
+    license: 'MIT',
     title: 'Nginx with ModSecurity - 企业级 WAF',
     description: '集成 Nginx 和 OWASP ModSecurity 的企业级 WAF Docker 镜像',
     longDescription:
@@ -320,6 +408,17 @@ export default {
   },
 
   'acme-docker-reloader': {
+    id: 'acme-docker-reloader',
+
+    tags: ['Shell', 'Docker', 'acme.sh', 'SSL', 'Automation', 'systemd'],
+
+    githubUrl: 'https://github.com/AptS-1547/acme-docker-reloader',
+
+    language: 'Shell',
+
+    status: 'active',
+
+    license: 'MIT',
     title: 'ACME Docker Reloader - SSL 自动化工具',
     description: 'Docker 容器的自动 SSL 证书续期和服务重载',
     longDescription:
@@ -355,6 +454,17 @@ export default {
   },
 
   'uptime-verse': {
+    id: 'uptime-verse',
+
+    tags: ['Rust', 'Distributed System', 'Monitoring', 'Uptime', 'Network'],
+
+    githubUrl: 'https://github.com/AptS-1547/uptime-verse',
+
+    language: 'Rust',
+
+    status: 'planned',
+
+    license: 'Apache-2.0',
     title: 'Uptime Verse - 分布式运行时监控',
     description: '倾听互联网脉搏的分布式运行时网络',
     longDescription:

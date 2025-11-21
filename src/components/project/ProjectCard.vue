@@ -12,11 +12,20 @@
     <!-- 渐变边框 -->
     <div
       class="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/30 via-secondary/20 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-      style="padding: 1px; -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude;"
+      style="
+        padding: 1px;
+        -webkit-mask:
+          linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+      "
     ></div>
 
     <!-- 内容容器 -->
-    <Card class="relative h-full flex flex-col bg-transparent border-gray-200/50 dark:border-gray-700/50 transition-all duration-500 overflow-hidden">
+    <Card
+      class="relative h-full flex flex-col bg-transparent border-gray-200/50 dark:border-gray-700/50 transition-all duration-500 overflow-hidden"
+    >
       <CardHeader class="pb-3">
         <!-- 项目状态标识 - 简约徽章 -->
         <div class="flex justify-between items-start mb-3">
@@ -50,42 +59,23 @@
           {{ project.longDescription || project.description }}
         </CardDescription>
 
-        <!-- 技术标签 - 玻璃态效果 -->
-        <div class="flex flex-wrap gap-2">
-          <Badge
-            v-for="tag in project.tags.slice(0, 4)"
-            :key="tag"
-            :style="{
-              backgroundColor: getTagColor(tag, isDark).backgroundColor + '40',
-              borderColor: getTagColor(tag, isDark).backgroundColor,
-            }"
-            class="relative backdrop-blur-sm border-2 hover:scale-110 transition-all duration-300 cursor-pointer font-medium shadow-md hover:shadow-lg overflow-hidden group/tag"
-            @mouseenter="handleTagHover($event, tag, true)"
-            @mouseleave="handleTagHover($event, tag, false)"
-          >
-            <!-- 标签发光效果 -->
-            <div
-              class="absolute inset-0 opacity-0 group-hover/tag:opacity-100 transition-opacity duration-300"
-              :style="{
-                background: `radial-gradient(circle at center, ${getTagColor(tag, isDark).backgroundColor}40 0%, transparent 70%)`,
-              }"
-            ></div>
-            <span class="relative z-10" :style="{ color: getTagColor(tag, isDark).textColor }">
-              {{ tag }}
-            </span>
-          </Badge>
-          <Badge
+        <!-- 技术标签 -->
+        <div class="flex flex-wrap gap-1.5">
+          <Tag v-for="tag in project.tags.slice(0, 4)" :key="tag" variant="auto" :label="tag" />
+          <Tag
             v-if="project.tags.length > 4"
-            class="backdrop-blur-sm bg-gray-200/60 dark:bg-gray-700/60 border border-gray-300 dark:border-gray-600"
-          >
-            +{{ project.tags.length - 4 }}
-          </Badge>
+            variant="neutral"
+            :label="`+${project.tags.length - 4}`"
+            :clickable="false"
+          />
         </div>
       </CardContent>
 
       <CardFooter class="flex-col space-y-3 pt-4">
         <!-- 玻璃态分隔线 -->
-        <div class="w-full h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
+        <div
+          class="w-full h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"
+        ></div>
 
         <!-- 操作按钮 -->
         <div class="flex justify-between items-center w-full pt-2">
@@ -109,7 +99,9 @@
               <div
                 class="absolute inset-0 bg-gradient-to-br from-primary to-secondary opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"
               ></div>
-              <CodeBracketIcon class="w-4 h-4 relative z-10 group-hover/btn:text-white transition-colors duration-300" />
+              <CodeBracketIcon
+                class="w-4 h-4 relative z-10 group-hover/btn:text-white transition-colors duration-300"
+              />
             </a>
             <a
               v-if="project.liveUrl"
@@ -149,21 +141,14 @@ import CardTitle from '@/components/ui/CardTitle.vue'
 import CardDescription from '@/components/ui/CardDescription.vue'
 import CardContent from '@/components/ui/CardContent.vue'
 import CardFooter from '@/components/ui/CardFooter.vue'
-import Badge from '@/components/ui/Badge.vue'
+import Tag from '@/components/ui/Tag.vue'
 import LicenseDisplay from './LicenseDisplay.vue'
-import { getTagColor } from '@/utils/colorHash'
-import { useThemeStore } from '@/stores/theme'
-import { storeToRefs } from 'pinia'
 import { CodeBracketIcon, RocketLaunchIcon } from '@heroicons/vue/24/outline'
 import type { Project } from '@/types/project'
 
 const props = defineProps<{
   project: Project
 }>()
-
-// 获取主题状态
-const themeStore = useThemeStore()
-const { isDark } = storeToRefs(themeStore)
 
 // 状态徽章样式
 const statusBadgeClass = computed(() => {
@@ -201,22 +186,6 @@ const statusDotClass = computed(() => {
 const handleCardHover = (isEnter: boolean) => {
   // 预留给未来可能的 3D 效果或其他交互
   // 当前主要通过 CSS 实现 hover 效果
-}
-
-// 处理标签悬停
-const handleTagHover = (event: Event, tag: string, isEnter: boolean) => {
-  const target = event.target as HTMLElement
-  const colors = getTagColor(tag, isDark.value)
-
-  if (isEnter) {
-    // 鼠标进入：应用悬停样式
-    target.style.backgroundColor = colors.hoverBackgroundColor
-    target.style.color = 'white'
-  } else {
-    // 鼠标离开：恢复原始样式
-    target.style.backgroundColor = colors.backgroundColor
-    target.style.color = colors.textColor
-  }
 }
 </script>
 

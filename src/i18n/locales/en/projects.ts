@@ -1,5 +1,16 @@
 export default {
   shortlinker: {
+    id: 'shortlinker',
+
+    tags: ['Rust', 'Actix-web', 'SQLite', 'Docker', 'High-Performance'],
+
+    githubUrl: 'https://github.com/AptS-1547/shortlinker',
+
+    language: 'Rust',
+
+    status: 'active',
+
+    license: 'MIT',
     title: 'ShortLinker',
     description: 'High-Performance URL Shortener built with Rust and Actix-web',
     longDescription:
@@ -41,6 +52,17 @@ export default {
   },
 
   'ferrus-gate': {
+    id: 'ferrus-gate',
+
+    tags: ['Rust', 'OAuth2', 'OIDC', 'SAML', 'FIDO2', 'Authentication'],
+
+    githubUrl: 'https://github.com/FerrusGate/FerrusGate',
+
+    language: 'Rust',
+
+    status: 'in-development',
+
+    license: 'MIT',
     title: 'Ferrus Gate',
     description: 'Modern Identity Gateway supporting OAuth2, OIDC, SAML, and FIDO2',
     longDescription:
@@ -85,6 +107,17 @@ export default {
   },
 
   nebulink: {
+    id: 'nebulink',
+
+    tags: ['Rust', 'Actix-web', 'CDN', 'Distributed System', 'Load Balancing'],
+
+    githubUrl: 'https://github.com/AptS-1547/Nebulink',
+
+    language: 'Rust',
+
+    status: 'planned',
+
+    license: 'Apache-2.0',
     title: 'Nebulink',
     description: 'Distributed acceleration management platform based on global cloud nodes',
     longDescription:
@@ -118,6 +151,17 @@ export default {
   },
 
   'sled-gui': {
+    id: 'sled-gui',
+
+    tags: ['Tauri', 'Rust', 'Vue.js', 'TypeScript', 'Sled', 'Desktop App'],
+
+    githubUrl: 'https://github.com/AptS-1547/sled-gui',
+
+    language: 'Rust',
+
+    status: 'planned',
+
+    license: 'MIT',
     title: 'Sled GUI',
     description: 'A Simple Visual Manager for Sled KV Database built with Tauri',
     longDescription:
@@ -163,6 +207,17 @@ export default {
   },
 
   'onebot-github-webhook': {
+    id: 'onebot-github-webhook',
+
+    tags: ['Python', 'FastAPI', 'OneBot', 'GitHub API', 'WebSocket', 'Docker'],
+
+    githubUrl: 'https://github.com/AptS-1547/onebot-github-webhook',
+
+    language: 'Python',
+
+    status: 'active',
+
+    license: 'Apache-2.0',
     title: 'OneBot GitHub Webhook',
     description: 'GitHub Webhook to QQ notification service via OneBot protocol',
     longDescription:
@@ -209,6 +264,17 @@ export default {
   },
 
   'vue-portfolio': {
+    id: 'vue-portfolio',
+
+    tags: ['Vue.js', 'TypeScript', 'Tailwind CSS', 'Responsive', 'Portfolio'],
+
+    githubUrl: 'https://github.com/AptS-1547/VUE-About-Me',
+
+    language: 'TypeScript',
+
+    status: 'active',
+
+    license: 'MIT',
     title: 'Vue Portfolio',
     description: 'Personal portfolio website built with Vue.js and modern design',
     longDescription:
@@ -245,6 +311,17 @@ export default {
   },
 
   'wakatime-readme-updater': {
+    id: 'wakatime-readme-updater',
+
+    tags: ['Rust', 'WakaTime', 'GitHub Actions', 'Docker', 'Automation'],
+
+    githubUrl: 'https://github.com/AptS-1547/wakatime-readme-updater',
+
+    language: 'Rust',
+
+    status: 'active',
+
+    license: 'MIT',
     title: 'WakaTime README Updater',
     description: 'Automatically integrate WakaTime coding statistics into GitHub README',
     longDescription:
@@ -280,6 +357,17 @@ export default {
   },
 
   'nginx-modsecurity': {
+    id: 'nginx-modsecurity',
+
+    tags: ['Docker', 'Nginx', 'ModSecurity', 'WAF', 'Security', 'Alpine'],
+
+    githubUrl: 'https://github.com/AptS-1547/nginx-modsecurity',
+
+    language: 'Dockerfile',
+
+    status: 'active',
+
+    license: 'MIT',
     title: 'Nginx with ModSecurity',
     description: 'Enterprise-grade WAF Docker image with Nginx and OWASP ModSecurity',
     longDescription:
@@ -320,6 +408,17 @@ export default {
   },
 
   'acme-docker-reloader': {
+    id: 'acme-docker-reloader',
+
+    tags: ['Shell', 'Docker', 'acme.sh', 'SSL', 'Automation', 'systemd'],
+
+    githubUrl: 'https://github.com/AptS-1547/acme-docker-reloader',
+
+    language: 'Shell',
+
+    status: 'active',
+
+    license: 'MIT',
     title: 'ACME Docker Reloader',
     description: 'Automated SSL certificate renewal and service reload for Docker containers',
     longDescription:
@@ -355,6 +454,17 @@ export default {
   },
 
   'uptime-verse': {
+    id: 'uptime-verse',
+
+    tags: ['Rust', 'Distributed System', 'Monitoring', 'Uptime', 'Network'],
+
+    githubUrl: 'https://github.com/AptS-1547/uptime-verse',
+
+    language: 'Rust',
+
+    status: 'planned',
+
+    license: 'Apache-2.0',
     title: 'Uptime Verse',
     description: "A distributed uptime network that listens to the internet's pulse",
     longDescription:

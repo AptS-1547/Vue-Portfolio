@@ -19,7 +19,7 @@
         {{ featuredProjects.viewAllLink.text }}
       </router-link>
     </div>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
       <div
         v-for="(project, index) in featuredProjects.projects"
         :key="project.id"
@@ -46,43 +46,29 @@
             padding: '1px',
             WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
             WebkitMaskComposite: 'xor',
-            maskComposite: 'exclude'
+            maskComposite: 'exclude',
           }"
         ></div>
 
         <!-- 内容区域 -->
-        <div class="relative h-full flex flex-col p-5 lg:p-6 border border-gray-200/50 dark:border-gray-700/50 rounded-2xl transition-all duration-500 overflow-hidden">
+        <div
+          class="relative h-full flex flex-col p-5 lg:p-6 border border-gray-200/50 dark:border-gray-700/50 rounded-2xl transition-all duration-500 overflow-hidden"
+        >
           <h3
             class="font-bold text-gray-800 dark:text-gray-100 mb-3 text-base lg:text-lg bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 group-hover:from-[var(--hover-color)] group-hover:to-[var(--hover-color)] transition-all duration-500"
             :style="{ '--hover-color': project.hoverColor }"
           >
             {{ project.title }}
           </h3>
-          <p class="text-gray-700 dark:text-gray-300 text-xs lg:text-sm mb-4 leading-relaxed flex-grow">
+          <p
+            class="text-gray-700 dark:text-gray-300 text-xs lg:text-sm mb-4 leading-relaxed flex-grow"
+          >
             {{ project.description }}
           </p>
 
-          <!-- 技术标签 - 玻璃态 -->
+          <!-- 技术标签 -->
           <div class="flex flex-wrap gap-1.5 mb-4">
-            <span
-              v-for="tag in project.tags"
-              :key="tag"
-              class="relative px-2.5 py-1 rounded-lg text-xs font-medium backdrop-blur-sm border-2 transition-all duration-300 hover:scale-110 cursor-pointer overflow-hidden group/tag shadow-sm hover:shadow-md"
-              :style="{
-                backgroundColor: getTagColor(tag, isDark).backgroundColor + '40',
-                borderColor: getTagColor(tag, isDark).backgroundColor,
-                color: getTagColor(tag, isDark).textColor,
-              }"
-            >
-              <!-- 标签悬停发光效果 -->
-              <span
-                class="absolute inset-0 opacity-0 group-hover/tag:opacity-100 transition-opacity duration-300"
-                :style="{
-                  background: `radial-gradient(circle at center, ${getTagColor(tag, isDark).backgroundColor}40 0%, transparent 70%)`,
-                }"
-              ></span>
-              <span class="relative z-10">{{ tag }}</span>
-            </span>
+            <Tag v-for="tag in project.tags" :key="tag" variant="auto" :label="tag" />
           </div>
 
           <!-- 查看详情链接 - 渐变文字 -->
@@ -90,11 +76,13 @@
             :to="`/projects/${project.id}`"
             class="inline-flex items-center text-xs lg:text-sm font-medium bg-clip-text text-transparent bg-gradient-to-r transition-all duration-300 group/link"
             :style="{
-              backgroundImage: `linear-gradient(to right, ${project.hoverColor}, ${project.hoverColor}DD)`
+              backgroundImage: `linear-gradient(to right, ${project.hoverColor}, ${project.hoverColor}DD)`,
             }"
           >
             <span>{{ project.linkText }}</span>
-            <span class="ml-1 transition-transform duration-300 group-hover/link:translate-x-2">→</span>
+            <span class="ml-1 transition-transform duration-300 group-hover/link:translate-x-2"
+              >→</span
+            >
           </router-link>
         </div>
       </div>
@@ -109,6 +97,7 @@ import { useHoverEffect } from '@/utils/hoverEffect'
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
 import { useThemeStore } from '@/stores/theme'
 import { storeToRefs } from 'pinia'
+import Tag from '@/components/ui/Tag.vue'
 import type { FeaturedProjects, FeaturedProject } from '@/types/profile'
 
 defineProps<{

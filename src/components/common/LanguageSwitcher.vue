@@ -133,10 +133,7 @@ onUnmounted(() => {
               ]"
             >
               <span>{{ lang.label }}</span>
-              <CheckIcon
-                v-if="locale === lang.code"
-                class="w-4 h-4 text-primary"
-              />
+              <CheckIcon v-if="locale === lang.code" class="w-4 h-4 text-primary" />
             </button>
           </div>
         </div>
