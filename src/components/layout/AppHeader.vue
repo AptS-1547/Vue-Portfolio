@@ -104,10 +104,14 @@
             class="fixed top-0 right-0 h-full w-[80vw] max-w-[320px] bg-white dark:bg-gray-900 shadow-2xl z-[9999] lg:hidden overflow-y-auto"
           >
             <!-- Drawer Header -->
-            <div class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-800">
+            <div
+              class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-800"
+            >
               <div class="flex items-center space-x-3">
                 <RocketLaunchIcon class="w-6 h-6 text-[var(--color-primary)]" />
-                <span class="text-xl font-bold text-gray-800 dark:text-gray-100">{{ logo.text }}</span>
+                <span class="text-xl font-bold text-gray-800 dark:text-gray-100">{{
+                  logo.text
+                }}</span>
               </div>
               <button
                 @click="closeMobileMenu"
@@ -154,12 +158,16 @@
               <div class="space-y-3">
                 <!-- Language Switcher -->
                 <div class="flex items-center justify-between px-4 py-2">
-                  <span class="text-sm font-medium text-gray-600 dark:text-gray-400">{{ t('common.settings.language') }}</span>
+                  <span class="text-sm font-medium text-gray-600 dark:text-gray-400">{{
+                    t('common.settings.language')
+                  }}</span>
                   <LanguageSwitcher />
                 </div>
                 <!-- Theme Switcher -->
                 <div class="flex items-center justify-between px-4 py-2">
-                  <span class="text-sm font-medium text-gray-600 dark:text-gray-400">{{ t('common.settings.theme') }}</span>
+                  <span class="text-sm font-medium text-gray-600 dark:text-gray-400">{{
+                    t('common.settings.theme')
+                  }}</span>
                   <ThemeSwitcher />
                 </div>
               </div>

@@ -24,7 +24,6 @@
 
         <!-- Timeline - 时间线/动态 -->
         <TimelineSection github-username="AptS-1547" :initial-limit="10" :max-display="5" />
-
       </div>
     </div>
   </main>

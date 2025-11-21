@@ -39,6 +39,7 @@ export default {
     keyFeatures: 'Key Features',
     techStack: 'Technical Stack',
     performance: 'Performance Metrics',
+    tags: 'Tags',
   },
 
   // 技术栈分类

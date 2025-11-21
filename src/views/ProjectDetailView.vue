@@ -5,7 +5,7 @@
     <!-- 粒子背景 -->
     <ParticleBackground />
 
-    <div class="max-w-4xl mx-auto w-full">
+    <div class="max-w-6xl mx-auto w-full">
       <!-- 返回按钮 -->
       <div class="mb-6 animate-back-button">
         <router-link
@@ -27,113 +27,163 @@
         :back-text="$t('common.buttons.backToProjects')"
       />
 
-      <!-- 项目详情 -->
+      <!-- 项目详情 - 侧边栏布局 -->
       <div v-else class="space-y-8">
-        <!-- 项目头部 -->
-        <div
-          class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-lg border border-gray-200 dark:border-gray-800 p-6 lg:p-8 animate-header-slide hover:shadow-xl hover:scale-[1.01] transition-all duration-700"
-        >
-          <div class="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-6">
-            <div class="flex-1">
-              <div class="flex items-center space-x-3 mb-4 animate-status-fade">
-                <div :class="statusColor" class="w-3 h-3 rounded-full animate-status-pulse"></div>
-                <span
-                  class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide"
-                  >{{ $t(`common.projectStatus.${project.status}`) }}</span
-                >
-                <span class="text-sm text-gray-400 dark:text-gray-500">{{ project.language }}</span>
-                <LicenseDisplay :license="project.license || 'MIT'" />
-              </div>
+        <!-- 两栏布局 -->
+        <div class="flex flex-col lg:flex-row gap-8">
+          <!-- 左侧主内容 -->
+          <div class="flex-1 lg:w-2/3">
+            <!-- 项目标题区 + 关于项目（合并） -->
+            <div
+              class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-lg border border-gray-200 dark:border-gray-800 p-6 lg:p-8 animate-header-slide hover:shadow-xl hover:scale-[1.01] transition-all duration-700"
+            >
               <h1
                 class="text-3xl lg:text-4xl font-bold text-gray-800 dark:text-gray-100 mb-4 animate-title-emerge hover:text-[var(--color-primary)] transition-colors duration-500"
               >
                 {{ project.title }}
               </h1>
               <p
-                class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed animate-description-flow"
+                class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed animate-description-flow mb-6"
               >
                 {{ project.description }}
               </p>
-            </div>
-          </div>
 
-          <!-- 技术标签 -->
-          <div class="flex flex-wrap gap-1.5 mb-6 animate-tags-stagger">
-            <Tag v-for="tag in project.tags" :key="tag" variant="auto" :label="tag" />
-          </div>
+              <!-- 分隔线 -->
+              <div class="border-t border-gray-200 dark:border-gray-700 my-6"></div>
 
-          <!-- 操作按钮 -->
-          <div class="flex flex-col sm:flex-row gap-3 animate-buttons-slide">
-            <a
-              :href="project.githubUrl"
-              target="_blank"
-              class="inline-flex items-center justify-center px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-900 hover:scale-105 hover:-translate-y-1 transition-all duration-500 hover:shadow-xl group"
-            >
-              <CodeBracketIcon
-                class="w-5 h-5 mr-2 transition-transform duration-300 group-hover:rotate-12"
-              />
-              <span>{{ $t('common.buttons.viewOnGithub') }}</span>
-            </a>
-            <a
-              v-if="project.liveUrl"
-              :href="project.liveUrl"
-              target="_blank"
-              class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white rounded-lg hover:from-[var(--color-secondary)] hover:to-[var(--color-primary)] hover:scale-105 hover:-translate-y-1 transition-all duration-500 hover:shadow-xl group"
-            >
-              <RocketLaunchIcon
-                class="w-5 h-5 mr-2 transition-transform duration-300 group-hover:scale-125"
-              />
-              <span>{{ $t('common.buttons.liveDemo') }}</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- 项目详细描述 -->
-        <div
-          class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-lg border border-gray-200 dark:border-gray-800 p-6 lg:p-8 animate-section-slide hover:shadow-xl hover:scale-[1.01] transition-all duration-700"
-          style="animation-delay: 0.2s"
-        >
-          <h2
-            class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4 animate-section-title hover:text-[var(--color-primary)] transition-colors duration-500"
-          >
-            {{ $t('common.sections.aboutProject') }}
-          </h2>
-          <div class="prose prose-gray max-w-none">
-            <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-4 animate-text-reveal">
-              {{ project.longDescription || project.description }}
-            </p>
-            <div v-if="project.features" class="mt-6 animate-features-slide">
-              <h3
-                class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-3 animate-features-title"
+              <!-- 关于项目 -->
+              <h2
+                class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4 animate-section-title hover:text-[var(--color-primary)] transition-colors duration-500"
               >
-                {{ $t('common.sections.keyFeatures') }}
-              </h3>
-              <ul class="space-y-2">
-                <li
-                  v-for="(feature, index) in project.features"
-                  :key="feature"
-                  class="flex items-start space-x-2 animate-feature-item hover:translate-x-2 transition-transform duration-300"
-                  :style="{ animationDelay: `${index * 0.1}s` }"
+                {{ $t('common.sections.aboutProject') }}
+              </h2>
+              <div class="prose prose-gray max-w-none">
+                <p
+                  class="text-gray-600 dark:text-gray-400 leading-relaxed mb-4 animate-text-reveal"
                 >
-                  <span class="text-green-500 mt-1 animate-check-bounce">✓</span>
-                  <span class="text-gray-600 dark:text-gray-400">{{ feature }}</span>
-                </li>
-              </ul>
+                  {{ project.longDescription || project.description }}
+                </p>
+                <div v-if="project.features" class="mt-6 animate-features-slide">
+                  <h3
+                    class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-3 animate-features-title"
+                  >
+                    {{ $t('common.sections.keyFeatures') }}
+                  </h3>
+                  <ul class="space-y-2">
+                    <li
+                      v-for="(feature, index) in project.features"
+                      :key="feature"
+                      class="flex items-start space-x-2 animate-feature-item hover:translate-x-2 transition-transform duration-300"
+                      :style="{ animationDelay: `${index * 0.1}s` }"
+                    >
+                      <span class="text-green-500 mt-1 animate-check-bounce">✓</span>
+                      <span class="text-gray-600 dark:text-gray-400">{{ feature }}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 右侧边栏 -->
+          <div class="lg:w-1/3 space-y-6">
+            <!-- 状态和元信息 -->
+            <div
+              class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-lg border border-gray-200 dark:border-gray-800 p-6 animate-header-slide lg:sticky lg:top-12 hover:shadow-xl transition-all duration-700"
+            >
+              <!-- 状态 -->
+              <div class="flex items-center space-x-3 mb-4 animate-status-fade">
+                <div :class="statusColor" class="w-3 h-3 rounded-full animate-status-pulse"></div>
+                <span
+                  class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide"
+                  >{{ $t(`common.projectStatus.${project.status}`) }}</span
+                >
+              </div>
+
+              <!-- 语言和许可证 -->
+              <div
+                class="flex items-center justify-between mb-4 pb-4 border-b border-gray-200 dark:border-gray-700"
+              >
+                <span class="text-sm text-gray-500 dark:text-gray-400">{{ project.language }}</span>
+                <LicenseDisplay :license="project.license || 'MIT'" />
+              </div>
+
+              <!-- 操作按钮 -->
+              <div class="flex flex-col gap-3 mb-6 animate-buttons-slide">
+                <a
+                  :href="project.githubUrl"
+                  target="_blank"
+                  class="inline-flex items-center justify-center px-5 py-2.5 bg-gray-800 text-white rounded-lg hover:bg-gray-900 hover:scale-105 transition-all duration-500 hover:shadow-xl group text-sm"
+                >
+                  <CodeBracketIcon
+                    class="w-4 h-4 mr-2 transition-transform duration-300 group-hover:rotate-12"
+                  />
+                  <span>{{ $t('common.buttons.viewOnGithub') }}</span>
+                </a>
+                <a
+                  v-if="project.liveUrl"
+                  :href="project.liveUrl"
+                  target="_blank"
+                  class="inline-flex items-center justify-center px-5 py-2.5 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white rounded-lg hover:from-[var(--color-secondary)] hover:to-[var(--color-primary)] hover:scale-105 transition-all duration-500 hover:shadow-xl group text-sm"
+                >
+                  <RocketLaunchIcon
+                    class="w-4 h-4 mr-2 transition-transform duration-300 group-hover:scale-125"
+                  />
+                  <span>{{ $t('common.buttons.liveDemo') }}</span>
+                </a>
+              </div>
+
+              <!-- 技术标签 -->
+              <div>
+                <h3
+                  class="text-sm font-semibold text-gray-800 dark:text-gray-100 mb-3 uppercase tracking-wide"
+                >
+                  {{ $t('common.sections.tags') }}
+                </h3>
+                <div class="flex flex-wrap gap-1.5 animate-tags-stagger">
+                  <Tag v-for="tag in project.tags" :key="tag" variant="auto" :label="tag" />
+                </div>
+              </div>
+
+              <!-- 性能指标（如果有） -->
+              <div
+                v-if="project.performance"
+                class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700"
+              >
+                <h3
+                  class="text-sm font-semibold text-gray-800 dark:text-gray-100 mb-3 uppercase tracking-wide"
+                >
+                  {{ $t('common.sections.performance') }}
+                </h3>
+                <div class="space-y-3">
+                  <div
+                    v-for="(metric, index) in project.performance"
+                    :key="metric.name"
+                    class="flex justify-between items-center animate-metric-card"
+                    :style="{ animationDelay: `${0.5 + index * 0.1}s` }"
+                  >
+                    <span class="text-sm text-gray-600 dark:text-gray-400">{{ metric.name }}</span>
+                    <span class="text-sm font-bold text-[var(--color-primary)]">{{
+                      metric.value
+                    }}</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- 技术栈详情 -->
+        <!-- 底部全宽区域 - 技术栈详情 -->
         <div
           class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-lg border border-gray-200 dark:border-gray-800 p-6 lg:p-8 animate-section-slide hover:shadow-xl hover:scale-[1.01] transition-all duration-700"
           style="animation-delay: 0.4s"
         >
           <h2
-            class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4 animate-section-title hover:text-[var(--color-secondary)] transition-colors duration-500"
+            class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 animate-section-title hover:text-[var(--color-secondary)] transition-colors duration-500"
           >
             {{ $t('common.sections.techStack') }}
           </h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div
               v-for="(category, categoryIndex) in project.techStack"
               :key="category.name"
@@ -157,41 +207,13 @@
             </div>
           </div>
         </div>
-
-        <!-- 性能指标（如果有） -->
-        <div
-          v-if="project.performance"
-          class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-lg border border-gray-200 dark:border-gray-800 p-6 lg:p-8 animate-section-slide hover:shadow-xl hover:scale-[1.01] transition-all duration-700"
-          style="animation-delay: 0.6s"
-        >
-          <h2
-            class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4 animate-section-title hover:text-[var(--color-primary)] transition-colors duration-500"
-          >
-            {{ $t('common.sections.performance') }}
-          </h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div
-              v-for="(metric, index) in project.performance"
-              :key="metric.name"
-              class="text-center p-4 bg-gray-50/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-lg hover:bg-gradient-to-br hover:from-orange-50 hover:to-cyan-50 dark:hover:from-orange-950/30 dark:hover:to-cyan-950/30 hover:scale-105 hover:-translate-y-1 transition-all duration-500 animate-metric-card"
-              :style="{ animationDelay: `${1.5 + index * 0.2}s` }"
-            >
-              <div class="text-2xl font-bold text-[var(--color-primary)] mb-1 animate-metric-value">
-                {{ metric.value }}
-              </div>
-              <div class="text-sm text-gray-600 dark:text-gray-400 animate-metric-label">
-                {{ metric.name }}
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </main>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick } from 'vue'
+import { computed, onMounted, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import Tag from '@/components/ui/Tag.vue'
@@ -353,19 +375,7 @@ const statusColor = computed(() => {
 
 /* 性能指标动画 */
 .animate-metric-card {
-  animation: bounceInUp var(--animation-duration-slower) var(--animation-easing-bounce) forwards;
-  opacity: 0;
-}
-
-.animate-metric-value {
-  animation: bounceIn var(--animation-duration-slow) var(--animation-easing-bounce) forwards;
-  animation-delay: 0.1s;
-  opacity: 0;
-}
-
-.animate-metric-label {
   animation: fadeInUp var(--animation-duration-normal) ease-out forwards;
-  animation-delay: 0.15s;
   opacity: 0;
 }
 </style>

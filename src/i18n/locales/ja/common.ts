@@ -39,6 +39,7 @@ export default {
     keyFeatures: '主な機能',
     techStack: '技術スタック',
     performance: 'パフォーマンス指標',
+    tags: 'タグ',
   },
 
   // 技術スタックカテゴリ
