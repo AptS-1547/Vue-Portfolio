@@ -9,12 +9,14 @@
  * 4. 技术栈的结构（分类和每个分类的技术数量）必须一致
  */
 
-import { readFileSync } from 'fs'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
+import { createJiti } from 'jiti'
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 const projectRoot = join(__dirname, '..')
+const jiti = createJiti(__filename)
 
 const LOCALES = ['zh-CN', 'en', 'ja']
 const METADATA_FIELDS = ['id', 'tags', 'githubUrl', 'language', 'status', 'license']
@@ -30,8 +32,8 @@ async function loadProjectsData() {
   for (const locale of LOCALES) {
     const filePath = join(projectRoot, `src/i18n/locales/${locale}/projects.ts`)
     try {
-      // 读取文件内容并使用动态导入
-      const module = await import(`file://${filePath}`)
+      // 使用 jiti 加载 TypeScript 文件
+      const module = jiti(filePath)
       data[locale] = module.default
     } catch (error) {
       console.error(`❌ 无法加载 ${locale} 的项目数据:`, error.message)
