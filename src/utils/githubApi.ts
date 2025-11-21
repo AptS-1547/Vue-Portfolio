@@ -3,17 +3,49 @@
  */
 
 import type { GitHubEvent, GitHubActivity, GitHubEventType, TimelineEntry } from '@/types/timeline'
+import { deduplicatedFetch } from './requestDeduplicator'
 
 /**
  * GitHub API 基础配置
  */
 const GITHUB_API_BASE = 'https://api.github.com'
 const CACHE_KEY = 'github_events_cache'
-const CACHE_DURATION = 5 * 60 * 1000 // 5分钟缓存
+const ETAG_KEY = 'github_events_etag'
+const CACHE_DURATION = 10 * 60 * 1000 // 10分钟缓存（优化：从5分钟提升到10分钟）
 
 interface CacheData {
   timestamp: number
   data: GitHubActivity[]
+  etag?: string
+}
+
+/**
+ * 指数退避重试机制
+ * @param fn 要执行的函数
+ * @param maxRetries 最大重试次数
+ * @param delay 初始延迟时间（毫秒）
+ */
+async function retryWithBackoff<T>(
+  fn: () => Promise<T>,
+  maxRetries: number = 3,
+  delay: number = 1000,
+): Promise<T> {
+  let lastError: Error | null = null
+
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await fn()
+    } catch (error) {
+      lastError = error as Error
+      if (i < maxRetries - 1) {
+        const waitTime = delay * Math.pow(2, i) // 指数退避: 1s, 2s, 4s
+        console.debug(`[GitHub API] 重试 ${i + 1}/${maxRetries}，等待 ${waitTime}ms`)
+        await new Promise((resolve) => setTimeout(resolve, waitTime))
+      }
+    }
+  }
+
+  throw lastError
 }
 
 /**
@@ -33,24 +65,55 @@ export async function fetchGitHubActivity(
   }
 
   try {
-    const response = await fetch(`${GITHUB_API_BASE}/users/${username}/events/public`, {
-      headers: {
+    // 使用重试机制和请求去重
+    const activities = await retryWithBackoff(async () => {
+      // 获取存储的 ETag
+      const etag = getETag()
+      const headers: HeadersInit = {
         Accept: 'application/vnd.github.v3+json',
-      },
+      }
+
+      // 如果有 ETag，使用条件请求
+      if (etag) {
+        headers['If-None-Match'] = etag
+      }
+
+      // 使用去重的 fetch
+      const response = await deduplicatedFetch(
+        `${GITHUB_API_BASE}/users/${username}/events/public`,
+        { headers },
+      )
+
+      // 304 Not Modified - 使用缓存数据
+      if (response.status === 304) {
+        console.debug('[GitHub API] 使用 ETag 缓存（304）')
+        const cachedData = getCachedData(true)
+        if (cachedData) {
+          return cachedData.slice(0, limit)
+        }
+      }
+
+      if (!response.ok) {
+        throw new Error(`GitHub API error: ${response.status}`)
+      }
+
+      // 保存新的 ETag
+      const newETag = response.headers.get('etag')
+      if (newETag) {
+        setETag(newETag)
+      }
+
+      const events: GitHubEvent[] = await response.json()
+      const activities = events
+        .map((event) => convertGitHubEventToActivity(event))
+        .filter((activity): activity is GitHubActivity => activity !== null)
+        .slice(0, limit)
+
+      // 缓存数据
+      setCachedData(activities, newETag || undefined)
+
+      return activities
     })
-
-    if (!response.ok) {
-      throw new Error(`GitHub API error: ${response.status}`)
-    }
-
-    const events: GitHubEvent[] = await response.json()
-    const activities = events
-      .map((event) => convertGitHubEventToActivity(event))
-      .filter((activity): activity is GitHubActivity => activity !== null)
-      .slice(0, limit)
-
-    // 缓存数据
-    setCachedData(activities)
 
     return activities
   } catch (error) {
@@ -209,15 +272,38 @@ function getCachedData(ignoreExpiry = false): GitHubActivity[] | null {
 /**
  * 设置缓存数据
  */
-function setCachedData(data: GitHubActivity[]): void {
+function setCachedData(data: GitHubActivity[], etag?: string): void {
   try {
     const cacheData: CacheData = {
       timestamp: Date.now(),
       data,
+      etag,
     }
     localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData))
   } catch (error) {
     console.error('Failed to cache GitHub data:', error)
+  }
+}
+
+/**
+ * 获取 ETag
+ */
+function getETag(): string | null {
+  try {
+    return localStorage.getItem(ETAG_KEY)
+  } catch {
+    return null
+  }
+}
+
+/**
+ * 设置 ETag
+ */
+function setETag(etag: string): void {
+  try {
+    localStorage.setItem(ETAG_KEY, etag)
+  } catch (error) {
+    console.error('Failed to save ETag:', error)
   }
 }
 
@@ -227,6 +313,7 @@ function setCachedData(data: GitHubActivity[]): void {
 export function clearGitHubCache(): void {
   try {
     localStorage.removeItem(CACHE_KEY)
+    localStorage.removeItem(ETAG_KEY)
   } catch (error) {
     console.error('Failed to clear GitHub cache:', error)
   }

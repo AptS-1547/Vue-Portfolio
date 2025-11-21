@@ -67,18 +67,56 @@ const router = createRouter({
   },
 })
 
-// 辅助函数：更新 meta 标签
+// 辅助函数：更新 meta 标签（优化：缓存 DOM 元素）
+const metaCache = new Map<string, Element>()
+
 function updateMetaTag(property: string, content: string, useProperty = true) {
   const attribute = useProperty ? 'property' : 'name'
-  let element = document.querySelector(`meta[${attribute}="${property}"]`)
+  const cacheKey = `${attribute}:${property}`
+
+  let element = metaCache.get(cacheKey)
 
   if (!element) {
-    element = document.createElement('meta')
-    element.setAttribute(attribute, property)
-    document.head.appendChild(element)
+    const foundElement = document.querySelector(`meta[${attribute}="${property}"]`)
+
+    if (!foundElement) {
+      const newElement = document.createElement('meta')
+      newElement.setAttribute(attribute, property)
+      document.head.appendChild(newElement)
+      element = newElement
+    } else {
+      element = foundElement
+    }
+
+    // 缓存元素
+    metaCache.set(cacheKey, element)
   }
 
-  element.setAttribute('content', content)
+  // 只在内容变化时更新
+  const currentContent = element.getAttribute('content')
+  if (currentContent !== content) {
+    element.setAttribute('content', content)
+  }
+}
+
+// 缓存 canonical link 元素
+let canonicalLinkElement: HTMLLinkElement | null = null
+
+function updateCanonicalLink(url: string) {
+  if (!canonicalLinkElement) {
+    canonicalLinkElement = document.querySelector('link[rel="canonical"]')
+
+    if (!canonicalLinkElement) {
+      canonicalLinkElement = document.createElement('link')
+      canonicalLinkElement.setAttribute('rel', 'canonical')
+      document.head.appendChild(canonicalLinkElement)
+    }
+  }
+
+  // 只在 URL 变化时更新
+  if (canonicalLinkElement.getAttribute('href') !== url) {
+    canonicalLinkElement.setAttribute('href', url)
+  }
 }
 
 // 路由守卫：自动更新页面标题和 meta 标签
@@ -89,6 +127,12 @@ router.beforeEach((to, _from, next) => {
   // 获取路由的 titleKey
   const titleKey = to.meta.titleKey as string | undefined
 
+  // 调试：检查 i18n 状态
+  const globalI18n = i18n.global as any
+  console.debug('[Router] Current locale:', globalI18n.locale.value)
+  console.debug('[Router] Available locales:', globalI18n.availableLocales)
+  console.debug('[Router] Messages loaded:', Object.keys(globalI18n.messages.value))
+
   // 基础信息
   const baseUrl = 'https://me.esaps.net'
   const currentUrl = `${baseUrl}${to.path}`
@@ -96,6 +140,10 @@ router.beforeEach((to, _from, next) => {
   if (titleKey) {
     let title = t(titleKey)
     let description = t('common.pageTitles.home') // 默认描述
+
+    console.debug('[Router] Title key:', titleKey)
+    console.debug('[Router] Title from t():', title)
+    console.debug('[Router] Title is key?:', title === titleKey)
 
     // 如果需要动态项目标题
     if (to.meta.requiresProjectTitle && to.params.id) {
@@ -105,16 +153,28 @@ router.beforeEach((to, _from, next) => {
       const projectTitle = t(projectTitleKey)
       const projectDesc = t(projectDescKey)
 
-      // 如果翻译存在且不是key本身，则使用项目标题替换占位符
+      console.debug('[Router] Project ID:', to.params.id)
+      console.debug('[Router] Project Title Key:', projectTitleKey)
+      console.debug('[Router] Project Title from t():', projectTitle)
+      console.debug('[Router] Is project title a key?:', projectTitle === projectTitleKey)
+
+      // 如果翻译存在且不是key本身，则使用项目标题
       if (projectTitle && projectTitle !== projectTitleKey) {
-        title = title.replace('{title}', projectTitle)
+        title = projectTitle
         description = projectDesc && projectDesc !== projectDescKey ? projectDesc : title
+        console.debug('[Router] ✓ Final title:', title)
+      } else {
+        // Fallback：如果找不到项目翻译，使用项目 ID 和通用标题
+        title = `${to.params.id} - ${t('common.pageTitles.projects')}`
+        description = `${to.params.id} - ${t('common.pageTitles.projects')}`
+        console.debug('[Router] ✗ Fallback title:', title)
       }
     } else if (to.name === 'projects') {
       description = 'Browse all my projects including Rust, Node.js, Vue.js and more'
     }
 
     // 更新页面标题
+    console.debug('[Router] Setting document.title to:', title)
     document.title = title
 
     // 更新 meta 描述
@@ -129,14 +189,8 @@ router.beforeEach((to, _from, next) => {
     updateMetaTag('twitter:title', title)
     updateMetaTag('twitter:description', description)
 
-    // 更新 canonical URL
-    let canonicalLink = document.querySelector('link[rel="canonical"]')
-    if (!canonicalLink) {
-      canonicalLink = document.createElement('link')
-      canonicalLink.setAttribute('rel', 'canonical')
-      document.head.appendChild(canonicalLink)
-    }
-    canonicalLink.setAttribute('href', currentUrl)
+    // 更新 canonical URL（优化：使用缓存的元素）
+    updateCanonicalLink(currentUrl)
   }
 
   next()

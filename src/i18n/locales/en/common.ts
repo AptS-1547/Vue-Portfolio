@@ -3,7 +3,7 @@ export default {
   pageTitles: {
     home: 'AptS-1547 - Full Stack Developer',
     projects: 'My Projects',
-    projectDetail: '{title}',
+    projectDetail: 'Project Details',
     notFound: 'Page Not Found',
   },
 

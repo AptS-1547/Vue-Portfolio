@@ -1,19 +1,21 @@
 <template>
-  <div>
+  <div class="relative">
     <!-- Skip to main content link for accessibility -->
     <a href="#main-content" class="skip-link">
       {{ t('common.accessibility.skipToContent') }}
     </a>
 
-    <AppHeader />
+    <div class="relative z-10">
+      <AppHeader />
 
-    <main id="main-content" tabindex="-1">
-      <router-view v-slot="{ Component, route }">
-        <transition name="page" mode="out-in" @enter="onPageEnter" @leave="onPageLeave">
-          <component :is="Component" :key="route.path" />
-        </transition>
-      </router-view>
-    </main>
+      <main id="main-content" tabindex="-1">
+        <router-view v-slot="{ Component, route }">
+          <transition name="page" mode="out-in" @enter="onPageEnter" @leave="onPageLeave">
+            <component :is="Component" :key="route.path" />
+          </transition>
+        </router-view>
+      </main>
+    </div>
   </div>
 </template>
 

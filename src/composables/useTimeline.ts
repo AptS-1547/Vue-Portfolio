@@ -1,18 +1,21 @@
 import { ref, computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import type { TimelineEntry, LearningRecord, LifeUpdate, GitHubActivity } from '@/types/timeline'
-import { fetchGitHubActivity, sortTimelineEntries } from '@/utils/githubApi'
+import { sortTimelineEntries } from '@/utils/githubApi'
+import { useTimelineStore } from '@/stores/timeline'
 
 /**
  * 时间线数据组合式函数
+ * 优化：使用全局 store 管理 GitHub 活动数据，避免重复请求
  */
 export function useTimeline() {
   const { t, tm } = useI18n()
+  const timelineStore = useTimelineStore()
 
-  // 状态管理
-  const loading = ref(false)
-  const error = ref<Error | null>(null)
-  const githubActivities = ref<GitHubActivity[]>([])
+  // 使用 store 的状态（GitHub 活动数据已在 store 中管理）
+  const loading = computed(() => timelineStore.isLoading)
+  const error = computed(() => timelineStore.error)
+  const githubActivities = computed(() => timelineStore.githubActivities)
 
   // 学习记录（从 i18n 获取）
   const learningRecords = computed<LearningRecord[]>(() => {
@@ -107,25 +110,18 @@ export function useTimeline() {
     return allEntries.value.slice(0, limit)
   }
 
-  // 加载 GitHub 活动
+  // 加载 GitHub 活动（使用 store，自动去重和缓存）
   const loadGitHubActivity = async (username: string, limit: number = 10) => {
-    loading.value = true
-    error.value = null
-
     try {
-      const activities = await fetchGitHubActivity(username, limit)
-      githubActivities.value = activities
+      await timelineStore.fetchActivities(username, limit)
     } catch (err) {
-      error.value = err instanceof Error ? err : new Error('Failed to load GitHub activity')
       console.error('Error loading GitHub activity:', err)
-    } finally {
-      loading.value = false
     }
   }
 
-  // 刷新数据
-  const refresh = async (username: string) => {
-    await loadGitHubActivity(username)
+  // 刷新数据（强制刷新）
+  const refresh = async (username: string, limit: number = 10) => {
+    await timelineStore.fetchActivities(username, limit, true)
   }
 
   // 组件挂载时自动加载（可选）

@@ -3,7 +3,7 @@ export default {
   pageTitles: {
     home: 'AptS-1547 - フルスタック開発者',
     projects: 'マイプロジェクト',
-    projectDetail: '{title}',
+    projectDetail: 'プロジェクト詳細',
     notFound: 'ページが見つかりません',
   },
 

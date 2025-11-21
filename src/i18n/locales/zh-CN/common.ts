@@ -3,7 +3,7 @@ export default {
   pageTitles: {
     home: 'AptS-1547 - 全栈开发者',
     projects: '我的项目',
-    projectDetail: '{title}',
+    projectDetail: '项目详情',
     notFound: '页面未找到',
   },
 

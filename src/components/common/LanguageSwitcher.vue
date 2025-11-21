@@ -50,8 +50,18 @@ const updateDropdownPosition = () => {
 
 // 切换语言
 const changeLanguage = (code: Locale) => {
-  locale.value = code
+  if (locale.value === code) return
+
+  // 切换语言
+  locale.value = code as any
+
+  // 保存到 localStorage
   saveLocale(code)
+
+  // 更新 HTML lang 属性
+  document.documentElement.setAttribute('lang', code)
+
+  // 关闭下拉菜单
   isOpen.value = false
 }
 

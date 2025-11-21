@@ -1,5 +1,7 @@
 import { createI18n } from 'vue-i18n'
 import type { I18nOptions } from 'vue-i18n'
+
+// 直接导入所有语言
 import zhCN from './locales/zh-CN'
 import en from './locales/en'
 import ja from './locales/ja'
@@ -48,10 +50,13 @@ export function saveLocale(locale: Locale) {
   localStorage.setItem(LOCALE_STORAGE_KEY, locale)
 }
 
-// i18n 配置
+// 初始语言
+const initialLocale = getInitialLocale()
+
+// i18n 配置（直接加载所有语言）
 const i18nOptions: I18nOptions = {
   legacy: false, // 使用 Composition API 模式
-  locale: getInitialLocale(),
+  locale: initialLocale,
   fallbackLocale: 'en',
   messages: {
     'zh-CN': zhCN,
@@ -64,5 +69,8 @@ const i18nOptions: I18nOptions = {
 }
 
 const i18n = createI18n(i18nOptions)
+
+// 设置 HTML lang 属性
+document.documentElement.setAttribute('lang', initialLocale)
 
 export default i18n

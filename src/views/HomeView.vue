@@ -1,8 +1,5 @@
 <template>
   <main class="min-h-screen bg-gray-50 dark:bg-gray-950 overflow-x-hidden pt-16 relative">
-    <!-- 粒子背景 -->
-    <ParticleBackground />
-
     <!-- 单栏布局 -->
     <div class="w-full">
       <!-- Hero Section - 个人信息 -->
@@ -38,7 +35,6 @@ import SkillsSection from '@/components/sections/SkillsSection.vue'
 import TimelineSection from '@/components/sections/TimelineSection.vue'
 import FeaturedProjectsSection from '@/components/sections/FeaturedProjectsSection.vue'
 import ExperienceSection from '@/components/sections/ExperienceSection.vue'
-import ParticleBackground from '@/components/common/ParticleBackground.vue'
 
 // 使用 i18n 数据
 const { personalInfo, aboutMe, skills, experience, featuredProjects } = useProfileI18n()
